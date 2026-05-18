@@ -410,7 +410,7 @@ export default function ContentSection() {
               </p>
               <div className="hidden md:block w-px h-3 bg-dark-lavender/10" />
               <p className="text-dark-lavender/20 text-[10px] font-bold tracking-widest uppercase">
-                Integrated Cognitive Architecture V4.0
+                For website related queries contact: +91 6369888789
               </p>
             </div>
             
