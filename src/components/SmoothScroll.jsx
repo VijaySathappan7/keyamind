@@ -37,17 +37,9 @@ export default function SmoothScroll({ children }) {
 
     rafId = requestAnimationFrame(raf);
 
-    // Scroll collision listener to update scroll progress or triggers if needed
-    const handleScroll = () => {
-      // Broadcast scroll events if any global hook depends on it
-      window.dispatchEvent(new CustomEvent("lenis-scroll", { detail: lenis }));
-    };
-    lenis.on("scroll", handleScroll);
-
     // Clean up connections on unmount to prevent memory leaks
     return () => {
       cancelAnimationFrame(rafId);
-      lenis.off("scroll", handleScroll);
       lenis.destroy();
       window.lenis = null;
     };

@@ -1,10 +1,27 @@
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Check, ArrowRight } from 'lucide-react';
 import ikigaiLogo from '../assets/logos/ikigailogo.webp';
 import ikigaiImg from '../assets/images/ikigai.webp';
 import LazyImage from './LazyImage';
+import useMediaQuery from './useMediaQuery';
 
 export default function IkigaiSection() {
+  const containerRef = useRef(null);
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+  
+  // Track scroll progress of this section
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  // IBM-style cinematic zoom linked to scroll (clamped once the section reaches halfway)
+  const rawScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.96, 1.0, 1.0]);
+  const scale = useSpring(rawScale, { stiffness: 35, damping: 20, mass: 0.5, restDelta: 0.001 });
+
+  const desktopScaleStyle = isDesktop ? { scale, transformOrigin: 'center center' } : {};
+
   const highlights = [
     "Discover Your Strengths",
     "Align Passion with Purpose",
@@ -25,8 +42,10 @@ export default function IkigaiSection() {
     }),
   };
 
+
   return (
     <section 
+      ref={containerRef}
       id="ikigai" 
       className="relative w-full py-16 sm:py-20 lg:py-24 bg-white overflow-hidden scroll-mt-[80px]"
     >
@@ -47,8 +66,7 @@ export default function IkigaiSection() {
             <motion.div
               custom={1}
               initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+              whileInView="visible" viewport={{ once: true, margin: "-50px" }}
               variants={fadeUp}
               className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-warm-cream/80 border border-purple-100 shadow-[inset_0_1px_1px_rgba(255,255,255,0.8)] backdrop-blur-md"
             >
@@ -61,8 +79,7 @@ export default function IkigaiSection() {
             <motion.h2
               custom={2}
               initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+              whileInView="visible" viewport={{ once: true, margin: "-50px" }}
               variants={fadeUp}
               className="text-[clamp(24px,5.5vw,42px)] font-outfit font-black text-dark-lavender leading-[1.12] tracking-tight"
             >
@@ -71,15 +88,9 @@ export default function IkigaiSection() {
             </motion.h2>
           </div>
 
-          {/* ====================================================
-              IMAGE COLUMN (Order 2 on Mobile, Right Column on LG)
-              ==================================================== */}
           <div className="w-full lg:w-[48%] flex items-center justify-center relative order-2 lg:order-2">
             <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
+              style={desktopScaleStyle}
               className="w-full flex justify-center items-center"
             >
               <div className="w-full flex items-center justify-center">
@@ -104,8 +115,7 @@ export default function IkigaiSection() {
               <motion.div
                 custom={1}
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                whileInView="visible" viewport={{ once: true, margin: "-50px" }}
                 variants={fadeUp}
                 className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-warm-cream/80 border border-purple-100 shadow-[inset_0_1px_1px_rgba(255,255,255,0.8)] backdrop-blur-md"
               >
@@ -118,8 +128,7 @@ export default function IkigaiSection() {
               <motion.h2
                 custom={2}
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                whileInView="visible" viewport={{ once: true, margin: "-50px" }}
                 variants={fadeUp}
                 className="text-[clamp(24px,5.5vw,42px)] font-outfit font-black text-dark-lavender leading-[1.12] tracking-tight"
               >
@@ -132,8 +141,7 @@ export default function IkigaiSection() {
             <motion.p
               custom={3}
               initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+              whileInView="visible" viewport={{ once: true, margin: "-50px" }}
               variants={fadeUp}
               className="text-base sm:text-lg text-dark-lavender/85 leading-relaxed font-normal font-poppins max-w-xl"
             >
@@ -143,8 +151,7 @@ export default function IkigaiSection() {
             <motion.p
               custom={4}
               initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+              whileInView="visible" viewport={{ once: true, margin: "-50px" }}
               variants={fadeUp}
               className="text-sm sm:text-base text-dark-lavender/70 font-light leading-relaxed border-l-2 border-purple-400 pl-4 max-w-xl"
             >
@@ -154,8 +161,7 @@ export default function IkigaiSection() {
             <motion.div
               custom={5}
               initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+              whileInView="visible" viewport={{ once: true, margin: "-50px" }}
               variants={fadeUp}
               className="grid grid-cols-2 gap-x-8 gap-y-4 w-full max-w-lg mt-2 pt-2 border-t border-purple-100/50"
             >
@@ -172,8 +178,7 @@ export default function IkigaiSection() {
             <motion.div
               custom={6}
               initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+              whileInView="visible" viewport={{ once: true, margin: "-50px" }}
               variants={fadeUp}
               className="flex flex-row flex-wrap gap-4 w-full mt-4"
             >
@@ -221,8 +226,7 @@ export default function IkigaiSection() {
           ---------------------------------------------------- */}
       <motion.div
         initial={{ opacity: 0, y: 12 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: 0.8, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
         className="w-full max-w-4xl mx-auto px-6 text-center relative z-10 mt-6 md:mt-8 border-t border-purple-100/20 pt-6"
       >

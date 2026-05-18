@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import logo from '../assets/logos/logosquare.webp';
+import logo from '../assets/logos/logo.webp';
 import titleImage from '../assets/logos/title.webp';
 
 /* ─── Link data ─────────────────────────────────────────────────────────── */
@@ -30,15 +30,13 @@ const scienceLinks = [
 
 /* ─── Animation variants ─────────────────────────────────────────────────── */
 const drawerVariants = {
-  hidden:  { x: "100%", opacity: 0 },
+  hidden:  { x: "100%" },
   visible: {
     x: 0,
-    opacity: 1,
     transition: { duration: 0.42, ease: [0.22, 1, 0.36, 1], when: "beforeChildren", staggerChildren: 0.045 },
   },
   exit: {
     x: "100%",
-    opacity: 0,
     transition: { duration: 0.34, ease: [0.4, 0, 0.2, 1], when: "afterChildren", staggerChildren: 0.03, staggerDirection: -1 },
   },
 };
@@ -104,20 +102,23 @@ const Navbar = () => {
       const y = window.scrollY;
 
       if (y <= 60) {
-        setHidden(false);
-        setScrolled(false);
+        setHidden(prev => prev !== false ? false : prev);
+        setScrolled(prev => prev !== false ? false : prev);
       } else {
         const diff = y - lastScrollY.current;
-        if (Math.abs(diff) > 4) setHidden(diff > 0);
-        setScrolled(true);
+        if (Math.abs(diff) > 4) {
+          const nextHidden = diff > 0;
+          setHidden(prev => prev !== nextHidden ? nextHidden : prev);
+        }
+        setScrolled(prev => prev !== true ? true : prev);
       }
       lastScrollY.current = y;
 
-      // Collapse dropdowns during scroll (RAF-deferred)
+      // Collapse dropdowns during scroll (RAF-deferred, guarded against redundant state changes)
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          setLearnOpen(false);
-          setScienceOpen(false);
+          setLearnOpen(prev => prev ? false : prev);
+          setScienceOpen(prev => prev ? false : prev);
           ticking = false;
         });
         ticking = true;
@@ -211,15 +212,15 @@ const Navbar = () => {
         animate={{ y: navY, x: "-50%", opacity: 1 }}
         transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
         className={`
-          fixed top-4 left-1/2 w-[94%] max-w-[1280px] h-[58px]
+          fixed top-4 left-1/2 w-[94%] max-w-[1280px] h-[66px]
           rounded-full px-4 sm:px-6 md:px-8
           flex items-center justify-between
           border border-white/50
           transition-all duration-500
           ${menuOpen   ? "z-[200]" : "z-[110]"}
           ${scrolled
-            ? "bg-white/80 backdrop-blur-2xl shadow-[0_8px_40px_rgba(0,0,0,0.09)]"
-            : "bg-white/60 backdrop-blur-xl  shadow-[0_4px_24px_rgba(0,0,0,0.05)]"
+            ? "bg-white/80 backdrop-blur-md shadow-[0_8px_40px_rgba(0,0,0,0.09)]"
+            : "bg-white/60 backdrop-blur-md  shadow-[0_4px_24px_rgba(0,0,0,0.05)]"
           }
         `}
       >
@@ -227,18 +228,18 @@ const Navbar = () => {
         <a
           href="/"
           onClick={(e) => handleNavClick(e, mainLinks[0])}
-          className="flex items-center gap-2 sm:gap-3 shrink-0"
+          className="flex items-center gap-1 sm:gap-1.5 shrink-0"
         >
           <img
             src={logo}
-            width={38} height={38}
-            className="w-9 h-9 object-contain"
+            width={48} height={48}
+            className="w-11 h-11 sm:w-12 sm:h-12 object-contain"
             alt="Keyamind logo"
           />
           <img
             src={titleImage}
-            width={130} height={32}
-            className="h-[28px] sm:h-[31px] w-auto object-contain"
+            width={150} height={36}
+            className="h-[32px] sm:h-[36px] md:h-[38px] w-auto object-contain"
             style={{ filter: "sepia(0.6) saturate(1.8) hue-rotate(320deg) brightness(0.3) contrast(1.1)" }}
             alt="Keyamind"
           />
@@ -246,7 +247,7 @@ const Navbar = () => {
 
         {/* ── DESKTOP LINKS (≥ 1024 px) ─────────────────────────────── */}
         <div className="hidden lg:flex items-center gap-6 xl:gap-8">
-          <ul className="flex items-center gap-5 xl:gap-7 text-[10.5px] xl:text-[11px] font-black tracking-[0.15em] uppercase font-poppins text-dark-lavender">
+          <ul className="flex items-center gap-5 xl:gap-6 text-[10.5px] xl:text-[11px] font-black tracking-[0.15em] uppercase font-poppins text-dark-lavender">
 
             {/* Home */}
             <li>
@@ -266,7 +267,11 @@ const Navbar = () => {
               onMouseLeave={() => setLearnOpen(false)}
             >
               <button
-                className="flex items-center gap-1.5 hover:text-purple-600 transition-colors duration-200 cursor-pointer py-2"
+                aria-expanded={learnOpen}
+                aria-haspopup="true"
+                aria-controls="learn-dropdown-menu"
+                aria-label="Toggle Learn and Explore Dropdown"
+                className="flex items-center gap-1.5 hover:text-purple-600 transition-colors duration-200 cursor-pointer py-2 uppercase font-black focus-visible:ring-2 focus-visible:ring-purple-500/50 focus-visible:outline-none rounded-lg"
               >
                 <span>Learn</span>
                 <svg
@@ -286,13 +291,18 @@ const Navbar = () => {
                     transition={{ duration: 0.22 }}
                     className="absolute left-1/2 -translate-x-1/2 top-full pt-3 w-52"
                   >
-                    <div className="bg-white/95 backdrop-blur-xl border border-purple-50 rounded-2xl p-2 shadow-2xl">
+                    <div 
+                      id="learn-dropdown-menu"
+                      role="menu"
+                      className="bg-white/95 backdrop-blur-md border border-purple-50 rounded-2xl p-2 shadow-xl"
+                    >
                       {learnLinks.map((link) => (
                         <a
                           key={link.name}
                           href="/"
+                          role="menuitem"
                           onClick={(e) => handleNavClick(e, link)}
-                          className="block px-4 py-2.5 rounded-xl text-[10px] hover:bg-purple-50 hover:text-purple-600 transition-all uppercase tracking-wider font-bold"
+                          className="block px-4 py-2.5 rounded-xl text-[10px] hover:bg-purple-50 hover:text-purple-600 transition-all uppercase tracking-wider font-black focus-visible:bg-purple-50 focus-visible:text-purple-600 focus-visible:outline-none"
                         >
                           {link.name}
                         </a>
@@ -310,7 +320,11 @@ const Navbar = () => {
               onMouseLeave={() => setScienceOpen(false)}
             >
               <button
-                className="flex items-center gap-1.5 hover:text-purple-600 transition-colors duration-200 cursor-pointer py-2"
+                aria-expanded={scienceOpen}
+                aria-haspopup="true"
+                aria-controls="science-dropdown-menu"
+                aria-label="Toggle Science of DMIT Dropdown"
+                className="flex items-center gap-1.5 hover:text-purple-600 transition-colors duration-200 cursor-pointer py-2 uppercase font-black focus-visible:ring-2 focus-visible:ring-purple-500/50 focus-visible:outline-none rounded-lg"
               >
                 <span>Science</span>
                 <svg
@@ -330,13 +344,18 @@ const Navbar = () => {
                     transition={{ duration: 0.22 }}
                     className="absolute left-1/2 -translate-x-1/2 top-full pt-3 w-52"
                   >
-                    <div className="bg-white/95 backdrop-blur-xl border border-purple-50 rounded-2xl p-2 shadow-2xl">
+                    <div 
+                      id="science-dropdown-menu"
+                      role="menu"
+                      className="bg-white/95 backdrop-blur-md border border-purple-50 rounded-2xl p-2 shadow-xl"
+                    >
                       {scienceLinks.map((link) => (
                         <a
                           key={link.name}
                           href="/"
+                          role="menuitem"
                           onClick={(e) => handleNavClick(e, link)}
-                          className="block px-4 py-2.5 rounded-xl text-[10px] hover:bg-purple-50 hover:text-purple-600 transition-all uppercase tracking-wider font-bold"
+                          className="block px-4 py-2.5 rounded-xl text-[10px] hover:bg-purple-50 hover:text-purple-600 transition-all uppercase tracking-wider font-black focus-visible:bg-purple-50 focus-visible:text-purple-600 focus-visible:outline-none"
                         >
                           {link.name}
                         </a>
@@ -408,7 +427,7 @@ const Navbar = () => {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="lg:hidden fixed inset-0 z-[190] flex flex-col overflow-y-auto bg-white/96 backdrop-blur-2xl"
+            className="lg:hidden fixed inset-0 z-[190] flex flex-col overflow-y-auto bg-white/96 backdrop-blur-md"
             data-lenis-prevent="true"
           >
             {/* Top padding to clear the navbar capsule */}
@@ -450,7 +469,7 @@ const Navbar = () => {
                     variants={itemVariants}
                     href={link.to}
                     onClick={(e) => handleNavClick(e, link)}
-                    className="text-xs font-bold tracking-wide uppercase text-dark-lavender/65 hover:text-purple-600 transition-colors duration-200"
+                    className="text-xs font-black tracking-wide uppercase text-dark-lavender/65 hover:text-purple-600 transition-colors duration-200"
                   >
                     {link.name}
                   </motion.a>
@@ -470,7 +489,7 @@ const Navbar = () => {
                     variants={itemVariants}
                     href={link.to}
                     onClick={(e) => handleNavClick(e, link)}
-                    className="text-xs font-bold tracking-wide uppercase text-dark-lavender/65 hover:text-purple-600 transition-colors duration-200"
+                    className="text-xs font-black tracking-wide uppercase text-dark-lavender/65 hover:text-purple-600 transition-colors duration-200"
                   >
                     {link.name}
                   </motion.a>

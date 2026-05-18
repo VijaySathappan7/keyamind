@@ -1,6 +1,9 @@
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import quotientsImg from "../assets/images/quotients.webp";
 import LazyImage from "./LazyImage";
+import useMediaQuery from "./useMediaQuery";
+
 
 const quotients = [
   {
@@ -42,6 +45,30 @@ const quotients = [
 ];
 
 export default function HumanQuotientsSection() {
+  const containerRef = useRef(null);
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+
+  // Track scroll progress of this section
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  // Center spectrum infographic scroll scale-up expansion (clamped halfway for a premium subtle zoom)
+  const rawScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.96, 1.0, 1.0]);
+  const imageScale = useSpring(rawScale, { stiffness: 95, damping: 26, mass: 0.35 });
+
+  // Slide quotient cards in from left/right sides
+  const rawXLeft = useTransform(scrollYProgress, [0, 0.4], [-65, 0]);
+  const xLeft = useSpring(rawXLeft, { stiffness: 95, damping: 26, mass: 0.35 });
+
+  const rawXRight = useTransform(scrollYProgress, [0, 0.4], [65, 0]);
+  const xRight = useSpring(rawXRight, { stiffness: 95, damping: 26, mass: 0.35 });
+
+  const desktopXLeftStyle = isDesktop ? { x: xLeft } : {};
+  const desktopXRightStyle = isDesktop ? { x: xRight } : {};
+  const desktopImageScaleStyle = isDesktop ? { scale: imageScale } : {};
+
   const fadeUp = {
     hidden: { opacity: 0, y: 20 },
     visible: (i = 1) => ({
@@ -57,6 +84,7 @@ export default function HumanQuotientsSection() {
 
   return (
     <section 
+      ref={containerRef}
       id="human-quotients" 
       className="relative w-full py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#FAF5F8] to-[#FAF9F6] overflow-hidden scroll-mt-[80px]"
     >
@@ -76,8 +104,7 @@ export default function HumanQuotientsSection() {
         <div className="text-center mb-12 lg:mb-20 flex flex-col items-center">
           <motion.div
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+            whileInView="visible" viewport={{ once: true, margin: "-50px" }}
             variants={fadeUp}
             custom={1}
             className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-purple-100 bg-white/70 backdrop-blur-md shadow-sm mb-6"
@@ -90,8 +117,7 @@ export default function HumanQuotientsSection() {
           
           <motion.h2
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+            whileInView="visible" viewport={{ once: true, margin: "-50px" }}
             variants={fadeUp}
             custom={2}
             className="text-[clamp(24px,5.5vw,42px)] lg:text-[44px] font-outfit font-black text-dark-lavender leading-[1.12] tracking-tight"
@@ -104,22 +130,18 @@ export default function HumanQuotientsSection() {
         {/* ── DESKTOP GRID ARCHITECTURE ── */}
         <div className="hidden lg:grid grid-cols-12 gap-y-12 gap-x-0 items-center justify-items-center">
           {/* 1. IQ (Top Left) */}
-          <div className="lg:col-span-3 lg:col-start-1 lg:row-start-1 w-full flex justify-end lg:pr-12">
+          <motion.div style={desktopXLeftStyle} className="lg:col-span-3 lg:col-start-1 lg:row-start-1 w-full flex justify-end lg:pr-12">
             <QuotientCard item={quotients[0]} index={4} />
-          </div>
+          </motion.div>
 
           {/* 2. EQ (Top Right) */}
-          <div className="lg:col-span-3 lg:col-start-10 lg:row-start-1 w-full flex justify-start lg:pl-12">
+          <motion.div style={desktopXRightStyle} className="lg:col-span-3 lg:col-start-10 lg:row-start-1 w-full flex justify-start lg:pl-12">
             <QuotientCard item={quotients[1]} index={5} />
-          </div>
+          </motion.div>
 
           {/* 3. CENTER INFOGRAPHIC */}
           <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            custom={3}
+            style={desktopImageScaleStyle}
             className="lg:col-span-6 lg:col-start-4 lg:row-span-2 flex items-center justify-center"
           >
             <div className="relative w-full max-w-[520px] aspect-square flex items-center justify-center">
@@ -135,14 +157,14 @@ export default function HumanQuotientsSection() {
           </motion.div>
 
           {/* 4. CQ (Bottom Left) */}
-          <div className="lg:col-span-3 lg:col-start-1 lg:row-start-2 w-full flex justify-end lg:pr-12">
+          <motion.div style={desktopXLeftStyle} className="lg:col-span-3 lg:col-start-1 lg:row-start-2 w-full flex justify-end lg:pr-12">
             <QuotientCard item={quotients[2]} index={6} />
-          </div>
+          </motion.div>
 
           {/* 5. AQ (Bottom Right) */}
-          <div className="lg:col-span-3 lg:col-start-10 lg:row-start-2 w-full flex justify-start lg:pl-12">
+          <motion.div style={desktopXRightStyle} className="lg:col-span-3 lg:col-start-10 lg:row-start-2 w-full flex justify-start lg:pl-12">
             <QuotientCard item={quotients[3]} index={7} />
-          </div>
+          </motion.div>
         </div>
 
         {/* ── MOBILE COMPACT ARCHITECTURE (IQ/EQ Top, Image Middle, CQ/AQ Bottom) ── */}
@@ -157,8 +179,7 @@ export default function HumanQuotientsSection() {
           {/* Middle: Image */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
+            whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true, margin: "-50px" }}
             className="relative w-full max-w-[340px] sm:max-w-[380px] aspect-square flex items-center justify-center py-4"
           >
             <div className="absolute inset-0 bg-gradient-to-tr from-purple-100/20 to-transparent blur-[60px]" />
@@ -188,10 +209,9 @@ const QuotientCard = ({ item, index, isMobile }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }}
       transition={{ delay: index * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className={`group relative backdrop-blur-xl bg-white/65 border border-white/50 shadow-[0_15px_45px_rgba(255,182,193,0.15)] transition-all duration-500 w-full gpu-optimize ${
+      className={`group relative backdrop-blur-md bg-white/65 border border-white/50 shadow-[0_15px_45px_rgba(255,182,193,0.15)] transition-all duration-500 w-full gpu-optimize ${
         isMobile 
           ? "rounded-[22px] p-4 text-center flex flex-col items-center" 
           : "rounded-[28px] p-5 md:p-6 hover:-translate-y-1.5 hover:shadow-[0_25px_60px_rgba(255,182,193,0.22)] max-w-[320px]"

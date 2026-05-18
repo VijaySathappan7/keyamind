@@ -119,8 +119,7 @@ export default function DmitPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24">
             <motion.div 
               initial={{ x: -55, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              viewport={{ once: true }}
+              whileInView={{ x: 0, opacity: 1 }} viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="space-y-6"
             >
@@ -164,10 +163,9 @@ export default function DmitPage() {
             {/* Premium Interactive Visual Card */}
             <motion.div 
               initial={{ x: 55, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              viewport={{ once: true }}
+              whileInView={{ x: 0, opacity: 1 }} viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="glass-premium rounded-3xl p-8 sm:p-10 border-white/50 shadow-2xl relative overflow-hidden"
+              className="glass-premium rounded-3xl p-8 sm:p-10 border-white/50 shadow-xl relative overflow-hidden"
             >
               <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-bl-full pointer-events-none" />
               
@@ -209,10 +207,9 @@ export default function DmitPage() {
           {/* ================= STRICT PRIVACY CARD (CRITICAL USER REQUEST) ================= */}
           <motion.div 
             initial={{ y: 40, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
+            whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6 }}
-            className="w-full rounded-3xl border border-emerald-500/20 bg-gradient-to-r from-emerald-50/30 to-teal-50/30 backdrop-blur-xl p-8 mb-24 flex flex-col md:flex-row gap-6 items-center shadow-xl shadow-emerald-500/5"
+            className="w-full rounded-3xl border border-emerald-500/20 bg-gradient-to-r from-emerald-50/30 to-teal-50/30 backdrop-blur-md p-8 mb-24 flex flex-col md:flex-row gap-6 items-center shadow-xl shadow-emerald-500/5"
           >
             <div className="w-14 h-14 shrink-0 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-600">
               <ShieldCheck className="w-8 h-8" />
@@ -243,8 +240,7 @@ export default function DmitPage() {
                 <motion.div 
                   key={item.title}
                   initial={{ y: 30, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  viewport={{ once: true }}
+                  whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.4, delay: idx * 0.05 }}
                   whileHover={{ y: -8, transition: { duration: 0.2 } }}
                   className="bg-white border border-purple-50 rounded-2xl p-6 shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-xl transition-all"
@@ -260,7 +256,7 @@ export default function DmitPage() {
           </div>
 
           {/* ================= BENEFITS MATRIX ================= */}
-          <div className="glass-premium rounded-[32px] p-8 sm:p-12 mb-24 border-white/60 shadow-2xl">
+          <div className="glass-premium rounded-[32px] p-8 sm:p-12 mb-24 border-white/60 shadow-xl">
             <h2 className="text-3xl font-black text-dark-lavender tracking-tight text-center font-outfit mb-12">
               Who Benefits from DMIT Brain Mapping?
             </h2>
@@ -349,10 +345,9 @@ export default function DmitPage() {
           {/* ================= HIGH-CONVERSION CTA ================= */}
           <motion.div 
             initial={{ scale: 0.95, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true }}
+            whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6 }}
-            className="w-full rounded-[32px] bg-gradient-to-r from-dark-lavender via-purple-900 to-purple-800 text-white p-8 sm:p-12 text-center relative overflow-hidden shadow-2xl"
+            className="w-full rounded-[32px] bg-gradient-to-r from-dark-lavender via-purple-900 to-purple-800 text-white p-8 sm:p-12 text-center relative overflow-hidden shadow-xl"
           >
             <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent pointer-events-none" />
             

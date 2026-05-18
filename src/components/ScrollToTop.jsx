@@ -1,38 +1,19 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
 import { ArrowUp } from 'lucide-react';
 
 export default function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
 
-  useEffect(() => {
-    let ticking = false;
+  const { scrollY, scrollYProgress } = useScroll();
 
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const currentY = window.scrollY;
-          
-          // Show/hide button based on scroll position
-          setIsVisible(currentY > 300);
-
-          // Calculate scroll progress percentage (layout read-only once per frame)
-          const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-          if (totalScroll > 0) {
-            setScrollProgress(currentY / totalScroll);
-          }
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+  // Watch scrollY to toggle visibility (triggers state change ONLY when crossing 300px threshold)
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const shouldBeVisible = latest > 300;
+    if (isVisible !== shouldBeVisible) {
+      setIsVisible(shouldBeVisible);
+    }
+  });
 
   const scrollToTop = () => {
     if (window.lenis) {
@@ -51,7 +32,10 @@ export default function ScrollToTop() {
   // Circular progress calculations
   const radius = 20;
   const circumference = 2 * Math.PI * radius;
-  const strokeDashoffset = circumference - (scrollProgress * circumference);
+  
+  // Transform scrollYProgress (0 to 1) directly into strokeDashoffset (circumference to 0)
+  // Bound to Style so it animates directly on the DOM, completely bypassing React reconciliation!
+  const strokeDashoffset = useTransform(scrollYProgress, [0, 1], [circumference, 0]);
 
   return (
     <AnimatePresence>
@@ -82,7 +66,7 @@ export default function ScrollToTop() {
               className="stroke-lavender-purple fill-none"
               strokeWidth="2.5"
               strokeDasharray={circumference}
-              strokeDashoffset={strokeDashoffset}
+              style={{ strokeDashoffset }}
               strokeLinecap="round"
               transition={{ ease: 'easeOut' }}
             />
@@ -102,3 +86,4 @@ export default function ScrollToTop() {
     </AnimatePresence>
   );
 }
+

@@ -1,7 +1,20 @@
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import founderImage from '../assets/images/swathi.webp';
+import useMediaQuery from './useMediaQuery';
 
 export default function FounderProfileSection() {
+  const containerRef = useRef(null);
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+
+  // Track scroll progress of this section
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  // Scroll tracking kept for other elements if needed
+
   const fadeUp = {
     hidden: { opacity: 0, y: 30 },
     visible: (i = 1) => ({
@@ -16,7 +29,7 @@ export default function FounderProfileSection() {
   };
 
   return (
-    <section id="founder" className="relative overflow-hidden bg-gradient-to-b from-[#FAF9F6] to-white py-16 sm:py-20 lg:py-24 select-none z-10 font-poppins scroll-mt-[80px]">
+    <section ref={containerRef} id="founder" className="relative overflow-hidden bg-gradient-to-b from-[#FAF9F6] to-white py-16 sm:py-20 lg:py-24 select-none z-10 font-poppins scroll-mt-[80px]">
       {/* Seamless Bottom Blending Mask */}
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white via-white/60 to-transparent z-[2] pointer-events-none" />
 
@@ -33,8 +46,7 @@ export default function FounderProfileSection() {
             <motion.div
               custom={1}
               initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+              whileInView="visible" viewport={{ once: true, margin: "-50px" }}
               variants={fadeUp}
               className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-purple-100 bg-white/70 backdrop-blur-md shadow-sm mb-3 self-start"
             >
@@ -48,8 +60,7 @@ export default function FounderProfileSection() {
             <motion.h2
               custom={2}
               initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+              whileInView="visible" viewport={{ once: true, margin: "-50px" }}
               variants={fadeUp}
               className="text-3xl sm:text-4xl md:text-5xl lg:text-[46px] font-outfit font-black text-dark-lavender leading-[1.12] tracking-tight text-left"
             >
@@ -64,8 +75,7 @@ export default function FounderProfileSection() {
           <motion.p
             custom={3}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+            whileInView="visible" viewport={{ once: true, margin: "-50px" }}
             variants={fadeUp}
             className="text-sm sm:text-base leading-relaxed text-dark-lavender/80 lg:w-5/12 font-poppins font-light text-left lg:pb-2"
           >
@@ -81,12 +91,13 @@ export default function FounderProfileSection() {
           <motion.div
             custom={4}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+            whileInView="visible" viewport={{ once: true, margin: "-50px" }}
             variants={fadeUp}
             className="lg:col-span-5 flex flex-col items-start w-full"
           >
-            <div className="relative w-full max-w-[220px] sm:max-w-[260px] lg:max-w-[320px] aspect-square rounded-full border border-purple-200/60 p-2 sm:p-2.5 mx-auto lg:mx-0 bg-white/40 backdrop-blur-sm shadow-[0_15px_45px_rgba(59,46,94,0.08)] group gpu-optimize">
+            <motion.div 
+              className="relative w-full max-w-[220px] sm:max-w-[260px] lg:max-w-[320px] aspect-square rounded-full border border-purple-200/60 p-2 sm:p-2.5 mx-auto lg:mx-0 bg-white/40 backdrop-blur-sm shadow-[0_15px_45px_rgba(59,46,94,0.08)] group gpu-optimize"
+            >
               <div className="w-full h-full rounded-full border-2 border-white overflow-hidden bg-white shadow-[0_5px_15px_rgba(59,46,94,0.05)]">
                 <img
                   src={founderImage}
@@ -96,7 +107,7 @@ export default function FounderProfileSection() {
                   className="w-full h-full object-cover filter group-hover:scale-105 transition-transform duration-1000 ease-out rounded-full"
                 />
               </div>
-            </div>
+            </motion.div>
 
             <div className="mt-6 flex flex-col text-left pl-2 w-full items-center lg:items-start">
               <h3 className="text-xl sm:text-2xl font-black text-dark-lavender font-outfit">
@@ -113,8 +124,7 @@ export default function FounderProfileSection() {
           <motion.div
             custom={5}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+            whileInView="visible" viewport={{ once: true, margin: "-50px" }}
             variants={fadeUp}
             className="lg:col-span-7 flex flex-col gap-10 text-left pt-2"
           >

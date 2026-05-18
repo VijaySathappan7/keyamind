@@ -5,9 +5,11 @@ import titleTaglineImage from '../assets/logos/titletagline.webp';
 import heroBackgroundVideo from '../assets/videos/herobackground11.mp4';
 import LazyVideo from './LazyVideo';
 import LazyImage from './LazyImage';
+import useMediaQuery from './useMediaQuery';
 
 const ExpertiseSection = memo(() => {
   const containerRef = useRef(null);
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -15,8 +17,15 @@ const ExpertiseSection = memo(() => {
   const springX = useSpring(mouseX, { damping: 30, stiffness: 150 });
   const springY = useSpring(mouseY, { damping: 30, stiffness: 150 });
 
-  const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 500], [0, 50]);
+  // Scroll tracking of this specific section for premium drift
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  const y1 = useTransform(scrollYProgress, [0, 1], [-20, 20]);
+
+  const desktopY1Style = isDesktop ? { y: y1 } : {};
 
   const handleMouseMove = (e) => {
     if (!containerRef.current) return;
@@ -61,7 +70,7 @@ const ExpertiseSection = memo(() => {
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.2, margin: "-50px" }}
           transition={{ duration: 0.70, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col items-center"
         >
@@ -80,7 +89,7 @@ const ExpertiseSection = memo(() => {
             </span>
           </h2>
 
-          <p className="text-sm sm:text-base text-dark-lavender/80 leading-relaxed font-light font-poppins max-w-3xl mb-2 px-4">
+          <p className="text-sm sm:text-base text-dark-lavender/80 leading-relaxed font-light font-poppins max-w-3xl mb-4 px-4">
             Keyamind Solutions combines advanced DMIT brain mapping with practical,
             research-backed mentorship. We don't just advise — we help individuals
             and organizations discover their inherent strengths and build a lifelong
@@ -91,12 +100,14 @@ const ExpertiseSection = memo(() => {
           <motion.div
             initial={{ opacity: 0, y: 60, scale: 0.95 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            style={{ y: y1 }}
-            viewport={{ once: true, amount: 0.2 }}
+            style={desktopY1Style}
+            viewport={{ once: true, amount: 0.2, margin: "-50px" }}
             transition={{ duration: 0.70, delay: 0.20, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-full max-w-4xl mx-auto select-none pointer-events-none px-4 md:px-0 mt-0"
+            className="relative w-full max-w-4xl mx-auto select-none pointer-events-none px-4 md:px-0 mt-10 sm:mt-14 md:mt-16"
           >
-            <div className="relative mx-auto w-[92%] md:w-[90%] aspect-[16/10] h-auto bg-[#0c0c0c] rounded-[1.5rem] sm:rounded-[2.5rem] border-[8px] sm:border-[12px] md:border-[16px] border-[#1a1a1a] shadow-[0_50px_100px_rgba(59,46,94,0.2)] overflow-hidden flex flex-col justify-between">
+
+
+            <div className="relative mx-auto w-[92%] md:w-[90%] aspect-[16/10] h-auto bg-[#0c0c0c] rounded-[1.5rem] sm:rounded-[2.5rem] border-[8px] sm:border-[12px] md:border-[16px] border-[#1a1a1a] shadow-[0_20px_50px_rgba(59,46,94,0.1)] overflow-hidden flex flex-col justify-between">
               {/* Webcam */}
               <div className="absolute top-[4px] left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-neutral-900 flex items-center justify-center">
                 <div className="w-1 h-1 rounded-full bg-purple-500/40 animate-pulse" />
@@ -220,7 +231,7 @@ const ExpertiseSection = memo(() => {
             </div>
 
             {/* Laptop Base */}
-            <div className="relative mx-auto w-full h-4 md:h-6 bg-[#1a1a1a] rounded-b-[2rem] shadow-2xl flex justify-center z-20">
+            <div className="relative mx-auto w-full h-4 md:h-6 bg-[#1a1a1a] rounded-b-[2rem] shadow-xl flex justify-center z-20">
               <div className="absolute top-0 inset-x-10 h-[3px] bg-white/10" />
               <div className="w-[20%] h-[6px] md:h-[8px] bg-[#0c0c0c] rounded-b-xl border-t border-black/50 shadow-inner" />
             </div>

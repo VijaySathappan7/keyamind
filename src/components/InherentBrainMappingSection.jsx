@@ -5,9 +5,11 @@ import inherentVideo from "../assets/videos/inherent.mp4";
 import fingerprintImage from "../assets/images/fingerprintdesign.webp";
 import LazyVideo from "./LazyVideo";
 import LazyImage from "./LazyImage";
+import useMediaQuery from "./useMediaQuery";
 
 const InherentBrainMappingSection = () => {
   const containerRef = useRef(null);
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
 
   // Smooth cinematic vertical parallax for the background video
   const { scrollYProgress } = useScroll({
@@ -17,6 +19,14 @@ const InherentBrainMappingSection = () => {
 
   const rawY = useTransform(scrollYProgress, [0, 1], [-50, 50]);
   const yParallax = useSpring(rawY, { stiffness: 90, damping: 25, mass: 0.4 });
+
+  // Scroll-linked fingerprint blueprint zoom (clamped halfway for a premium subtle zoom)
+  const blueprintScaleRaw = useTransform(scrollYProgress, [0, 0.5, 1], [0.96, 1.0, 1.0]);
+  const blueprintScale = useSpring(blueprintScaleRaw, { stiffness: 90, damping: 25, mass: 0.35 });
+
+  const desktopBgStyle = isDesktop ? { y: yParallax } : {};
+  const desktopBlueprintStyle = isDesktop ? { scale: blueprintScale } : {};
+
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -85,7 +95,7 @@ const InherentBrainMappingSection = () => {
     >
       {/* 100% COMPLETE CINEMATIC BACKGROUND VIDEO PLAYING WITH SMOOTH PARALLAX */}
       <motion.div 
-        style={{ y: yParallax, translateZ: 0 }}
+        style={{ ...desktopBgStyle, translateZ: 0 }}
         className="absolute inset-0 z-0 overflow-hidden scale-[1.12] will-change-transform"
       >
         <LazyVideo 
@@ -131,13 +141,9 @@ const InherentBrainMappingSection = () => {
         {/* DESKTOP SPLIT: IMAGE & CONTENT */}
         <div className="flex flex-col xl:flex-row items-center justify-between gap-8 xl:gap-12">
           
-          {/* IMAGE COLUMN (Order 2 on Mobile, Left on XL) */}
           <div className="w-full xl:w-[48%] flex items-center justify-center relative order-2">
             <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
+              style={desktopBlueprintStyle}
               className="w-full flex justify-center items-center"
             >
               <div className="w-full max-w-[650px] lg:max-w-[750px] flex items-center justify-center">
@@ -146,7 +152,7 @@ const InherentBrainMappingSection = () => {
                   alt="Inherent Brain Mapping Intelligence Blueprint" 
                   width={750}
                   height={650}
-                  className="w-full h-auto max-h-[350px] lg:max-h-[600px] object-contain select-none pointer-events-none filter drop-shadow-[0_20px_45px_rgba(59,46,94,0.25)] animate-float-slow"
+                  className="w-full h-auto max-h-[350px] lg:max-h-[600px] object-contain select-none pointer-events-none filter drop-shadow-[0_20px_45px_rgba(59,46,94,0.25)]"
                 />
               </div>
             </motion.div>
@@ -156,8 +162,7 @@ const InherentBrainMappingSection = () => {
           <motion.div 
             variants={containerVariants}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true, margin: "-50px" }} whileInView="visible"
             className="w-full xl:w-[50%] flex flex-col items-start text-left gap-4 lg:gap-5 order-3 xl:order-2"
           >
             {/* DESKTOP HEADING (Visible only on XL) */}
@@ -254,8 +259,7 @@ const InherentBrainMappingSection = () => {
         <motion.div 
           variants={containerVariants}
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: true, margin: "-50px" }} whileInView="visible"
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full pt-2"
         >
           {features.map((item, idx) => {
@@ -266,7 +270,7 @@ const InherentBrainMappingSection = () => {
                 variants={itemVariants}
                 whileHover={{ y: -4, scale: 1.02 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
-                className={`p-4 sm:p-5 rounded-[22px] bg-white/70 border border-white shadow-[0_8px_25px_rgba(59,46,94,0.05)] backdrop-blur-xl flex flex-col gap-3 relative group overflow-hidden ${item.borderHover} transition-all duration-300`}
+                className={`p-4 sm:p-5 rounded-[22px] bg-white/70 border border-white shadow-[0_8px_25px_rgba(59,46,94,0.05)] backdrop-blur-md flex flex-col gap-3 relative group overflow-hidden ${item.borderHover} transition-all duration-300`}
               >
                 {/* Subtle top indicator beam */}
                 <div className="absolute top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-transparent via-purple-400/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

@@ -1,4 +1,5 @@
-import { memo } from "react";
+import { useRef, memo } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import LazyImage from "./LazyImage";
 
@@ -8,6 +9,22 @@ import auditoryImg from "../assets/images/auditory.webp";
 import kinestheticImg from "../assets/images/kinesthetic.webp";
 
 const LearningStylesSection = memo(() => {
+  const containerRef = useRef(null);
+
+  // Track scroll progress of this section
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  // Scroll-linked scale (clamped halfway for a premium subtle zoom)
+  const rawScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.96, 1.0, 1.0]);
+  const pieScale = useSpring(rawScale, { stiffness: 95, damping: 26, mass: 0.35 });
+
+  // Scroll slide-in for cards list
+  const rawXRight = useTransform(scrollYProgress, [0, 0.4], [75, 0]);
+  const cardsX = useSpring(rawXRight, { stiffness: 95, damping: 26, mass: 0.35 });
+
   const cards = [
     {
       id: "visual",
@@ -33,7 +50,7 @@ const LearningStylesSection = memo(() => {
   ];
 
   return (
-    <section id="learning-styles" className="relative w-full py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#FAF2F7] to-[#FAF6F9] overflow-hidden scroll-mt-[80px]">
+    <section ref={containerRef} id="learning-styles" className="relative w-full py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#FAF2F7] to-[#FAF6F9] overflow-hidden scroll-mt-[80px]">
       {/* Seamless Top & Bottom Blending Masks */}
       
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white via-white/60 to-transparent z-[2] pointer-events-none" />
@@ -78,7 +95,10 @@ const LearningStylesSection = memo(() => {
           {/* LEFT SIDE → MASSIVE FIXED PIE CHART (No Dancing) + CONCISE QUOTE BELOW */}
           <div className="w-full lg:w-[48%] flex flex-col items-center justify-center gap-6 relative">
             {/* Massive Pure Centerpiece Image (Static, Fixed, Balanced sizing) */}
-            <div className="w-full max-w-[450px] sm:max-w-[520px] lg:max-w-[580px] xl:max-w-[620px] relative flex items-center justify-center">
+            <motion.div 
+              style={{ scale: pieScale, transformOrigin: 'center center' }}
+              className="w-full max-w-[450px] sm:max-w-[520px] lg:max-w-[580px] xl:max-w-[620px] relative flex items-center justify-center"
+            >
               <LazyImage 
                 src={pieChartImg} 
                 alt="Cognitive Learning Styles Pie Chart Blueprint" 
@@ -86,7 +106,7 @@ const LearningStylesSection = memo(() => {
                 height={996}
                 className="w-full h-auto object-contain drop-shadow-[0_20px_45px_rgba(59,46,94,0.18)] select-none pointer-events-none"
               />
-            </div>
+            </motion.div>
 
             {/* Reduced Quote Positioned Directly Below the Pie Image */}
             <div className="w-full max-w-md text-center px-4 pt-1">
@@ -97,12 +117,15 @@ const LearningStylesSection = memo(() => {
           </div>
 
           {/* RIGHT SIDE → 3 STREAMLINED STATIC CARDS (No hover options) */}
-          <div className="w-full lg:w-[50%] flex flex-col justify-center gap-5">
+          <motion.div 
+            style={{ x: cardsX }}
+            className="w-full lg:w-[50%] flex flex-col justify-center gap-5"
+          >
             {cards.map((card) => {
               return (
                 <div 
                   key={card.id}
-                  className="rounded-[28px] bg-white/70 border border-white shadow-[0_10px_30px_rgba(59,46,94,0.04)] backdrop-blur-xl flex flex-row items-stretch overflow-hidden min-h-[90px] sm:min-h-[110px]"
+                  className="rounded-[28px] bg-white/70 border border-white shadow-[0_10px_30px_rgba(59,46,94,0.04)] backdrop-blur-md flex flex-row items-stretch overflow-hidden min-h-[90px] sm:min-h-[110px]"
                 >
                   {/* Left Corner Filled Entirely with Image (Landscape Format) */}
                   <div className="w-[130px] sm:w-[180px] lg:w-[220px] bg-purple-50/30 shrink-0 relative overflow-hidden flex items-center justify-center">
@@ -140,7 +163,7 @@ const LearningStylesSection = memo(() => {
                 </div>
               );
             })}
-          </div>
+          </motion.div>
 
         </div>
 

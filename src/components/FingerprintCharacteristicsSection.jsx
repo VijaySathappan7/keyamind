@@ -1,5 +1,5 @@
 import { useRef, memo } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
 
 // Import images directly from assets for Vite build optimization
@@ -29,6 +29,17 @@ const fingerprintCharacteristics = [
 const FingerprintCharacteristicsSection = memo(() => {
   const containerRef = useRef(null);
 
+  // Track scroll progress of this section
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  // Dynamic image scaling on scroll
+  const rawScale = useTransform(scrollYProgress, [0, 0.5], [1.0, 1.15]);
+  const imgScale = useSpring(rawScale, { stiffness: 95, damping: 26, mass: 0.35 });
+
+
   return (
     <section 
       ref={containerRef}
@@ -50,8 +61,7 @@ const FingerprintCharacteristicsSection = memo(() => {
         <div className="text-center mb-12 md:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }}
             className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-50 border border-purple-100 mb-4"
           >
             <Sparkles size={11} className="text-purple-500" />
@@ -62,8 +72,7 @@ const FingerprintCharacteristicsSection = memo(() => {
 
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }}
             className="text-[clamp(24px,5.5vw,42px)] lg:text-[44px] font-outfit font-black text-dark-lavender leading-tight tracking-tight mb-4"
           >
             Every Fingerprint Tells <br />
@@ -72,8 +81,7 @@ const FingerprintCharacteristicsSection = memo(() => {
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }}
             className="text-xs md:text-sm text-dark-lavender/60 font-light max-w-lg mx-auto font-poppins"
           >
             Simple, permanent, and unique. Discover the biological map that defines your innate potential.
@@ -88,16 +96,16 @@ const FingerprintCharacteristicsSection = memo(() => {
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: index * 0.1, duration: 0.6 }}
               className="group flex flex-col rounded-[32px] bg-warm-cream/20 border border-purple-100/30 overflow-hidden hover:bg-white hover:shadow-xl hover:shadow-purple-100/10 transition-all duration-500 text-left h-full gpu-optimize"
             >
               {/* Full-Bleed Image Top (Covering Corners) */}
               <div className="w-full h-48 lg:h-56 shrink-0 bg-white relative overflow-hidden flex items-center justify-center">
-                <img 
+                <motion.img 
                   src={item.image} 
                   alt={item.title} 
+                  style={{ scale: imgScale }}
                   className="w-full h-full object-cover select-none pointer-events-none transition-transform duration-1000 group-hover:scale-110" 
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent pointer-events-none" />

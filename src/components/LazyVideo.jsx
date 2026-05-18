@@ -3,6 +3,7 @@ import { useEffect, useRef, useState, memo } from 'react';
 const LazyVideo = memo(({ src, mobileSrc, poster, className, ...props }) => {
   const videoRef = useRef(null);
   const [inView, setInView] = useState(false);
+  const [hasEnteredView, setHasEnteredView] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -10,9 +11,13 @@ const LazyVideo = memo(({ src, mobileSrc, poster, className, ...props }) => {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setInView(entry.isIntersecting);
+        const intersecting = entry.isIntersecting;
+        setInView(intersecting);
+        if (intersecting) {
+          setHasEnteredView(true);
+        }
       },
-      { threshold: 0.1, rootMargin: "100px 0px" } // Load slightly before entering view
+      { threshold: 0.05, rootMargin: "120px 0px" } // Load slightly before entering view
     );
 
     observer.observe(video);
@@ -36,10 +41,14 @@ const LazyVideo = memo(({ src, mobileSrc, poster, className, ...props }) => {
   // Play/pause based on intersection and source readiness
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || !activeSrc) return;
 
-    if (inView && activeSrc) {
-      video.play().catch(() => {});
+    if (inView) {
+      // Small timeout to ensure browser thread handles play operation safely
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {});
+      }
     } else {
       video.pause();
     }
@@ -54,7 +63,7 @@ const LazyVideo = memo(({ src, mobileSrc, poster, className, ...props }) => {
       loop
       playsInline
       preload="none"
-      src={inView && activeSrc ? activeSrc : undefined}
+      src={hasEnteredView && activeSrc ? activeSrc : undefined}
       {...props}
     />
   );

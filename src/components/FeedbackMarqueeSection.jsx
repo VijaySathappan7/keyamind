@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { Quote } from "lucide-react";
 
 const feedbacks = [
@@ -102,9 +103,9 @@ export default function FeedbackMarqueeSection() {
       className="relative overflow-hidden bg-gradient-to-b from-[#FAF5F7] to-[#FAF9F6] py-20 md:py-24 select-none scroll-mt-[80px] z-10"
     >
       {/* BACKGROUND GLOWS */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-10 right-10 w-[450px] h-[450px] rounded-full bg-purple-300/15 blur-[150px] animate-pulse-soft" />
-        <div className="absolute bottom-0 left-10 w-[400px] h-[400px] rounded-full bg-purple-300/15 blur-[140px] animate-pulse-soft" />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none max-md:hidden">
+        <div className="absolute top-10 right-10 w-[450px] h-[450px] rounded-full bg-purple-300/15 blur-[150px] animate-pulse-soft gpu-optimize" />
+        <div className="absolute bottom-0 left-10 w-[400px] h-[400px] rounded-full bg-purple-300/15 blur-[140px] animate-pulse-soft gpu-optimize" />
       </div>
 
       <div className="relative z-10 max-w-[1420px] mx-auto px-6 md:px-12 lg:px-16 w-full flex flex-col gap-6 lg:gap-8">
@@ -118,8 +119,7 @@ export default function FeedbackMarqueeSection() {
             <motion.div
               custom={1}
               initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+              whileInView="visible" viewport={{ once: true, margin: "-50px" }}
               variants={fadeUp}
               className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-purple-100 bg-white/70 backdrop-blur-md shadow-sm mb-2.5 self-start"
             >
@@ -133,8 +133,7 @@ export default function FeedbackMarqueeSection() {
             <motion.h2
               custom={2}
               initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+              whileInView="visible" viewport={{ once: true, margin: "-50px" }}
               variants={fadeUp}
               className="text-[clamp(24px,5.5vw,42px)] lg:text-[44px] font-outfit font-black text-dark-lavender leading-[1.12] tracking-tight text-left"
             >
@@ -149,8 +148,7 @@ export default function FeedbackMarqueeSection() {
           <motion.p
             custom={3}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+            whileInView="visible" viewport={{ once: true, margin: "-50px" }}
             variants={fadeUp}
             className="text-sm sm:text-base leading-relaxed text-dark-lavender/80 lg:w-5/12 font-poppins font-light text-left lg:pb-1"
           >
@@ -158,27 +156,29 @@ export default function FeedbackMarqueeSection() {
             educators, and working professionals across Tamil Nadu.
           </motion.p>
         </div>
+      </div>
 
-        {/* ====================================================
-            MARQUEE TRACK CONTAINER
-            ==================================================== */}
-        <motion.div
-          custom={4}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeUp}
-          className="relative w-full overflow-hidden py-2 -mx-6 px-6 sm:-mx-12 sm:px-12 lg:-mx-16 lg:px-16 flex mask-gradient-horizontal"
-        >
-          {/* MARQUEE TRACK (Adjacent lists with 100% translate seamless loop) */}
-          <div className="flex w-full overflow-hidden hover:[&>div]:[animation-play-state:paused]">
+      {/* ====================================================
+          MARQUEE TRACK CONTAINER (Edge-to-Edge Stretched)
+          ==================================================== */}
+      <motion.div
+        custom={4}
+        initial="hidden"
+        whileInView="visible" viewport={{ once: true, margin: "-50px" }}
+        variants={fadeUp}
+        className="relative w-full overflow-hidden py-4 flex mask-gradient-horizontal z-10"
+      >
+          {/* MARQUEE TRACK (Adjacent lists with 100% translate seamless loop sliding left to right) */}
+          <div 
+            className="flex w-full overflow-hidden hover:[&>div]:[animation-play-state:paused]"
+          >
             
             {/* List 1 */}
-            <div className="flex gap-5 sm:gap-6 shrink-0 animate-marquee pr-5 sm:pr-6">
+            <div className="flex gap-5 sm:gap-6 shrink-0 animate-marquee-reverse pr-5 sm:pr-6">
               {feedbacks.map((item, idx) => (
                 <div
                   key={`f1-${idx}`}
-                  className="w-[280px] sm:w-[340px] lg:w-[380px] shrink-0 rounded-2xl border border-white/80 bg-white/60 backdrop-blur-xl p-5 sm:p-6 shadow-[0_10px_35px_rgba(59,46,94,0.04)] flex flex-col justify-between hover:bg-white/90 hover:scale-[1.015] hover:shadow-[0_20px_50px_rgba(59,46,94,0.08)] transition-all duration-300 text-left gpu-optimize"
+                  className="w-[280px] sm:w-[340px] lg:w-[380px] shrink-0 rounded-2xl border border-white/80 bg-white/90 md:bg-white/60 md:backdrop-blur-md p-5 sm:p-6 shadow-[0_10px_35px_rgba(59,46,94,0.04)] flex flex-col justify-between hover:bg-white/90 hover:scale-[1.015] hover:shadow-[0_20px_50px_rgba(59,46,94,0.08)] transition-all duration-300 text-left gpu-optimize"
                 >
                   {/* QUOTE ICON & TEXT */}
                   <div className="flex flex-col gap-3 mb-5 font-poppins">
@@ -212,11 +212,11 @@ export default function FeedbackMarqueeSection() {
             </div>
 
             {/* List 2 (Identical Copy for seamless loop) */}
-            <div className="flex gap-5 sm:gap-6 shrink-0 animate-marquee pr-5 sm:pr-6" aria-hidden="true">
+            <div className="flex gap-5 sm:gap-6 shrink-0 animate-marquee-reverse pr-5 sm:pr-6" aria-hidden="true">
               {feedbacks.map((item, idx) => (
                 <div
                   key={`f2-${idx}`}
-                  className="w-[280px] sm:w-[340px] lg:w-[380px] shrink-0 rounded-2xl border border-white/80 bg-white/60 backdrop-blur-xl p-5 sm:p-6 shadow-[0_10px_35px_rgba(59,46,94,0.04)] flex flex-col justify-between hover:bg-white/90 hover:scale-[1.015] hover:shadow-[0_20px_50px_rgba(59,46,94,0.08)] transition-all duration-300 text-left gpu-optimize"
+                  className="w-[280px] sm:w-[340px] lg:w-[380px] shrink-0 rounded-2xl border border-white/80 bg-white/90 md:bg-white/60 md:backdrop-blur-md p-5 sm:p-6 shadow-[0_10px_35px_rgba(59,46,94,0.04)] flex flex-col justify-between hover:bg-white/90 hover:scale-[1.015] hover:shadow-[0_20px_50px_rgba(59,46,94,0.08)] transition-all duration-300 text-left gpu-optimize"
                 >
                   {/* QUOTE ICON & TEXT */}
                   <div className="flex flex-col gap-3 mb-5 font-poppins">
@@ -251,8 +251,6 @@ export default function FeedbackMarqueeSection() {
 
           </div>
         </motion.div>
-
-      </div>
     </section>
   );
 }

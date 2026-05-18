@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
+import { motion, AnimatePresence, useMotionValue, useSpring, useScroll, useTransform } from 'framer-motion';
 import { Sparkles, ArrowUpRight } from 'lucide-react';
 import LazyImage from './LazyImage';
 
@@ -66,6 +66,27 @@ const ServicesSection = () => {
   const [autoPlay, setAutoPlay] = useState(true);
   const [isManualLocked, setIsManualLocked] = useState(false);
   const containerRef = useRef(null);
+
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.12,
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 35 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { 
+        duration: 0.8, 
+        ease: [0.16, 1, 0.3, 1] 
+      }
+    }
+  };
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -180,11 +201,18 @@ const ServicesSection = () => {
           DESKTOP 3x2 GRID HUB (3 Cards Up, 3 Cards Down)
           ==================================================== */}
       <div className="hidden lg:block w-full max-w-[1340px] mx-auto px-6 md:px-12 lg:px-8 pb-10 z-10 relative">
-        <div className="grid grid-cols-2 xl:grid-cols-3 gap-6 xl:gap-8 mb-8 items-stretch transform-gpu">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          viewport={{ once: true, margin: "-50px" }} whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid grid-cols-2 xl:grid-cols-3 gap-6 xl:gap-8 mb-8 items-stretch transform-gpu"
+        >
           {services.map((service) => (
-            <div 
+            <motion.div 
               key={service.num}
-              className="flex flex-col rounded-[32px] bg-white/80 border border-white shadow-[0_15px_45px_rgba(59,46,94,0.04)] hover:shadow-[0_25px_60px_rgba(59,46,94,0.08)] backdrop-blur-xl overflow-hidden group hover:-translate-y-2 transition-all duration-700 text-left"
+              variants={cardVariants}
+              className="flex flex-col rounded-[32px] bg-white/80 border border-white shadow-[0_15px_45px_rgba(59,46,94,0.04)] hover:shadow-[0_25px_60px_rgba(59,46,94,0.08)] backdrop-blur-md overflow-hidden group hover:-translate-y-2 transition-all duration-700 text-left"
             >
               {/* Image Container (Curved Top) */}
               <div className="w-full h-[200px] xl:h-[240px] relative overflow-hidden shrink-0 bg-white flex items-center justify-center">
@@ -240,9 +268,9 @@ const ServicesSection = () => {
                   ))}
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       {/* ====================================================
@@ -251,7 +279,7 @@ const ServicesSection = () => {
       <div className="lg:hidden max-w-xl mx-auto px-6 pb-10 z-10 relative w-full flex flex-col gap-6">
         
         {/* Active Card Feed Container — Content First */}
-        <div className="relative w-full min-h-[480px] rounded-[32px] bg-white border border-white shadow-2xl backdrop-blur-xl overflow-hidden flex flex-col">
+        <div className="relative w-full min-h-[480px] rounded-[32px] bg-white border border-white shadow-xl backdrop-blur-md overflow-hidden flex flex-col">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeIndex}
@@ -365,7 +393,7 @@ const ServicesSection = () => {
           BOTTOM CTA SECTION
           ==================================================== */}
       <div className="max-w-[1340px] mx-auto px-6 md:px-12 lg:px-8 mt-2 z-10 relative w-full">
-        <div className="w-full py-8 px-6 sm:py-10 sm:px-12 rounded-[32px] bg-gradient-to-r from-white/95 via-purple-50/90 to-purple-50/90 border border-white shadow-[0_20px_50px_rgba(59,46,94,0.06)] backdrop-blur-2xl relative overflow-hidden flex flex-col items-center text-center group">
+        <div className="w-full py-8 px-6 sm:py-10 sm:px-12 rounded-[32px] bg-gradient-to-r from-white/95 via-purple-50/90 to-purple-50/90 border border-white shadow-[0_20px_50px_rgba(59,46,94,0.06)] backdrop-blur-md relative overflow-hidden flex flex-col items-center text-center group">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-gradient-to-tr from-purple-300/20 to-purple-300/20 rounded-full blur-[70px] pointer-events-none animate-pulse-soft" />
 
           <div className="relative z-10 max-w-3xl flex flex-col items-center gap-3.5">

@@ -1,9 +1,25 @@
-import { memo } from "react";
-import { motion } from "framer-motion";
+import { useRef, memo } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import brainLobesImg from "../assets/images/brainlobes.webp";
 import LazyImage from "./LazyImage";
+import useMediaQuery from "./useMediaQuery";
 
 const BrainLobeFunctionalitySection = memo(() => {
+  const containerRef = useRef(null);
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+
+  // Track scroll progress of this section
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  // Scroll-driven scaling (clamped halfway for a premium subtle zoom)
+  const rawScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.96, 1.0, 1.0]);
+  const brainScale = useSpring(rawScale, { stiffness: 95, damping: 26, mass: 0.35 });
+
+  const desktopScaleStyle = isDesktop ? { scale: brainScale, transformOrigin: 'center center' } : {};
+
   const lobes = [
     {
       name: "Frontal Lobe",
@@ -60,6 +76,7 @@ const BrainLobeFunctionalitySection = memo(() => {
 
   return (
     <section
+      ref={containerRef}
       id="brain-lobes"
       className="relative w-full py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-white to-[#FAF5F8] overflow-hidden scroll-mt-[80px]"
     >
@@ -83,8 +100,7 @@ const BrainLobeFunctionalitySection = memo(() => {
           <motion.div
             custom={1}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+            whileInView="visible" viewport={{ once: true, margin: "-50px" }}
             variants={fadeUp}
             className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-purple-100 bg-white/70 backdrop-blur-md shadow-sm mb-5"
           >
@@ -98,8 +114,7 @@ const BrainLobeFunctionalitySection = memo(() => {
           <motion.h2
             custom={2}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+            whileInView="visible" viewport={{ once: true, margin: "-50px" }}
             variants={fadeUp}
             className="text-[clamp(24px,5.5vw,42px)] lg:text-[44px] font-outfit font-black text-dark-lavender leading-[1.12] tracking-tight mb-6"
           >
@@ -110,8 +125,7 @@ const BrainLobeFunctionalitySection = memo(() => {
           <motion.p
             custom={3}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+            whileInView="visible" viewport={{ once: true, margin: "-50px" }}
             variants={fadeUp}
             className="text-base sm:text-lg text-dark-lavender/70 font-light leading-relaxed font-poppins max-w-2xl"
           >
@@ -133,14 +147,13 @@ const BrainLobeFunctionalitySection = memo(() => {
                 key={index}
                 custom={index + 4}
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                whileInView="visible" viewport={{ once: true, margin: "-50px" }}
                 variants={fadeUp}
                 whileHover={{
                   scale: 1.015,
                   x: 5,
                 }}
-                className="group relative overflow-hidden rounded-2xl border border-white/60 bg-white/45 backdrop-blur-xl py-3 px-4 sm:py-3.5 sm:px-5 shadow-[0_10px_35px_rgba(59,46,94,0.03)] transition-all duration-300 text-left gpu-optimize"
+                className="group relative overflow-hidden rounded-2xl border border-white/60 bg-white/45 backdrop-blur-md py-3 px-4 sm:py-3.5 sm:px-5 shadow-[0_10px_35px_rgba(59,46,94,0.03)] transition-all duration-300 text-left gpu-optimize"
               >
                 {/* HOVER GRADIENT */}
                 <div
@@ -182,17 +195,7 @@ const BrainLobeFunctionalitySection = memo(() => {
 
             {/* BRAIN VISUAL */}
             <motion.div
-              animate={{
-                y: [-8, 8, -8],
-              }}
-              transition={{
-                duration: 6,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              whileHover={{
-                scale: 1.025,
-              }}
+              style={desktopScaleStyle}
               className="relative z-10 flex items-center justify-center w-full max-w-[300px] sm:max-w-[380px] lg:max-w-[440px] xl:max-w-[500px] transition-transform duration-700 gpu-optimize"
             >
               <LazyImage

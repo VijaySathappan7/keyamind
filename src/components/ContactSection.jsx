@@ -58,8 +58,7 @@ export default function ContactSection() {
             <motion.div
               custom={1}
               initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+              whileInView="visible" viewport={{ once: true, margin: "-50px" }}
               variants={fadeUp}
               className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-purple-100 bg-white/70 backdrop-blur-md shadow-sm self-start"
             >
@@ -73,8 +72,7 @@ export default function ContactSection() {
             <motion.h2
               custom={2}
               initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+              whileInView="visible" viewport={{ once: true, margin: "-50px" }}
               variants={fadeUp}
               className="text-[clamp(24px,5.5vw,42px)] lg:text-[44px] font-outfit font-black text-dark-lavender leading-[1.12] tracking-tight text-left"
             >
@@ -87,8 +85,7 @@ export default function ContactSection() {
             <motion.p
               custom={3}
               initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+              whileInView="visible" viewport={{ once: true, margin: "-50px" }}
               variants={fadeUp}
               className="text-sm sm:text-base leading-relaxed text-dark-lavender/80 font-poppins font-light max-w-md"
             >
@@ -102,11 +99,10 @@ export default function ContactSection() {
               <motion.a
                 custom={4}
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                whileInView="visible" viewport={{ once: true, margin: "-50px" }}
                 variants={fadeUp}
                 href="tel:+919344094369"
-                className="flex items-center gap-4 p-4 rounded-2xl bg-white/60 backdrop-blur-xl border border-white/80 shadow-[0_10px_30px_rgba(59,46,94,0.04)] hover:bg-white/90 hover:scale-[1.015] transition-all duration-300 group cursor-pointer min-h-[48px]"
+                className="flex items-center gap-4 p-4 rounded-2xl bg-white/60 backdrop-blur-md border border-white/80 shadow-[0_10px_30px_rgba(59,46,94,0.04)] hover:bg-white/90 hover:scale-[1.015] transition-all duration-300 group cursor-pointer min-h-[48px]"
               >
                 <div className="w-11 h-11 rounded-xl bg-emerald-50 flex items-center justify-center border border-emerald-100 group-hover:bg-emerald-500 transition-colors shrink-0">
                   <svg viewBox="0 0 24 24" className="w-5.5 h-5.5 fill-[#25D366] group-hover:fill-white transition-colors shrink-0" xmlns="http://www.w3.org/2000/svg">
@@ -127,11 +123,10 @@ export default function ContactSection() {
               <motion.a
                 custom={5}
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                whileInView="visible" viewport={{ once: true, margin: "-50px" }}
                 variants={fadeUp}
                 href="mailto:contact@keyamind.com"
-                className="flex items-center gap-4 p-4 rounded-2xl bg-white/60 backdrop-blur-xl border border-white/80 shadow-[0_10px_30px_rgba(59,46,94,0.04)] hover:bg-white/90 hover:scale-[1.015] transition-all duration-300 group cursor-pointer min-h-[48px]"
+                className="flex items-center gap-4 p-4 rounded-2xl bg-white/60 backdrop-blur-md border border-white/80 shadow-[0_10px_30px_rgba(59,46,94,0.04)] hover:bg-white/90 hover:scale-[1.015] transition-all duration-300 group cursor-pointer min-h-[48px]"
               >
                 <div className="w-11 h-11 rounded-xl bg-red-50 flex items-center justify-center border border-red-100 group-hover:bg-red-100 transition-colors shrink-0">
                   <svg viewBox="0 0 48 48" className="w-5.5 h-5.5 shrink-0" xmlns="http://www.w3.org/2000/svg">
@@ -155,10 +150,9 @@ export default function ContactSection() {
               <motion.div
                 custom={6}
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                whileInView="visible" viewport={{ once: true, margin: "-50px" }}
                 variants={fadeUp}
-                className="flex items-center gap-4 p-4 rounded-2xl bg-white/60 backdrop-blur-xl border border-white/80 shadow-[0_10px_30px_rgba(59,46,94,0.04)] min-h-[48px]"
+                className="flex items-center gap-4 p-4 rounded-2xl bg-white/60 backdrop-blur-md border border-white/80 shadow-[0_10px_30px_rgba(59,46,94,0.04)] min-h-[48px]"
               >
                 <div className="w-11 h-11 rounded-xl bg-blue-50 flex items-center justify-center border border-blue-100 shrink-0">
                   <svg viewBox="0 0 24 24" className="w-5.5 h-5.5 shrink-0" xmlns="http://www.w3.org/2000/svg">
@@ -189,12 +183,11 @@ export default function ContactSection() {
           <motion.div
             custom={7}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+            whileInView="visible" viewport={{ once: true, margin: "-50px" }}
             variants={fadeUp}
             className="lg:col-span-7 w-full"
           >
-            <div className="w-full p-6 sm:p-10 rounded-[32px] bg-white/70 backdrop-blur-2xl border border-white shadow-[0_20px_60px_rgba(59,46,94,0.08)] relative overflow-hidden text-left font-poppins">
+            <div className="w-full p-6 sm:p-10 rounded-[32px] bg-white/70 backdrop-blur-md border border-white shadow-[0_20px_60px_rgba(59,46,94,0.08)] relative overflow-hidden text-left font-poppins">
               
               {/* TOP WHATSAPP STATUS HEADER */}
               <div className="flex items-center justify-between pb-6 border-b border-dark-lavender/5">

@@ -1,6 +1,8 @@
-import { memo } from "react";
+import { useRef, memo } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import LazyImage from "./LazyImage";
+import useMediaQuery from "./useMediaQuery";
 
 import eagleImg from "../assets/images/eagle.webp";
 import peacockImg from "../assets/images/peacocok.webp";
@@ -8,6 +10,21 @@ import owlImg from "../assets/images/owl.webp";
 import doveImg from "../assets/images/dove.webp";
 
 const PersonalitySection = memo(() => {
+  const containerRef = useRef(null);
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+
+  // Track scroll progress of this section
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  // Dynamic scroll-driven circular avatar scaling (clamped halfway for a premium subtle zoom)
+  const rawScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.96, 1.0, 1.0]);
+  const circleScale = useSpring(rawScale, { stiffness: 95, damping: 26, mass: 0.35 });
+
+  const desktopScaleStyle = isDesktop ? { scale: circleScale } : {};
+
   const cards = [
     {
       id: "eagle",
@@ -41,6 +58,7 @@ const PersonalitySection = memo(() => {
 
   return (
     <section 
+      ref={containerRef}
       id="personality" 
       className="relative w-full py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#FAF9F6] to-[#FAF2F7] overflow-hidden scroll-mt-[80px]"
     >
@@ -83,7 +101,10 @@ const PersonalitySection = memo(() => {
                   key={card.id}
                   className="flex flex-col items-center text-center gap-2.5 flex-1"
                 >
-                  <div className="w-40 h-40 sm:w-28 sm:h-28 lg:w-32 lg:h-32 xl:w-36 xl:h-36 rounded-full overflow-hidden border-2 border-white shadow-[0_10px_30px_rgba(59,46,94,0.08)] flex items-center justify-center bg-gradient-to-tr from-purple-50/50 to-purple-50/50 hover:scale-105 transition-transform duration-300 mx-auto sm:mx-0">
+                  <motion.div 
+                    style={desktopScaleStyle}
+                    className="w-40 h-40 sm:w-28 sm:h-28 lg:w-32 lg:h-32 xl:w-36 xl:h-36 rounded-full overflow-hidden border-2 border-white shadow-[0_10px_30px_rgba(59,46,94,0.08)] flex items-center justify-center bg-gradient-to-tr from-purple-50/50 to-purple-50/50 hover:scale-105 transition-transform duration-300 mx-auto sm:mx-0"
+                  >
                     <LazyImage 
                       src={card.image} 
                       alt={card.birdName} 
@@ -100,7 +121,7 @@ const PersonalitySection = memo(() => {
                       objectCover={true}
                       className="w-full h-full pointer-events-none select-none"
                     />
-                  </div>
+                  </motion.div>
 
                   {/* Clean Typography Label Below */}
                   <div className="flex flex-col items-center text-center">

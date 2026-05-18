@@ -45,27 +45,31 @@ const IntelligenceSpectrumDiagram = memo(() => {
             <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0" />
           </radialGradient>
 
-          {/* Glowing Filter Definitions for high fidelity glassmorphism */}
-          <filter id="neonGlowPurple" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur stdDeviation="10" result="blur" />
-            <feComposite in="SourceGraphic" in2="blur" operator="over" />
-          </filter>
-          <filter id="neonGlowCyan" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur stdDeviation="10" result="blur" />
-            <feComposite in="SourceGraphic" in2="blur" operator="over" />
-          </filter>
-          <filter id="neonGlowBlue" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur stdDeviation="10" result="blur" />
-            <feComposite in="SourceGraphic" in2="blur" operator="over" />
-          </filter>
-          <filter id="neonGlowOrange" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur stdDeviation="10" result="blur" />
-            <feComposite in="SourceGraphic" in2="blur" operator="over" />
-          </filter>
+          {/* Radial Gradients for Quotient Nodes (Replaces expensive pixel blur filters) */}
+          <radialGradient id="neonGlowPurple" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#8B5CF6" stopOpacity="0.35" />
+            <stop offset="60%" stopColor="#8B5CF6" stopOpacity="0.1" />
+            <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0" />
+          </radialGradient>
+          <radialGradient id="neonGlowCyan" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#22D3EE" stopOpacity="0.35" />
+            <stop offset="60%" stopColor="#22D3EE" stopOpacity="0.1" />
+            <stop offset="100%" stopColor="#22D3EE" stopOpacity="0" />
+          </radialGradient>
+          <radialGradient id="neonGlowBlue" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.35" />
+            <stop offset="60%" stopColor="#3B82F6" stopOpacity="0.1" />
+            <stop offset="100%" stopColor="#3B82F6" stopOpacity="0" />
+          </radialGradient>
+          <radialGradient id="neonGlowOrange" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#F59E0B" stopOpacity="0.35" />
+            <stop offset="60%" stopColor="#F59E0B" stopOpacity="0.1" />
+            <stop offset="100%" stopColor="#F59E0B" stopOpacity="0" />
+          </radialGradient>
         </defs>
 
         {/* ── PULSING NEURAL PATHWAYS (Connecting Central Core to Quotient Nodes) ── */}
-        <g strokeWidth="2.5" strokeLinecap="round" opacity="0.85">
+        <g strokeWidth="2.5" strokeLinecap="round" opacity="0.85" style={{ willChange: "transform, opacity" }}>
           {/* IQ Pathway (Top-Left) */}
           <line x1="250" y1="250" x2="120" y2="120" stroke="#06B6D4" strokeDasharray="8 8" className="opacity-45" />
           <motion.line
@@ -104,7 +108,7 @@ const IntelligenceSpectrumDiagram = memo(() => {
         </g>
 
         {/* ── CENTRAL GLOWING CORE (The Integrated Mind) ── */}
-        <g transform="translate(250, 250)">
+        <g transform="translate(250, 250)" style={{ willChange: "transform" }}>
           {/* Ambient Radial Core Backing */}
           <circle cx="0" cy="0" r="85" fill="url(#centerGlow)" />
 
@@ -152,9 +156,10 @@ const IntelligenceSpectrumDiagram = memo(() => {
           variants={floatVariants(0)}
           animate="animate"
           className="cursor-pointer group"
+          style={{ willChange: "transform" }}
         >
-          {/* Ambient Glow */}
-          <circle cx="120" cy="120" r="48" fill="#22D3EE" opacity="0.08" filter="url(#neonGlowCyan)" />
+          {/* Ambient Glow (High-performance Radial Gradient) */}
+          <circle cx="120" cy="120" r="54" fill="url(#neonGlowCyan)" />
           
           {/* Main Glass Circle */}
           <circle
@@ -209,9 +214,10 @@ const IntelligenceSpectrumDiagram = memo(() => {
           variants={floatVariants(0.6)}
           animate="animate"
           className="cursor-pointer group"
+          style={{ willChange: "transform" }}
         >
-          {/* Ambient Glow */}
-          <circle cx="380" cy="120" r="48" fill="#3B82F6" opacity="0.08" filter="url(#neonGlowBlue)" />
+          {/* Ambient Glow (High-performance Radial Gradient) */}
+          <circle cx="380" cy="120" r="54" fill="url(#neonGlowBlue)" />
 
           {/* Main Glass Circle */}
           <circle
@@ -266,9 +272,10 @@ const IntelligenceSpectrumDiagram = memo(() => {
           variants={floatVariants(1.2)}
           animate="animate"
           className="cursor-pointer group"
+          style={{ willChange: "transform" }}
         >
-          {/* Ambient Glow */}
-          <circle cx="120" cy="380" r="48" fill="#F59E0B" opacity="0.08" filter="url(#neonGlowOrange)" />
+          {/* Ambient Glow (High-performance Radial Gradient) */}
+          <circle cx="120" cy="380" r="54" fill="url(#neonGlowOrange)" />
 
           {/* Main Glass Circle */}
           <circle
@@ -323,9 +330,10 @@ const IntelligenceSpectrumDiagram = memo(() => {
           variants={floatVariants(1.8)}
           animate="animate"
           className="cursor-pointer group"
+          style={{ willChange: "transform" }}
         >
-          {/* Ambient Glow */}
-          <circle cx="380" cy="380" r="48" fill="#8B5CF6" opacity="0.08" filter="url(#neonGlowPurple)" />
+          {/* Ambient Glow (High-performance Radial Gradient) */}
+          <circle cx="380" cy="380" r="54" fill="url(#neonGlowPurple)" />
 
           {/* Main Glass Circle */}
           <circle

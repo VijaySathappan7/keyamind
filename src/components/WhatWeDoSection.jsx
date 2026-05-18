@@ -1,7 +1,8 @@
 import { useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Shield, Award, Compass, Cpu, Activity, ChevronDown } from 'lucide-react';
 import LazyImage from './LazyImage';
+import useMediaQuery from './useMediaQuery';
 
 import babyprintImg from '../assets/images/babyprint.webp';
 import fingerprintImg from '../assets/images/fingerprint.webp';
@@ -12,6 +13,20 @@ import dmitImg from '../assets/images/dmit.webp';
 export default function WhatWeDoSection() {
   const containerRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+
+  // Track scroll progress of this section
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  // Editorial Parallax: offset image vertical translation
+  const rawImageY = useTransform(scrollYProgress, [0, 1], [-50, 50]);
+  const imageY = useSpring(rawImageY, { stiffness: 95, damping: 26, mass: 0.35 });
+
+  const desktopImageStyle = isDesktop ? { y: imageY } : {};
+
   
   const steps = [
     {
@@ -137,8 +152,8 @@ export default function WhatWeDoSection() {
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white via-white/60 to-transparent z-[2] pointer-events-none" />
 
       {/* Subtle Ambient Glows */}
-      <div className="absolute top-[20%] left-[-10%] w-[500px] h-[500px] bg-purple-100/20 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute top-[50%] right-[-10%] w-[600px] h-[600px] bg-purple-100/15 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-[20%] left-[-10%] w-[500px] h-[500px] bg-purple-100/20 rounded-full blur-[140px] pointer-events-none max-md:hidden gpu-optimize" />
+      <div className="absolute top-[50%] right-[-10%] w-[600px] h-[600px] bg-purple-100/15 rounded-full blur-[150px] pointer-events-none max-md:hidden gpu-optimize" />
 
       <div className="max-w-[1340px] mx-auto px-6 md:px-12 lg:px-8 w-full relative z-10">
 
@@ -148,8 +163,7 @@ export default function WhatWeDoSection() {
         <div className="w-full text-center max-w-4xl mx-auto mb-10 lg:mb-12">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.8 }}
             className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white border border-purple-100 shadow-[inset:0_1px_1px_rgba(255,255,255,0.8)] mb-5 backdrop-blur-md"
           >
@@ -160,8 +174,7 @@ export default function WhatWeDoSection() {
 
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.8, delay: 0.1 }}
             className="text-3xl sm:text-4xl md:text-5xl lg:text-[46px] font-outfit font-black text-dark-lavender leading-[1.12] tracking-tight"
           >
@@ -170,8 +183,7 @@ export default function WhatWeDoSection() {
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-base sm:text-lg md:text-xl text-dark-lavender/70 font-light mt-5 leading-relaxed font-poppins"
           >
@@ -195,11 +207,12 @@ export default function WhatWeDoSection() {
                 {/* Visual / Image Side — INCREASED FOOTPRINT BY 20% */}
                 <div className={`w-full lg:w-[46%] flex items-center justify-center relative ${isLeft ? 'lg:order-1' : 'lg:order-2'} mb-10 lg:mb-0`}>
                   <motion.div
-                    initial={{ opacity: 0, x: isLeft ? -40 : 40, scale: 0.98 }}
-                    whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                    initial={{ opacity: 0, x: isLeft ? -40 : 40 }}
+                    whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: "-50px" }}
                     transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                    className="relative group select-none w-full rounded-[2rem] overflow-hidden shadow-lg border border-purple-100/50"
+                    style={desktopImageStyle}
+                    className="relative group select-none w-full rounded-[2rem] overflow-hidden shadow-lg border border-purple-100/50 gpu-optimize"
                   >
                     <LazyImage
                       src={step.image}
@@ -310,13 +323,12 @@ export default function WhatWeDoSection() {
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: "-50px" }} whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 className={`relative overflow-hidden rounded-[2.5rem] border transition-all duration-700 ${
                   isOpen 
                     ? "bg-white border-purple-200 shadow-[0_25px_60px_rgba(139,92,246,0.1)]" 
-                    : "bg-white/50 backdrop-blur-xl border-white/80 shadow-lg"
+                    : "bg-white/50 backdrop-blur-md border-white/80 shadow-lg"
                 }`}
               >
                 {/* Accordion Trigger Button */}

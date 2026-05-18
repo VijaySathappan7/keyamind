@@ -1,11 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Sparkles, Compass, ArrowRight } from 'lucide-react';
 import logo from '../assets/logos/logo.webp';
 import titleImg from '../assets/logos/title.webp';
 import ContactSection from './ContactSection';
+import useMediaQuery from './useMediaQuery';
 
 const footerNavLinks = [
   { name: "Home", to: "/", sectionId: "home" },
@@ -29,6 +30,25 @@ export default function ContentSection() {
   const currentYear = new Date().getFullYear();
   const [activeModal, setActiveModal] = useState(null);
   const [mounted, setMounted] = useState(false);
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+
+  const aboutRef = useRef(null);
+
+  // Track scroll progress of the footer/about section
+  const { scrollYProgress: aboutScroll } = useScroll({
+    target: aboutRef,
+    offset: ["start end", "end start"]
+  });
+
+  // Stagger curtain/slide reveals for Left and Right about columns
+  const aboutLeftX = useTransform(aboutScroll, [0, 0.4], [-60, 0]);
+  const aboutLeftXSpring = useSpring(aboutLeftX, { stiffness: 95, damping: 26, mass: 0.35 });
+
+  const aboutRightX = useTransform(aboutScroll, [0, 0.4], [60, 0]);
+  const aboutRightXSpring = useSpring(aboutRightX, { stiffness: 95, damping: 26, mass: 0.35 });
+
+  const desktopLeftStyle = isDesktop ? { x: aboutLeftXSpring } : {};
+  const desktopRightStyle = isDesktop ? { x: aboutRightXSpring } : {};
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -201,9 +221,12 @@ export default function ContentSection() {
         {/* ====================================================
             ABOUT US / PHILOSOPHY SECTION
             ==================================================== */}
-        <section id="about" className="py-16 sm:py-20 lg:py-24 scroll-mt-[80px]">
+        <section ref={aboutRef} id="about" className="py-16 sm:py-20 lg:py-24 scroll-mt-[80px]">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            <div className="text-left flex flex-col gap-6 lg:col-span-7">
+            <motion.div 
+              style={desktopLeftStyle}
+              className="text-left flex flex-col gap-6 lg:col-span-7"
+            >
               <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-purple-100 bg-white/70 backdrop-blur-md shadow-sm self-start">
                 <div className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-purple-600 via-purple-500 to-purple-400 animate-pulse" />
                 <span className="text-[10px] sm:text-[11px] tracking-[0.25em] uppercase font-extrabold text-dark-lavender font-poppins pl-[0.1em]">
@@ -241,11 +264,14 @@ export default function ContentSection() {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="relative flex justify-center lg:col-span-5 w-full">
+            <motion.div 
+              style={desktopRightStyle}
+              className="relative flex justify-center lg:col-span-5 w-full"
+            >
               <div className="absolute w-80 h-80 bg-purple-200/30 rounded-full blur-[70px] pointer-events-none" />
-              <div className="w-full max-w-md p-8 sm:p-10 rounded-[2.5rem] border border-white/60 shadow-xl relative overflow-hidden bg-white/60 backdrop-blur-xl">
+              <div className="w-full max-w-md p-8 sm:p-10 rounded-[2.5rem] border border-white/60 shadow-xl relative overflow-hidden bg-white/60 backdrop-blur-md">
                 <div className="absolute inset-0 bg-gradient-to-tr from-purple-100/30 via-purple-100/10 to-white/40 pointer-events-none" />
                 <div className="relative z-10 flex flex-col gap-6 text-left">
                   <span className="text-xs font-bold text-purple-600 tracking-widest uppercase font-poppins">Our Vision</span>
@@ -264,7 +290,7 @@ export default function ContentSection() {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </section>
 
@@ -273,8 +299,7 @@ export default function ContentSection() {
             ==================================================== */}
         <motion.div
           initial={{ opacity: 0, scale: 0.96 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
+          whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="w-full rounded-[2.5rem] sm:rounded-[3rem] p-8 sm:p-12 lg:p-16 text-left relative overflow-hidden bg-gradient-r from-sakura-purple/70 via-ivory-peach/80 to-mist-purple/70 border border-white/60 shadow-xl shadow-purple-200/10 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 mb-10"
         >
@@ -337,12 +362,12 @@ export default function ContentSection() {
 
             {/* BRAND ARCHITECTURE — LG:COL-SPAN-5 */}
             <div className="flex flex-col gap-8 lg:col-span-5">
-              <a href="/" onClick={(e) => handleFooterNav(e, { sectionId: "home", to: "/" })} className="flex items-center gap-3 group">
+              <a href="/" onClick={(e) => handleFooterNav(e, { sectionId: "home", to: "/" })} className="flex items-center gap-1.5 group">
                 <div className="relative">
                   <div className="absolute inset-0 bg-purple-200/20 rounded-2xl blur-xl group-hover:bg-purple-300/30 transition-all duration-500" />
-                  <img src={logo} width={64} height={64} loading="lazy" alt="Keyamind Logo" className="relative w-16 h-16 object-contain filter drop-shadow-sm" />
+                  <img src={logo} width={80} height={80} loading="lazy" alt="Keyamind Logo" className="relative w-20 h-20 object-contain filter drop-shadow-sm" />
                 </div>
-                <img src={titleImg} width={180} height={43} loading="lazy" alt="Keyamind Title" className="h-[43.2px] w-auto object-contain" />
+                <img src={titleImg} width={220} height={53} loading="lazy" alt="Keyamind Title" className="h-[53px] w-auto object-contain" />
               </a>
               
               <p className="text-dark-lavender/80 text-sm font-medium leading-relaxed max-w-md">
@@ -646,7 +671,7 @@ export default function ContentSection() {
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
-                  className={`relative ${legalContent[activeModal].sizeClass} bg-white border border-purple-100/50 rounded-3xl overflow-hidden shadow-2xl flex flex-col z-20 max-h-[86vh] sm:max-h-[90vh]`}
+                  className={`relative ${legalContent[activeModal].sizeClass} bg-white border border-purple-100/50 rounded-3xl overflow-hidden shadow-xl flex flex-col z-20 max-h-[86vh] sm:max-h-[90vh]`}
                 >
                   <div className="p-6 sm:p-8 border-b border-dark-lavender/5 flex justify-between items-start shrink-0">
                     <div>

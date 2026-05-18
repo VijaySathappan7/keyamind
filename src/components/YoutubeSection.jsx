@@ -1,7 +1,23 @@
-import { memo } from "react";
-import { motion } from "framer-motion";
+import { useRef, memo } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import useMediaQuery from "./useMediaQuery";
 
 const YoutubeSection = memo(() => {
+  const containerRef = useRef(null);
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+
+  // Track scroll progress of this section
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  // Apple cinematic scroll zoom-in expansion
+  const rawScale = useTransform(scrollYProgress, [0, 0.45], [0.88, 1.02]);
+  const videoScale = useSpring(rawScale, { stiffness: 95, damping: 26, mass: 0.35 });
+
+  const desktopVideoScaleStyle = isDesktop ? { scale: videoScale } : {};
+
   const fadeUp = {
     hidden: { opacity: 0, y: 30 },
     visible: (i = 1) => ({
@@ -19,6 +35,7 @@ const YoutubeSection = memo(() => {
 
   return (
     <section 
+      ref={containerRef}
       id="inherent-mapping" 
       className="relative w-full py-20 sm:py-24 lg:py-28 bg-gradient-to-b from-[#FAF6F9] via-[#FAF9F5] to-white overflow-hidden scroll-mt-[80px]"
     >
@@ -35,8 +52,7 @@ const YoutubeSection = memo(() => {
         <div className="text-center mb-16 md:mb-20 flex flex-col items-center">
           <motion.div
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+            whileInView="visible" viewport={{ once: true, margin: "-50px" }}
             variants={fadeUp}
             custom={1}
             className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-purple-100 bg-white/75 backdrop-blur-md shadow-sm mb-8"
@@ -49,8 +65,7 @@ const YoutubeSection = memo(() => {
 
           <motion.h2
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+            whileInView="visible" viewport={{ once: true, margin: "-50px" }}
             variants={fadeUp}
             custom={2}
             className="text-[clamp(26px,6vw,46px)] lg:text-[50px] font-outfit font-black text-dark-lavender leading-[1.05] tracking-tight mb-8"
@@ -61,8 +76,7 @@ const YoutubeSection = memo(() => {
 
           <motion.p
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+            whileInView="visible" viewport={{ once: true, margin: "-50px" }}
             variants={fadeUp}
             custom={3}
             className="text-base sm:text-lg lg:text-xl text-dark-lavender/70 font-light leading-relaxed font-poppins max-w-3xl"
@@ -76,10 +90,7 @@ const YoutubeSection = memo(() => {
             PREMIUM CINEMA-GALLERY VIDEO FRAME
             ==================================================== */}
         <motion.div
-          initial={{ opacity: 0, y: 40, scale: 0.98 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          style={desktopVideoScaleStyle}
           className="relative w-full max-w-4xl group mx-auto"
         >
           {/* ── Multi-Layered Cinematic Shadows ── */}
@@ -87,7 +98,7 @@ const YoutubeSection = memo(() => {
           <div className="absolute inset-10 bg-purple-500/10 blur-[100px] -z-20" />
 
           {/* ── Main Frame Architecture ── */}
-          <div className="relative rounded-[3rem] sm:rounded-[3.5rem] p-[3px] bg-gradient-to-br from-white via-white/40 to-white/60 shadow-[0_40px_100px_-15px_rgba(0,0,0,0.12),0_20px_40px_-10px_rgba(139,92,246,0.05)] overflow-hidden">
+          <div className="relative rounded-[3rem] sm:rounded-[3.5rem] p-[3px] bg-gradient-to-br from-white via-white/40 to-white/60 shadow-xl overflow-hidden">
             
             {/* Inner Border Glow */}
             <div className="absolute inset-0 border-[1.5px] border-purple-200/30 rounded-[3rem] sm:rounded-[3.5rem] z-20 pointer-events-none" />
@@ -110,7 +121,7 @@ const YoutubeSection = memo(() => {
               ></iframe>
               
               {/* Soft Edge Integration Mask */}
-              <div className="absolute inset-0 pointer-events-none z-20 shadow-[inset_0_0_80px_rgba(0,0,0,0.2)]" />
+              <div className="absolute inset-0 pointer-events-none z-20 shadow-[inset_0_0_40px_rgba(0,0,0,0.1)]" />
             </div>
           </div>
 
@@ -127,8 +138,7 @@ const YoutubeSection = memo(() => {
             ==================================================== */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.8, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
           className="w-full max-w-4xl mx-auto px-6 text-center relative z-10 mt-16 md:mt-20 pt-8"
         >

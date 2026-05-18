@@ -161,8 +161,7 @@ export default function ServicesPage() {
                 <motion.div
                   key={service.title}
                   initial={{ y: 30, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  viewport={{ once: true }}
+                  whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
                   whileHover={{ y: -6 }}
                   className={`bg-white border border-purple-50 rounded-[32px] p-8 shadow-[0_12px_45px_rgba(0,0,0,0.02)] hover:shadow-xl transition-all flex flex-col justify-between`}
@@ -211,7 +210,7 @@ export default function ServicesPage() {
           </div>
 
           {/* ================= METHODOLOGY TRUST ================= */}
-          <div className="glass-premium rounded-[32px] p-8 sm:p-12 mb-24 border-white/60 shadow-2xl relative overflow-hidden">
+          <div className="glass-premium rounded-[32px] p-8 sm:p-12 mb-24 border-white/60 shadow-xl relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 rounded-bl-full pointer-events-none" />
             
             <div className="max-w-3xl">
@@ -233,10 +232,9 @@ export default function ServicesPage() {
           {/* ================= HIGH-CONVERSION CTA ================= */}
           <motion.div 
             initial={{ scale: 0.95, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true }}
+            whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6 }}
-            className="w-full rounded-[32px] bg-gradient-to-r from-dark-lavender via-purple-900 to-purple-800 text-white p-8 sm:p-12 text-center relative overflow-hidden shadow-2xl"
+            className="w-full rounded-[32px] bg-gradient-to-r from-dark-lavender via-purple-900 to-purple-800 text-white p-8 sm:p-12 text-center relative overflow-hidden shadow-xl"
           >
             <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent pointer-events-none" />
             

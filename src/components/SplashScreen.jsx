@@ -62,9 +62,9 @@ export default function SplashScreen({ onComplete }) {
   // Centering math: (logo + gap + title) perfectly centered
   const { logoX, titleX } = (() => {
     let lw, tw, gap;
-    if      (deviceWidth < 640)  { lw = 82;  tw = 162; gap = 28; }
-    else if (deviceWidth < 768)  { lw = 105; tw = 207; gap = 36; }
-    else if (deviceWidth < 1024) { lw = 135; tw = 263; gap = 44; }
+    if      (deviceWidth < 640)  { lw = 115; tw = 230; gap = 36; }
+    else if (deviceWidth < 768)  { lw = 130; tw = 256; gap = 40; }
+    else if (deviceWidth < 1024) { lw = 148; tw = 288; gap = 46; }
     else                         { lw = 165; tw = 320; gap = 52; }
     return { logoX: (gap + tw) / 2, titleX: (gap + lw) / 2 };
   })();
@@ -112,17 +112,15 @@ export default function SplashScreen({ onComplete }) {
             className="
               absolute z-10 object-contain
               pointer-events-none select-none will-change-transform
-              h-[50px] sm:h-[64px] md:h-[82px] lg:h-[100px]
+              h-[72px] sm:h-[80px] md:h-[90px] lg:h-[100px]
               w-auto max-w-none
             "
-            initial={{ x: -logoX, clipPath: "inset(0 100% 0 0%)", opacity: 0 }}
+            initial={{ x: -logoX, clipPath: "inset(0 0% 0 100%)", opacity: 0 }}
             animate={{
               x: isSplit ? titleX : (isMerge || isExit) ? -logoX + 25 : -logoX,
               clipPath: isSplit
                 ? "inset(0 0% 0 0%)"        // fully visible
-                : (isMerge || isExit)
-                  ? "inset(0 0% 0 100%)"    // swallow text left-to-right (from logo touching point)
-                  : "inset(0 100% 0 0%)",   // hidden
+                : "inset(0 0% 0 100%)",     // hidden
               opacity: isSplit ? 1 : 0,
             }}
             transition={{
@@ -142,7 +140,7 @@ export default function SplashScreen({ onComplete }) {
             className="
               relative z-20 object-contain
               pointer-events-none select-none will-change-transform
-              w-[82px] sm:w-[105px] md:w-[135px] lg:w-[165px]
+              w-[115px] sm:w-[130px] md:w-[148px] lg:w-[165px]
             "
             initial={{ opacity: 0, scale: 0.42, filter: "blur(22px)", x: 0 }}
             animate={{

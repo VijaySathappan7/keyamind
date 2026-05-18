@@ -6,10 +6,12 @@ import brainBackground from '../assets/images/brainbackground.webp';
 import brainImg from '../assets/images/brain.webp';
 import leftBrainImg from '../assets/images/leftbrain.webp';
 import rightBrainImg from '../assets/images/rightbrain.webp';
+import useMediaQuery from './useMediaQuery';
 
 export default function BrainBalanceSection() {
   const containerRef = useRef(null);
   const [mobileState, setMobileState] = useState('main'); // 'main', 'left', 'right'
+  const isDesktop = useMediaQuery('(min-width: 1280px)');
 
   // Smooth cinematic vertical parallax for the background video
   const { scrollYProgress } = useScroll({
@@ -19,6 +21,23 @@ export default function BrainBalanceSection() {
 
   const rawY = useTransform(scrollYProgress, [0, 1], [-50, 50]);
   const yParallax = useSpring(rawY, { stiffness: 90, damping: 25, mass: 0.4 });
+
+  // Premium Apple-style interactive spatial merger: Left/Right cards slide in, center brain scales
+  const rawXLeft = useTransform(scrollYProgress, [0, 0.4], [-75, 0]);
+  const xLeft = useSpring(rawXLeft, { stiffness: 95, damping: 26, mass: 0.35 });
+
+  const rawXRight = useTransform(scrollYProgress, [0, 0.4], [75, 0]);
+  const xRight = useSpring(rawXRight, { stiffness: 95, damping: 26, mass: 0.35 });
+
+  // Premium Apple-style interactive spatial merger (clamped halfway for a premium subtle zoom)
+  const rawBrainScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.96, 1.0, 1.0]);
+  const brainScale = useSpring(rawBrainScale, { stiffness: 95, damping: 26, mass: 0.35 });
+
+  const desktopBgStyle = isDesktop ? { y: yParallax } : {};
+  const desktopLeftCardStyle = isDesktop ? { x: xLeft } : {};
+  const desktopRightCardStyle = isDesktop ? { x: xRight } : {};
+  const desktopBrainScaleStyle = isDesktop ? { scale: brainScale } : {};
+
 
   const leftFeatures = [
     "Logical Reasoning",
@@ -63,7 +82,7 @@ export default function BrainBalanceSection() {
     >
       {/* 100% COMPLETE CINEMATIC BACKGROUND IMAGE WITH SMOOTH PARALLAX */}
       <motion.div
-        style={{ y: yParallax, translateZ: 0 }}
+        style={{ ...desktopBgStyle, translateZ: 0 }}
         className="absolute inset-0 z-0 overflow-hidden scale-[1.15] will-change-transform"
       >
         <LazyImage
@@ -89,8 +108,7 @@ export default function BrainBalanceSection() {
           <motion.div
             custom={1}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+            whileInView="visible" viewport={{ once: true, margin: "-50px" }}
             variants={fadeUp}
             className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/80 border border-purple-100 shadow-[inset:0_1px_1px_rgba(255,255,255,0.8)] mb-4 backdrop-blur-md"
           >
@@ -102,8 +120,7 @@ export default function BrainBalanceSection() {
           <motion.h2
             custom={2}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+            whileInView="visible" viewport={{ once: true, margin: "-50px" }}
             variants={fadeUp}
             className="text-[clamp(24px,5.5vw,42px)] lg:text-[44px] font-outfit font-black text-dark-lavender leading-[1.12] tracking-tight"
           >
@@ -118,9 +135,7 @@ export default function BrainBalanceSection() {
 
           {/* Left Brain Card */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            style={desktopLeftCardStyle}
             whileHover={{ y: -8, scale: 1.015, boxShadow: "0 25px 50px rgba(186, 164, 255, 0.15)" }}
             className="w-[32%] max-w-[400px] glass-premium rounded-[36px] border border-white/60 shadow-xl bg-white/45 flex flex-col overflow-hidden group gpu-optimize"
           >
@@ -143,10 +158,9 @@ export default function BrainBalanceSection() {
 
           {/* Center Brain Image */}
           <div className="w-[32%] flex flex-col items-center justify-center relative">
-            <div className="absolute w-[580px] h-[580px] rounded-full bg-gradient-to-tr from-purple-300/35 to-purple-300/30 blur-2xl opacity-75 animate-pulse-soft -z-10" />
+            <div className="absolute w-[580px] h-[580px] rounded-full bg-gradient-to-tr from-purple-300/35 to-purple-300/30 blur-2xl opacity-75 animate-pulse-soft -z-10 gpu-optimize" />
             <motion.div
-              animate={{ y: [0, -12, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              style={desktopBrainScaleStyle}
               className="w-full h-auto flex items-center justify-center gpu-optimize"
             >
               <LazyImage
@@ -165,9 +179,7 @@ export default function BrainBalanceSection() {
 
           {/* Right Brain Card */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            style={desktopRightCardStyle}
             whileHover={{ y: -8, scale: 1.015, boxShadow: "0 25px 50px rgba(216, 180, 254, 0.2)" }}
             className="w-[32%] max-w-[400px] glass-premium rounded-[36px] border border-white/60 shadow-xl bg-white/45 flex flex-col overflow-hidden group gpu-optimize"
           >
@@ -206,7 +218,7 @@ export default function BrainBalanceSection() {
                 {/* Big Centered Brain */}
                 <div className="relative w-full flex justify-center py-8">
                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[320px] aspect-square bg-purple-200/40 rounded-full blur-[80px]" />
-                   <LazyImage src={brainImg} alt="Brain Balance" width={1536} height={1024} className="w-full h-auto object-contain relative z-10 filter drop-shadow-2xl scale-110" />
+                   <LazyImage src={brainImg} alt="Brain Balance" width={1536} height={1024} className="w-full h-auto object-contain relative z-10 filter drop-shadow-xl scale-110" />
                 </div>
 
                 {/* Two Navigation Buttons */}
@@ -243,7 +255,7 @@ export default function BrainBalanceSection() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -50 }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="w-full glass-premium rounded-[36px] border border-blue-100 shadow-2xl bg-white flex flex-col overflow-hidden gpu-optimize"
+                className="w-full glass-premium rounded-[36px] border border-blue-100 shadow-xl bg-white flex flex-col overflow-hidden gpu-optimize"
               >
                 <div className="w-full h-64 sm:h-72 relative flex items-center justify-center overflow-hidden bg-white">
                   <LazyImage src={leftBrainImg} alt="Left Brain" width={500} height={350} objectCover={true} className="absolute inset-0 w-full h-full scale-110" />
@@ -280,7 +292,7 @@ export default function BrainBalanceSection() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 50 }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="w-full glass-premium rounded-[36px] border border-purple-100 shadow-2xl bg-white flex flex-col overflow-hidden gpu-optimize"
+                className="w-full glass-premium rounded-[36px] border border-purple-100 shadow-xl bg-white flex flex-col overflow-hidden gpu-optimize"
               >
                 <div className="w-full h-64 sm:h-72 relative flex items-center justify-center overflow-hidden bg-white">
                   <LazyImage src={rightBrainImg} alt="Right Brain" width={612} height={452} objectCover={true} className="absolute inset-0 w-full h-full scale-110" />

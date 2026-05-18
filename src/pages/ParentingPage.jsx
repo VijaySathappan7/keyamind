@@ -127,10 +127,9 @@ export default function ParentingPage() {
             {/* Visual Glassmorphic Card */}
             <motion.div 
               initial={{ x: -55, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              viewport={{ once: true }}
+              whileInView={{ x: 0, opacity: 1 }} viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="glass-premium rounded-3xl p-8 sm:p-10 border-white/50 shadow-2xl relative overflow-hidden"
+              className="glass-premium rounded-3xl p-8 sm:p-10 border-white/50 shadow-xl relative overflow-hidden"
             >
               <div className="absolute top-0 left-0 w-24 h-24 bg-gradient-to-br from-pink-500/10 to-purple-500/10 rounded-br-full pointer-events-none" />
               
@@ -179,8 +178,7 @@ export default function ParentingPage() {
 
             <motion.div 
               initial={{ x: 55, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              viewport={{ once: true }}
+              whileInView={{ x: 0, opacity: 1 }} viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="space-y-6"
             >
@@ -239,8 +237,7 @@ export default function ParentingPage() {
                 <motion.div 
                   key={phase.title}
                   initial={{ y: 30, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  viewport={{ once: true }}
+                  whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.4, delay: idx * 0.1 }}
                   className="bg-white border border-purple-50 rounded-3xl p-8 shadow-[0_15px_45px_rgba(0,0,0,0.03)] flex flex-col justify-between"
                 >
@@ -262,10 +259,9 @@ export default function ParentingPage() {
           {/* ================= FAMILY COMPATIBILITY BOX ================= */}
           <motion.div 
             initial={{ y: 40, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
+            whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6 }}
-            className="glass-premium rounded-[32px] p-8 sm:p-12 mb-24 border-white/60 shadow-2xl relative overflow-hidden"
+            className="glass-premium rounded-[32px] p-8 sm:p-12 mb-24 border-white/60 shadow-xl relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 w-32 h-32 bg-pink-500/5 rounded-bl-full pointer-events-none" />
             
@@ -341,10 +337,9 @@ export default function ParentingPage() {
           {/* ================= HIGH-CONVERSION CTA ================= */}
           <motion.div 
             initial={{ scale: 0.95, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true }}
+            whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6 }}
-            className="w-full rounded-[32px] bg-gradient-to-r from-dark-lavender via-purple-900 to-purple-800 text-white p-8 sm:p-12 text-center relative overflow-hidden shadow-2xl"
+            className="w-full rounded-[32px] bg-gradient-to-r from-dark-lavender via-purple-900 to-purple-800 text-white p-8 sm:p-12 text-center relative overflow-hidden shadow-xl"
           >
             <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-pink-500/20 via-transparent to-transparent pointer-events-none" />
             

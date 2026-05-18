@@ -76,8 +76,8 @@
 /* Custom visual effects */
 .glass-premium {
   background: rgba(255, 255, 255, 0.38); /* Extra translucent high-contrast crystal white backing */
-  backdrop-filter: blur(45px); /* Strong macOS frosted glass refraction */
-  -webkit-backdrop-filter: blur(45px);
+  backdrop-filter: blur(8px); /* Optimized macOS frosted glass refraction */
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.65); /* Specular premium border limit */
   box-shadow: 
     0 15px 45px rgba(0, 0, 0, 0.05), /* Subtle soft atmospheric float shadow */
@@ -85,15 +85,32 @@
     inset 0 -1.5px 2px rgba(0, 0, 0, 0.02); /* Crisp base offset grounding */
 }
 
+/* Premium glassmorphism for mobile devices to reduce GPU paint & composite overhead */
+@media (max-width: 767px) {
+  .glass-premium {
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    background: rgba(255, 255, 255, 0.68); /* Slightly more opaque for identical premium contrast */
+  }
+}
+
 .glass-premium-dark {
   background: rgba(12, 6, 23, 0.35); /* Executive Obsidian Dark Glass */
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 
     0 25px 65px rgba(0, 0, 0, 0.35),
     inset 0 1px 1.5px rgba(255, 255, 255, 0.2),
     inset 0 -1px 1.5px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 767px) {
+  .glass-premium-dark {
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    background: rgba(12, 6, 23, 0.65);
+  }
 }
 
 .text-gradient-purple {
@@ -164,8 +181,19 @@
   100% { transform: translate3d(-100%, 0, 0); }
 }
 
+@keyframes marquee-reverse {
+  0% { transform: translate3d(-100%, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
 .animate-marquee {
   animation: marquee 45s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.animate-marquee-reverse {
+  animation: marquee-reverse 45s linear infinite;
   will-change: transform;
   backface-visibility: hidden;
 }
@@ -177,7 +205,7 @@
 
 /* GPU hardware acceleration composite triggers */
 .gpu-optimize {
-  transform: translateZ(0);
+  transform: translate3d(0,0,0);
   will-change: transform, opacity;
   backface-visibility: hidden;
   perspective: 1000px;
@@ -225,11 +253,33 @@ body {
 
 * {
   box-sizing: border-box;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
 }
 
 img {
   -webkit-user-drag: none;
   user-select: none;
 }
+
+/* Apple Typography Mask Reveal */
+.apple-mask-reveal {
+  overflow: hidden;
+  position: relative;
+}
+
+.apple-mask-reveal-child {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+/* 3D Cinematic Perspective Container */
+.perspective-cinematic {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+/* High-fidelity custom scroll-driven card scale hover transitions */
+.apple-card-hover {
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.8s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow, border-color;
+}
+

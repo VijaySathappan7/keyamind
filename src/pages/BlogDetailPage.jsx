@@ -23,7 +23,7 @@ export default function BlogDetailPage() {
   if (!blog) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-mesh px-4">
-        <div className="glass-premium rounded-3xl p-8 max-w-md text-center border-white/60 shadow-2xl">
+        <div className="glass-premium rounded-3xl p-8 max-w-md text-center border-white/60 shadow-xl">
           <BookOpen className="w-12 h-12 text-purple-600 mx-auto mb-4 animate-bounce" />
           <h2 className="text-2xl font-black text-dark-lavender mb-2 font-outfit">Article Not Found</h2>
           <p className="text-sm text-dark-lavender/60 mb-6 font-semibold">The educational resource you are looking for may have been relocated or updated.</p>
@@ -149,7 +149,7 @@ export default function BlogDetailPage() {
           </div>
 
           {/* ================= COVER IMAGE ================= */}
-          <div className="max-w-4xl mx-auto rounded-[32px] overflow-hidden shadow-2xl aspect-[21/9] bg-purple-50 mb-16 border border-white/60">
+          <div className="max-w-4xl mx-auto rounded-[32px] overflow-hidden shadow-xl aspect-[21/9] bg-purple-50 mb-16 border border-white/60">
             <img 
               src={blog.image} 
               alt={blog.title} 
@@ -279,10 +279,9 @@ export default function BlogDetailPage() {
           <div className="max-w-4xl mx-auto mt-20">
             <motion.div 
               initial={{ scale: 0.96, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              viewport={{ once: true }}
+              whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6 }}
-              className="w-full rounded-[32px] bg-gradient-to-r from-dark-lavender via-purple-900 to-purple-800 text-white p-8 sm:p-12 text-center relative overflow-hidden shadow-2xl"
+              className="w-full rounded-[32px] bg-gradient-to-r from-dark-lavender via-purple-900 to-purple-800 text-white p-8 sm:p-12 text-center relative overflow-hidden shadow-xl"
             >
               <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent pointer-events-none" />
               
