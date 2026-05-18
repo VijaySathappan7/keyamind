@@ -178,7 +178,7 @@ export default function WhatWeDoSection() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="text-3xl sm:text-4xl md:text-5xl lg:text-[46px] font-outfit font-black text-dark-lavender leading-[1.12] tracking-tight"
           >
-            How We Discover <span className="text-gradient-purple font-cursive text-4xl sm:text-5xl md:text-6xl lg:text-[60px] font-normal capitalize tracking-normal inline-block drop-shadow-[0_2px_8px_rgba(139,92,246,0.15)] ml-1">Human Potential</span>
+            The Science of <span className="text-gradient-purple font-cursive text-4xl sm:text-5xl md:text-6xl lg:text-[60px] font-normal capitalize tracking-normal inline-block drop-shadow-[0_2px_8px_rgba(139,92,246,0.15)] ml-1">DMIT Fingerprint Analysis</span>
           </motion.h2>
 
           <motion.p

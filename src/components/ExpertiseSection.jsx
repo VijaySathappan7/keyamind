@@ -78,14 +78,14 @@ const ExpertiseSection = memo(() => {
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-purple-100 bg-white/70 backdrop-blur-md shadow-sm mb-6">
             <div className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-purple-600 via-purple-500 to-purple-400 animate-pulse" />
             <span className="text-[10px] sm:text-[11px] tracking-[0.25em] uppercase font-extrabold text-dark-lavender font-poppins pl-[0.1em]">
-              Our Expertise
+              DMIT & Career Counselling
             </span>
           </div>
 
           <h2 className="text-[clamp(24px,5.5vw,42px)] lg:text-[44px] font-outfit font-black text-dark-lavender leading-[1.12] tracking-tight mb-5">
-            Deep Neuroscience. Clear <br />
+            Scientific Fingerprint Analysis. Clear <br />
             <span className="text-gradient-purple font-cursive text-[clamp(34px,7.5vw,58px)] lg:text-[56px] font-normal capitalize tracking-normal block drop-shadow-[0_2px_8px_rgba(139,92,246,0.15)] mt-1">
-              Vision & Direction.
+              Career Direction.
             </span>
           </h2>
 

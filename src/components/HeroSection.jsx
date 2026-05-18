@@ -9,10 +9,10 @@ import titleImage from "../assets/logos/title.webp";
 import useMediaQuery from "./useMediaQuery";
 
 const phrases = [
-  "Personal Growth",
-  "Career Guidance",
-  "Learning Insights",
-  "Confidence Building"
+  "DMIT Brain Mapping",
+  "Career Counselling",
+  "Fingerprint Analysis",
+  "Student Guidance"
 ];
 
 // Lightweight standalone memoized typewriter component to prevent parent HeroSection re-renders
@@ -153,10 +153,10 @@ const HeroSection = () => {
   };
 
   const highlights = [
-    "Personal Growth",
-    "Career Guidance",
+    "DMIT Brain Mapping",
+    "Career Counselling",
+    "Fingerprint Analysis",
     "Learning Insights",
-    "Confidence Building",
   ];
 
   return (
@@ -303,7 +303,7 @@ const HeroSection = () => {
               variants={fadeUp}
               className="mt-3.5 text-[13px] sm:text-[14.5px] text-black/85 leading-relaxed font-medium font-poppins max-w-2xl text-left"
             >
-              We help individuals discover clarity, confidence, learning direction, and personal growth through advanced insight-driven guidance.
+              Discover clarity and direction with India's trusted <strong>DMIT Test</strong>, scientific <strong>Fingerprint Analysis</strong>, and expert <strong>Career Counselling</strong>.
             </motion.p>
 
             {/* TYPEWRITER DYNAMIC EXPERTISE BADGE */}
