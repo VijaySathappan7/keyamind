@@ -1,0 +1,235 @@
+@import "tailwindcss";
+
+@theme {
+  --color-blossom-purple: #E9D5FF;
+  --color-sakura-purple: #F3E8FF;
+  --color-lavender-purple: #CDBDFF;
+  --color-soft-orchid: #DCCEFF;
+  --color-ivory-peach: #FFF2E8;
+  --color-warm-cream: #FFF9F5;
+  --color-purple-glow: #FAF5FF;
+  --color-mist-purple: #F1ECFF;
+  --color-dark-lavender: #3B2E5E;
+  
+  /* New Flowing Narrative Palette */
+  --color-ivory: #FAF9F6;
+  --color-soft-lavender: #F3E8FF;
+  --color-soft-violet: #F5F3FF;
+  --color-ivory-cream: #FFFBF0;
+  --color-blush-purple: #FAF5FF;
+  --color-light-purple: #F0E7FF;
+  --color-soft-purple: #F5F3FF;
+  --color-warm-ivory: #FFF9F2;
+  --color-peach-purple: #FAF5FF;
+  --color-lavender-mist: #F8F7FF;
+  --color-blush-cream: #FFFBFA;
+  --color-soft-lilac: #F5F3FF;
+  --color-ivory-purple: #FAF5FF;
+  --color-soft-cream: #FFFDF9;
+
+  --font-sans: 'Outfit', 'Poppins', sans-serif;
+  --font-outfit: 'Outfit', sans-serif;
+  --font-poppins: 'Poppins', sans-serif;
+  --font-cursive: 'Alex Brush', cursive;
+}
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: auto !important; /* Handled by Lenis for buttery-smooth momentum scroll */
+    font-family: var(--font-outfit), var(--font-poppins), sans-serif;
+    color: #4A3E6D;
+    background-color: var(--color-warm-cream);
+    overflow-x: hidden;
+    width: 100%;
+  }
+  body {
+    overflow-x: hidden;
+    width: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Custom glassy scrollbar styling - High-visibility premium violet capsule */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(59, 46, 94, 0.05); /* Extremely soft translucent violet track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #7C5EB9 0%, #3B2E5E 100%); /* Premium high-contrast violet-to-dark-lavender gradient */
+  border-radius: 9999px;
+  border: 2px solid #FFF9F5; /* Crisp padding border matching body bg, creating a beautiful floating pill effect */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #9333EA 0%, #3B2E5E 100%); /* Highly vibrant violet highlight on hover */
+}
+
+/* Custom visual effects */
+.glass-premium {
+  background: rgba(255, 255, 255, 0.38); /* Extra translucent high-contrast crystal white backing */
+  backdrop-filter: blur(45px); /* Strong macOS frosted glass refraction */
+  -webkit-backdrop-filter: blur(45px);
+  border: 1px solid rgba(255, 255, 255, 0.65); /* Specular premium border limit */
+  box-shadow: 
+    0 15px 45px rgba(0, 0, 0, 0.05), /* Subtle soft atmospheric float shadow */
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.9), /* High-spec top glare line */
+    inset 0 -1.5px 2px rgba(0, 0, 0, 0.02); /* Crisp base offset grounding */
+}
+
+.glass-premium-dark {
+  background: rgba(12, 6, 23, 0.35); /* Executive Obsidian Dark Glass */
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 
+    0 25px 65px rgba(0, 0, 0, 0.35),
+    inset 0 1px 1.5px rgba(255, 255, 255, 0.2),
+    inset 0 -1px 1.5px rgba(0, 0, 0, 0.1);
+}
+
+.text-gradient-purple {
+  background: linear-gradient(135deg, #3B2E5E 0%, #7C5EB9 50%, #9333EA 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, #D4AF37 0%, #F3E5AB 50%, #AA7C11 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-gradient-purple-flow {
+  background: linear-gradient(135deg, var(--color-sakura-purple) 0%, var(--color-ivory-peach) 50%, var(--color-mist-purple) 100%);
+}
+
+.bg-gradient-mesh {
+  background-image: 
+    radial-gradient(at 10% 20%, rgba(216, 180, 254, 0.4) 0px, transparent 50%),
+    radial-gradient(at 90% 10%, rgba(203, 189, 255, 0.45) 0px, transparent 50%),
+    radial-gradient(at 50% 80%, rgba(255, 242, 232, 0.5) 0px, transparent 50%),
+    radial-gradient(at 80% 90%, rgba(233, 213, 255, 0.4) 0px, transparent 50%);
+}
+
+/* Float animations (Hardware accelerated 120FPS GPU optimized) */
+@keyframes float {
+  0% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50% { transform: translate3d(0, -15px, 0) rotate(2deg); }
+  100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+}
+
+@keyframes float-slow {
+  0% { transform: translate3d(0, 0, 0) scale3d(1, 1, 1) rotate(0deg); }
+  50% { transform: translate3d(0, -25px, 0) scale3d(1.03, 1.03, 1) rotate(-3deg); }
+  100% { transform: translate3d(0, 0, 0) scale3d(1, 1, 1) rotate(0deg); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 0.3; transform: scale3d(1, 1, 1); }
+  50% { opacity: 0.6; transform: scale3d(1.15, 1.15, 1); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.animate-float-slow {
+  animation: float-slow 10s ease-in-out infinite;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 8s ease-in-out infinite;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+@keyframes marquee {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-100%, 0, 0); }
+}
+
+.animate-marquee {
+  animation: marquee 45s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.mask-gradient-horizontal {
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+
+/* GPU hardware acceleration composite triggers */
+.gpu-optimize {
+  transform: translateZ(0);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Hide scrollbar utility for touch/swipe galleries */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Premium Lenis smooth scrolling rules */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+}

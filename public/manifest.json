@@ -1,0 +1,21 @@
+{
+  "name": "Keyamind Solutions",
+  "short_name": "Keyamind",
+  "description": "DMIT Brain Mapping, Fingerprint Intelligence Analysis & Life Mentorship",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#faf9f6",
+  "theme_color": "#6d28d9",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en-IN",
+  "categories": ["education", "health", "lifestyle"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
