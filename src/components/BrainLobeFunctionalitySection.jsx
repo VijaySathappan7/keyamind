@@ -61,7 +61,7 @@ const BrainLobeFunctionalitySection = memo(() => {
   return (
     <section
       id="brain-lobes"
-      className="relative w-full py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-white to-[#FAF5F8] overflow-hidden scroll-mt-20"
+      className="relative w-full py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-white to-[#FAF5F8] overflow-hidden scroll-mt-[80px]"
     >
       {/* Seamless Top & Bottom Blending Masks */}
       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white via-white/60 to-transparent z-[2] pointer-events-none" />

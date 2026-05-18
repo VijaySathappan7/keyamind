@@ -162,20 +162,31 @@ export default function ContentSection() {
 
   const handleFooterNav = (e, link) => {
     e.preventDefault();
-    const element = document.getElementById(link.sectionId);
-    if (element) {
-      if (window.lenis) {
-        window.lenis.scrollTo('#' + link.sectionId, {
-          offset: -80,
-          duration: 1.3,
-          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-        });
-      } else {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
-    } else {
+
+    // Navigate to route first if on a different page
+    if (window.location.pathname !== link.to) {
       navigate(link.to + '#' + link.sectionId);
+      return;
     }
+
+    // Retry polling — works even when sections are lazy-loaded
+    const tryScroll = (attempts = 0) => {
+      const el = document.getElementById(link.sectionId);
+      if (el) {
+        if (window.lenis) {
+          window.lenis.scrollTo('#' + link.sectionId, {
+            offset: -80,
+            duration: 1.35,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          });
+        } else {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      } else if (attempts < 30) {
+        setTimeout(() => tryScroll(attempts + 1), 50);
+      }
+    };
+    tryScroll();
   };
 
   return (
@@ -190,7 +201,7 @@ export default function ContentSection() {
         {/* ====================================================
             ABOUT US / PHILOSOPHY SECTION
             ==================================================== */}
-        <section id="about" className="py-16 sm:py-20 lg:py-24 scroll-mt-24">
+        <section id="about" className="py-16 sm:py-20 lg:py-24 scroll-mt-[80px]">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             <div className="text-left flex flex-col gap-6 lg:col-span-7">
               <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-purple-100 bg-white/70 backdrop-blur-md shadow-sm self-start">

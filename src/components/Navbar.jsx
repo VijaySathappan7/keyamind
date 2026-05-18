@@ -4,56 +4,116 @@ import { motion, AnimatePresence } from "framer-motion";
 import logo from '../assets/logos/logosquare.webp';
 import titleImage from '../assets/logos/title.webp';
 
+/* ─── Link data ─────────────────────────────────────────────────────────── */
 const mainLinks = [
-  { name: "Home", to: "/", sectionId: "home" },
-  { name: "Services", to: "/", sectionId: "our-services" },
-  { name: "Reviews", to: "/", sectionId: "testimonials" },
-  { name: "Expertise", to: "/", sectionId: "expertise" },
-  { name: "About", to: "/", sectionId: "about" }
+  { name: "Home",      to: "/", sectionId: "home"        },
+  { name: "Services",  to: "/", sectionId: "our-services" },
+  { name: "Reviews",   to: "/", sectionId: "testimonials" },
+  { name: "Expertise", to: "/", sectionId: "expertise"    },
+  { name: "About",     to: "/", sectionId: "about"        },
 ];
 
 const learnLinks = [
-  { name: "Ikigai Concept", to: "/", sectionId: "ikigai" },
-  { name: "Brain Mapping", to: "/", sectionId: "inherent-mapping" },
-  { name: "Fingerprint Story", to: "/", sectionId: "fingerprint-characteristics" },
-  { name: "Our Process", to: "/", sectionId: "what-we-do" }
+  { name: "Ikigai Concept",    to: "/", sectionId: "ikigai"                      },
+  { name: "Brain Mapping",     to: "/", sectionId: "inherent-mapping"             },
+  { name: "Fingerprint Story", to: "/", sectionId: "fingerprint-characteristics"  },
+  { name: "Our Process",       to: "/", sectionId: "what-we-do"                  },
 ];
 
 const scienceLinks = [
-  { name: "Brain Balance", to: "/", sectionId: "brain-balance" },
-  { name: "Brain Lobes", to: "/", sectionId: "brain-lobes" },
-  { name: "Human Quotients", to: "/", sectionId: "human-quotients" },
-  { name: "Personality Profile", to: "/", sectionId: "personality" },
-  { name: "Learning Styles", to: "/", sectionId: "learning-styles" }
+  { name: "Brain Balance",     to: "/", sectionId: "brain-balance"   },
+  { name: "Brain Lobes",       to: "/", sectionId: "brain-lobes"     },
+  { name: "Human Quotients",   to: "/", sectionId: "human-quotients" },
+  { name: "Personality",       to: "/", sectionId: "personality"     },
+  { name: "Learning Styles",   to: "/", sectionId: "learning-styles" },
 ];
 
+/* ─── Animation variants ─────────────────────────────────────────────────── */
+const drawerVariants = {
+  hidden:  { x: "100%", opacity: 0 },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: { duration: 0.42, ease: [0.22, 1, 0.36, 1], when: "beforeChildren", staggerChildren: 0.045 },
+  },
+  exit: {
+    x: "100%",
+    opacity: 0,
+    transition: { duration: 0.34, ease: [0.4, 0, 0.2, 1], when: "afterChildren", staggerChildren: 0.03, staggerDirection: -1 },
+  },
+};
+
+const itemVariants = {
+  hidden:  { opacity: 0, x: 24 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.32, ease: [0.22, 1, 0.36, 1] } },
+  exit:    { opacity: 0, x: 24, transition: { duration: 0.22 } },
+};
+
+const labelVariants = {
+  hidden:  { opacity: 0, y: 8  },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.28 } },
+  exit:    { opacity: 0, y: 8  },
+};
+
+const ctaVariants = {
+  hidden:  { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.34, ease: [0.22, 1, 0.36, 1] } },
+  exit:    { opacity: 0, y: 20 },
+};
+
+/* ─── Helper: scroll to a section with Lenis + retry ─────────────────────── */
+function scrollToSection(sectionId) {
+  const tryScroll = (attempts = 0) => {
+    const el = document.getElementById(sectionId);
+    if (el) {
+      if (window.lenis) {
+        window.lenis.scrollTo("#" + sectionId, {
+          offset: -80,
+          duration: 1.35,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        });
+      } else {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    } else if (attempts < 30) {
+      setTimeout(() => tryScroll(attempts + 1), 50);
+    }
+  };
+  tryScroll();
+}
+
+/* ─── Component ──────────────────────────────────────────────────────────── */
 const Navbar = () => {
   const location = useLocation();
-  const navigate = useNavigate();
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [learnOpen, setLearnOpen] = useState(false);
+  const navigate  = useNavigate();
+
+  const [menuOpen,    setMenuOpen]    = useState(false);
+  const [learnOpen,   setLearnOpen]   = useState(false);
   const [scienceOpen, setScienceOpen] = useState(false);
-  const [hidden, setHidden] = useState(false);
+  const [hidden,      setHidden]      = useState(false);
+  const [scrolled,    setScrolled]    = useState(false);
+
   const lastScrollY = useRef(0);
 
-  // SCROLL SENSING
+  /* ── 1. Headroom (hide on scroll-down, reveal on scroll-up / idle) ─── */
   useEffect(() => {
-    let ticking = false;
+    let ticking       = false;
     let scrollTimeout = null;
 
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      
-      if (currentScrollY <= 50) {
-        setHidden(false);
-      } else {
-        const diff = currentScrollY - lastScrollY.current;
-        if (Math.abs(diff) > 5) {
-          setHidden(diff > 0);
-        }
-      }
-      lastScrollY.current = currentScrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
 
+      if (y <= 60) {
+        setHidden(false);
+        setScrolled(false);
+      } else {
+        const diff = y - lastScrollY.current;
+        if (Math.abs(diff) > 4) setHidden(diff > 0);
+        setScrolled(true);
+      }
+      lastScrollY.current = y;
+
+      // Collapse dropdowns during scroll (RAF-deferred)
       if (!ticking) {
         window.requestAnimationFrame(() => {
           setLearnOpen(false);
@@ -63,249 +123,374 @@ const Navbar = () => {
         ticking = true;
       }
 
-      // Show navbar automatically after scrolling stops
-      if (scrollTimeout) {
-        clearTimeout(scrollTimeout);
-      }
-      scrollTimeout = setTimeout(() => {
-        setHidden(false);
-      }, 800);
+      // Auto-reveal after idle
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => setHidden(false), 800);
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      if (scrollTimeout) clearTimeout(scrollTimeout);
+      window.removeEventListener("scroll", onScroll);
+      clearTimeout(scrollTimeout);
     };
   }, []);
 
-  // Reactive helper to handle smooth section reveals for lazy-loaded modules on route/hash update
+  /* ── 2. Hash-based navigation (handles page reload with hash) ─────── */
   useEffect(() => {
-    if (location.hash && window.lenis) {
-      const targetId = location.hash;
-      let attempts = 0;
-      
-      // Polling interval to wait for lazy Suspense boundaries to hydrate and mount
-      const interval = setInterval(() => {
-        const element = document.querySelector(targetId);
-        attempts++;
-        
-        if (element) {
-          clearInterval(interval);
-          // Small delay to let rendering stabilize
-          setTimeout(() => {
-            window.lenis?.scrollTo(targetId, {
-              offset: -80, // Offset for top sticky navbar
-              duration: 1.4,
-              easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-            });
-          }, 60);
-        } else if (attempts > 30) {
-          // Timeout after 1.5 seconds if target not found
-          clearInterval(interval);
-        }
-      }, 50);
-
-      return () => clearInterval(interval);
-    }
+    if (!location.hash) return;
+    const id = location.hash.slice(1);
+    // Small delay so lazy sections can mount
+    const t = setTimeout(() => scrollToSection(id), 80);
+    return () => clearTimeout(t);
   }, [location.hash, location.pathname]);
 
+  /* ── 3. Scroll lock when mobile menu is open ──────────────────────── */
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow           = "hidden";
+      document.documentElement.style.overflow = "hidden";
+      if (window.lenis) window.lenis.stop();
+    } else {
+      document.body.style.overflow           = "";
+      document.documentElement.style.overflow = "";
+      if (window.lenis) window.lenis.start();
+    }
+    return () => {
+      document.body.style.overflow           = "";
+      document.documentElement.style.overflow = "";
+      if (window.lenis) window.lenis.start();
+    };
+  }, [menuOpen]);
+
+  /* ── 4. Click-outside to close dropdowns ─────────────────────────── */
+  useEffect(() => {
+    const handler = (e) => {
+      if (!e.target.closest(".nav-dropdown-group")) {
+        setLearnOpen(false);
+        setScienceOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  /* ── handleNavClick ───────────────────────────────────────────────── */
   const handleNavClick = (e, link) => {
     e.preventDefault();
+
+    // Close everything first
     setMenuOpen(false);
     setLearnOpen(false);
     setScienceOpen(false);
 
-    const element = document.getElementById(link.sectionId);
-    if (element) {
-      if (window.lenis) {
-        window.lenis.scrollTo('#' + link.sectionId, {
-          offset: -80, // Sync perfectly with sticky navbar height
-          duration: 1.3,
-          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-        });
-      } else {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
+    // Release scroll lock immediately
+    document.body.style.overflow           = "";
+    document.documentElement.style.overflow = "";
+    if (window.lenis) window.lenis.start();
+
+    if (location.pathname !== link.to) {
+      // Navigate to the route, hash-effect will scroll
+      navigate(link.to + "#" + link.sectionId);
     } else {
-      navigate(link.to + '#' + link.sectionId);
+      // Same page — scroll after drawer animation finishes
+      setTimeout(() => scrollToSection(link.sectionId), 280);
     }
   };
 
+  /* ── Derived ──────────────────────────────────────────────────────── */
+  const navY = (hidden && !menuOpen) ? -130 : 0;
+
   return (
-    <motion.nav
-      initial={{ y: -100, x: "-50%", opacity: 0 }}
-      animate={{ 
-        y: hidden ? -120 : 0, 
-        x: "-50%",
-        opacity: 1 
-      }}
-      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed z-[100] top-4 left-1/2 w-[94%] max-w-[1280px] h-[58px] rounded-full px-4 sm:px-6 md:px-8 border border-white/40 bg-white/70 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.06)] flex items-center justify-between"
-    >
-      {/* LOGO */}
-      <a href="/" onClick={(e) => handleNavClick(e, mainLinks[0])} className="flex items-center gap-2 sm:gap-3.5 shrink-0 animate-fade-in">
-        <img src={logo} width={38} height={38} className="w-[38px] h-[38px] sm:w-9 sm:h-9 object-contain" alt="Logo" />
-        <img 
-          src={titleImage} 
-          width={130}
-          height={32}
-          className="h-[29px] sm:h-[32px] w-auto object-contain" 
-          style={{ filter: "sepia(0.6) saturate(1.8) hue-rotate(320deg) brightness(0.3) contrast(1.1)" }}
-          alt="Keyamind" 
-        />
-      </a>
-
-      {/* DESKTOP LINKS */}
-      <div className="hidden xl:flex items-center gap-8">
-        <ul className="flex items-center gap-6 xl:gap-8 text-[11px] font-black tracking-[0.15em] uppercase font-poppins">
-          <li>
-            <a href="/" onClick={(e) => handleNavClick(e, mainLinks[0])} className="hover:text-purple-600 transition-colors">Home</a>
-          </li>
-
-          {/* Learn Dropdown */}
-          <li className="relative group" onMouseEnter={() => setLearnOpen(true)} onMouseLeave={() => setLearnOpen(false)}>
-            <button className="flex items-center gap-1.5 hover:text-purple-600 transition-colors uppercase font-black cursor-pointer">
-              <span>Learn</span>
-              <svg className={`w-3 h-3 transition-transform duration-300 ${learnOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            <AnimatePresence>
-              {learnOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                  className="absolute left-1/2 -translate-x-1/2 top-full pt-3 w-56"
-                >
-                  <div className="bg-white/95 backdrop-blur-xl border border-purple-50 rounded-2xl p-2 shadow-2xl">
-                    {learnLinks.map((link) => (
-                      <a key={link.name} href="/" onClick={(e) => handleNavClick(e, link)} className="block px-4 py-2.5 rounded-xl text-[10px] hover:bg-purple-50 hover:text-purple-600 transition-all uppercase tracking-wider">
-                        {link.name}
-                      </a>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </li>
-
-          {/* Science Dropdown */}
-          <li className="relative group" onMouseEnter={() => setScienceOpen(true)} onMouseLeave={() => setScienceOpen(false)}>
-            <button className="flex items-center gap-1.5 hover:text-purple-600 transition-colors uppercase font-black cursor-pointer">
-              <span>Science</span>
-              <svg className={`w-3 h-3 transition-transform duration-300 ${scienceOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            <AnimatePresence>
-              {scienceOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                  className="absolute left-1/2 -translate-x-1/2 top-full pt-3 w-56"
-                >
-                  <div className="bg-white/95 backdrop-blur-xl border border-purple-50 rounded-2xl p-2 shadow-2xl">
-                    {scienceLinks.map((link) => (
-                      <a key={link.name} href="/" onClick={(e) => handleNavClick(e, link)} className="block px-4 py-2.5 rounded-xl text-[10px] hover:bg-purple-50 hover:text-purple-600 transition-all uppercase tracking-wider">
-                        {link.name}
-                      </a>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </li>
-
-          {/* Direct Links */}
-          {mainLinks.slice(1).map((link) => (
-            <li key={link.name}>
-              <a href="/" onClick={(e) => handleNavClick(e, link)} className="hover:text-purple-600 transition-colors">{link.name}</a>
-            </li>
-          ))}
-        </ul>
-
-        <motion.button 
-          whileHover={{ scale: 1.04, y: -1, boxShadow: "0 10px 20px rgba(59,46,94,0.15)" }}
-          whileTap={{ scale: 0.96 }}
-          onClick={(e) => handleNavClick(e, { sectionId: "contact", to: "/" })}
-          className="ml-4 px-6 py-2.5 rounded-full bg-gradient-to-r from-dark-lavender via-purple-700 to-purple-600 text-white text-[10px] font-black uppercase tracking-[0.2em] shadow-md shadow-purple-500/10 transition-all duration-300 font-poppins cursor-pointer"
-        >
-          Get Started
-        </motion.button>
-      </div>
-
-      {/* MOBILE TRIGGER */}
-      <button 
-        aria-label="Toggle Menu"
-        className="xl:hidden w-11 h-11 flex items-center justify-center text-dark-lavender cursor-pointer rounded-full hover:bg-purple-50/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20" 
-        onClick={() => setMenuOpen(!menuOpen)}
+    <>
+      {/* ═══════════════════════════════════════════════════════════════
+          NAVBAR CAPSULE
+          ═══════════════════════════════════════════════════════════════ */}
+      <motion.nav
+        style={{ willChange: "transform, opacity" }}
+        initial={{ y: -110, x: "-50%", opacity: 0 }}
+        animate={{ y: navY, x: "-50%", opacity: 1 }}
+        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+        className={`
+          fixed top-4 left-1/2 w-[94%] max-w-[1280px] h-[58px]
+          rounded-full px-4 sm:px-6 md:px-8
+          flex items-center justify-between
+          border border-white/50
+          transition-all duration-500
+          ${menuOpen   ? "z-[200]" : "z-[110]"}
+          ${scrolled
+            ? "bg-white/80 backdrop-blur-2xl shadow-[0_8px_40px_rgba(0,0,0,0.09)]"
+            : "bg-white/60 backdrop-blur-xl  shadow-[0_4px_24px_rgba(0,0,0,0.05)]"
+          }
+        `}
       >
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={menuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
-        </svg>
-      </button>
+        {/* LOGO */}
+        <a
+          href="/"
+          onClick={(e) => handleNavClick(e, mainLinks[0])}
+          className="flex items-center gap-2 sm:gap-3 shrink-0"
+        >
+          <img
+            src={logo}
+            width={38} height={38}
+            className="w-9 h-9 object-contain"
+            alt="Keyamind logo"
+          />
+          <img
+            src={titleImage}
+            width={130} height={32}
+            className="h-[28px] sm:h-[31px] w-auto object-contain"
+            style={{ filter: "sepia(0.6) saturate(1.8) hue-rotate(320deg) brightness(0.3) contrast(1.1)" }}
+            alt="Keyamind"
+          />
+        </a>
 
-      {/* MOBILE MENU */}
+        {/* ── DESKTOP LINKS (≥ 1024 px) ─────────────────────────────── */}
+        <div className="hidden lg:flex items-center gap-6 xl:gap-8">
+          <ul className="flex items-center gap-5 xl:gap-7 text-[10.5px] xl:text-[11px] font-black tracking-[0.15em] uppercase font-poppins text-dark-lavender">
+
+            {/* Home */}
+            <li>
+              <a
+                href="/"
+                onClick={(e) => handleNavClick(e, mainLinks[0])}
+                className="hover:text-purple-600 transition-colors duration-200 py-2"
+              >
+                Home
+              </a>
+            </li>
+
+            {/* Learn dropdown */}
+            <li
+              className="relative nav-dropdown-group"
+              onMouseEnter={() => setLearnOpen(true)}
+              onMouseLeave={() => setLearnOpen(false)}
+            >
+              <button
+                className="flex items-center gap-1.5 hover:text-purple-600 transition-colors duration-200 cursor-pointer py-2"
+              >
+                <span>Learn</span>
+                <svg
+                  className={`w-3 h-3 transition-transform duration-300 ${learnOpen ? "rotate-180 text-purple-600" : ""}`}
+                  fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              <AnimatePresence>
+                {learnOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                    transition={{ duration: 0.22 }}
+                    className="absolute left-1/2 -translate-x-1/2 top-full pt-3 w-52"
+                  >
+                    <div className="bg-white/95 backdrop-blur-xl border border-purple-50 rounded-2xl p-2 shadow-2xl">
+                      {learnLinks.map((link) => (
+                        <a
+                          key={link.name}
+                          href="/"
+                          onClick={(e) => handleNavClick(e, link)}
+                          className="block px-4 py-2.5 rounded-xl text-[10px] hover:bg-purple-50 hover:text-purple-600 transition-all uppercase tracking-wider font-bold"
+                        >
+                          {link.name}
+                        </a>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </li>
+
+            {/* Science dropdown */}
+            <li
+              className="relative nav-dropdown-group"
+              onMouseEnter={() => setScienceOpen(true)}
+              onMouseLeave={() => setScienceOpen(false)}
+            >
+              <button
+                className="flex items-center gap-1.5 hover:text-purple-600 transition-colors duration-200 cursor-pointer py-2"
+              >
+                <span>Science</span>
+                <svg
+                  className={`w-3 h-3 transition-transform duration-300 ${scienceOpen ? "rotate-180 text-purple-600" : ""}`}
+                  fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              <AnimatePresence>
+                {scienceOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                    transition={{ duration: 0.22 }}
+                    className="absolute left-1/2 -translate-x-1/2 top-full pt-3 w-52"
+                  >
+                    <div className="bg-white/95 backdrop-blur-xl border border-purple-50 rounded-2xl p-2 shadow-2xl">
+                      {scienceLinks.map((link) => (
+                        <a
+                          key={link.name}
+                          href="/"
+                          onClick={(e) => handleNavClick(e, link)}
+                          className="block px-4 py-2.5 rounded-xl text-[10px] hover:bg-purple-50 hover:text-purple-600 transition-all uppercase tracking-wider font-bold"
+                        >
+                          {link.name}
+                        </a>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </li>
+
+            {/* Remaining main links */}
+            {mainLinks.slice(1).map((link) => (
+              <li key={link.name}>
+                <a
+                  href="/"
+                  onClick={(e) => handleNavClick(e, link)}
+                  className="hover:text-purple-600 transition-colors duration-200 py-2"
+                >
+                  {link.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          {/* Desktop CTA */}
+          <motion.button
+            whileHover={{ scale: 1.05, y: -1, boxShadow: "0 12px 24px rgba(59,46,94,0.18)" }}
+            whileTap={{ scale: 0.96 }}
+            onClick={(e) => handleNavClick(e, { sectionId: "contact", to: "/" })}
+            className="ml-2 px-5 xl:px-6 py-2.5 rounded-full bg-gradient-to-r from-dark-lavender via-purple-700 to-purple-600 text-white text-[9.5px] xl:text-[10px] font-black uppercase tracking-[0.2em] shadow-md shadow-purple-500/15 transition-all duration-300 font-poppins cursor-pointer whitespace-nowrap"
+          >
+            Get Started
+          </motion.button>
+        </div>
+
+        {/* ── MOBILE HAMBURGER (< 1024 px) ──────────────────────────── */}
+        <button
+          type="button"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          onClick={() => setMenuOpen((v) => !v)}
+          className="lg:hidden flex flex-col justify-center gap-[5px] p-3 rounded-xl transition-colors duration-200 hover:bg-purple-50/60 focus:outline-none"
+        >
+          <motion.span
+            animate={menuOpen ? { rotate: 45, y: 7.5 } : { rotate: 0, y: 0 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="block w-6 h-[2px] rounded-full bg-dark-lavender origin-center"
+          />
+          <motion.span
+            animate={menuOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
+            transition={{ duration: 0.25 }}
+            className="block w-6 h-[2px] rounded-full bg-dark-lavender"
+          />
+          <motion.span
+            animate={menuOpen ? { rotate: -45, y: -7.5 } : { rotate: 0, y: 0 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="block w-6 h-[2px] rounded-full bg-dark-lavender origin-center"
+          />
+        </button>
+      </motion.nav>
+
+      {/* ═══════════════════════════════════════════════════════════════
+          MOBILE FULL-SCREEN DRAWER (sibling — outside transform stacking)
+          ═══════════════════════════════════════════════════════════════ */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="absolute top-[70px] left-0 right-0 bg-white/95 backdrop-blur-xl rounded-3xl p-5 shadow-2xl border border-purple-50 flex flex-col gap-3 xl:hidden max-h-[78vh] overflow-y-auto"
+            key="mobile-drawer"
+            variants={drawerVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="lg:hidden fixed inset-0 z-[190] flex flex-col overflow-y-auto bg-white/96 backdrop-blur-2xl"
+            data-lenis-prevent="true"
           >
-            {mainLinks.map((link) => (
-              <a 
-                key={link.name} 
-                href="/" 
-                onClick={(e) => handleNavClick(e, link)} 
-                className="py-2 px-3 block rounded-xl hover:bg-purple-50/50 text-sm font-bold text-dark-lavender hover:text-purple-600 uppercase tracking-widest transition-all"
-              >
-                {link.name}
-              </a>
-            ))}
-            <div className="h-px bg-purple-100/60 my-1" />
-            <div className="grid grid-cols-2 gap-4 px-3">
-              <div className="flex flex-col gap-1.5">
-                <span className="text-[10px] font-black text-purple-500 uppercase tracking-widest mb-1.5">Learn</span>
+            {/* Top padding to clear the navbar capsule */}
+            <div className="pt-[88px] px-7 sm:px-10 pb-10 flex flex-col flex-1">
+
+              {/* ── Section label: Navigation ── */}
+              <motion.p variants={labelVariants} className="text-[9px] tracking-[0.45em] uppercase font-black mb-5 border-l-[3px] border-purple-500 pl-3 text-purple-500/80">
+                Navigation
+              </motion.p>
+
+              {/* ── Main links ── */}
+              <nav className="flex flex-col gap-2 mb-9">
+                {mainLinks.map((link) => (
+                  <motion.a
+                    key={link.name}
+                    variants={itemVariants}
+                    href={link.to}
+                    onClick={(e) => handleNavClick(e, link)}
+                    className="text-[22px] font-black tracking-tight uppercase text-dark-lavender hover:text-purple-600 transition-colors duration-200 py-1.5"
+                  >
+                    {link.name}
+                  </motion.a>
+                ))}
+              </nav>
+
+              {/* Divider */}
+              <motion.div variants={labelVariants} className="h-px bg-purple-100 mb-7" />
+
+              {/* ── Section label: Learn ── */}
+              <motion.p variants={labelVariants} className="text-[9px] tracking-[0.45em] uppercase font-black mb-4 border-l-[3px] border-purple-400/60 pl-3 text-purple-500/70">
+                Learn & Explore
+              </motion.p>
+
+              {/* ── Learn links ── */}
+              <div className="grid grid-cols-2 gap-x-6 gap-y-3 mb-8">
                 {learnLinks.map((link) => (
-                  <a 
-                    key={link.name} 
-                    href="/" 
-                    onClick={(e) => handleNavClick(e, link)} 
-                    className="py-1.5 block text-xs text-dark-lavender/70 hover:text-purple-600 font-bold uppercase tracking-wider transition-colors"
+                  <motion.a
+                    key={link.name}
+                    variants={itemVariants}
+                    href={link.to}
+                    onClick={(e) => handleNavClick(e, link)}
+                    className="text-xs font-bold tracking-wide uppercase text-dark-lavender/65 hover:text-purple-600 transition-colors duration-200"
                   >
                     {link.name}
-                  </a>
+                  </motion.a>
                 ))}
               </div>
-              <div className="flex flex-col gap-1.5">
-                <span className="text-[10px] font-black text-purple-500 uppercase tracking-widest mb-1.5">Science</span>
+
+              {/* ── Section label: Science ── */}
+              <motion.p variants={labelVariants} className="text-[9px] tracking-[0.45em] uppercase font-black mb-4 border-l-[3px] border-purple-400/60 pl-3 text-purple-500/70">
+                Science of DMIT
+              </motion.p>
+
+              {/* ── Science links ── */}
+              <div className="grid grid-cols-2 gap-x-6 gap-y-3 mb-10">
                 {scienceLinks.map((link) => (
-                  <a 
-                    key={link.name} 
-                    href="/" 
-                    onClick={(e) => handleNavClick(e, link)} 
-                    className="py-1.5 block text-xs text-dark-lavender/70 hover:text-purple-600 font-bold uppercase tracking-wider transition-colors"
+                  <motion.a
+                    key={link.name}
+                    variants={itemVariants}
+                    href={link.to}
+                    onClick={(e) => handleNavClick(e, link)}
+                    className="text-xs font-bold tracking-wide uppercase text-dark-lavender/65 hover:text-purple-600 transition-colors duration-200"
                   >
                     {link.name}
-                  </a>
+                  </motion.a>
                 ))}
               </div>
+
+              {/* ── CTA ── */}
+              <motion.button
+                variants={ctaVariants}
+                whileTap={{ scale: 0.97 }}
+                onClick={(e) => handleNavClick(e, { sectionId: "contact", to: "/" })}
+                className="mt-auto w-full py-4 rounded-2xl bg-gradient-to-r from-dark-lavender via-purple-700 to-purple-600 text-white text-[11px] font-black uppercase tracking-[0.22em] shadow-xl shadow-purple-900/12 cursor-pointer"
+              >
+                Get Started
+              </motion.button>
             </div>
-            <button 
-              onClick={(e) => handleNavClick(e, { sectionId: "contact", to: "/" })}
-              className="mt-3 w-full py-3.5 rounded-2xl bg-gradient-to-r from-dark-lavender via-purple-700 to-purple-600 text-white text-[11px] font-black uppercase tracking-widest shadow-md shadow-purple-900/10 cursor-pointer"
-            >
-              Get Started
-            </button>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </>
   );
 };
 

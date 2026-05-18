@@ -58,7 +58,7 @@ export default function HumanQuotientsSection() {
   return (
     <section 
       id="human-quotients" 
-      className="relative w-full py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#FAF5F8] to-[#FAF9F6] overflow-hidden scroll-mt-20"
+      className="relative w-full py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#FAF5F8] to-[#FAF9F6] overflow-hidden scroll-mt-[80px]"
     >
       {/* Seamless Top & Bottom Blending Masks */}
       

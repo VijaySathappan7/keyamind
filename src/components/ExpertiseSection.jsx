@@ -30,7 +30,7 @@ const ExpertiseSection = memo(() => {
       ref={containerRef}
       onMouseMove={handleMouseMove}
       id="expertise"
-      className="relative overflow-hidden flex flex-col justify-center pt-16 pb-24 lg:pt-20 lg:pb-28 bg-gradient-to-b from-white to-[#FAF6F8] select-none z-10"
+      className="relative overflow-hidden flex flex-col justify-center pt-16 pb-24 lg:pt-20 lg:pb-28 bg-gradient-to-b from-white to-[#FAF6F8] select-none z-10 scroll-mt-[80px]"
     >
       {/* Seamless Top & Bottom Blending Masks */}
       

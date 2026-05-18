@@ -81,7 +81,7 @@ const InherentBrainMappingSection = () => {
     <section 
       id="inherent-mapping"
       ref={containerRef}
-      className="relative min-h-screen w-full flex items-center overflow-hidden py-16 sm:py-20 lg:py-24 m-0 p-0 scroll-mt-12 selection:bg-purple-200 selection:text-dark-lavender"
+      className="relative min-h-screen w-full flex items-center overflow-hidden py-16 sm:py-20 lg:py-24 m-0 p-0 scroll-mt-[80px] selection:bg-purple-200 selection:text-dark-lavender"
     >
       {/* 100% COMPLETE CINEMATIC BACKGROUND VIDEO PLAYING WITH SMOOTH PARALLAX */}
       <motion.div 

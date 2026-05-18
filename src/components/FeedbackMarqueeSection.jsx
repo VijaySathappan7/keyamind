@@ -99,7 +99,7 @@ export default function FeedbackMarqueeSection() {
   return (
     <section
       id="testimonials"
-      className="relative overflow-hidden bg-gradient-to-b from-[#FAF5F7] to-[#FAF9F6] py-20 md:py-24 select-none scroll-mt-20 z-10"
+      className="relative overflow-hidden bg-gradient-to-b from-[#FAF5F7] to-[#FAF9F6] py-20 md:py-24 select-none scroll-mt-[80px] z-10"
     >
       {/* BACKGROUND GLOWS */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">

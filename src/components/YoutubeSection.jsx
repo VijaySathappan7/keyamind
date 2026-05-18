@@ -20,7 +20,7 @@ const YoutubeSection = memo(() => {
   return (
     <section 
       id="inherent-mapping" 
-      className="relative w-full py-20 sm:py-24 lg:py-28 bg-gradient-to-b from-[#FAF6F9] via-[#FAF9F5] to-white overflow-hidden scroll-mt-20"
+      className="relative w-full py-20 sm:py-24 lg:py-28 bg-gradient-to-b from-[#FAF6F9] via-[#FAF9F5] to-white overflow-hidden scroll-mt-[80px]"
     >
       {/* Seamless Top & Bottom Blending Masks */}
       

@@ -16,7 +16,7 @@ export default function FounderProfileSection() {
   };
 
   return (
-    <section id="founder" className="relative overflow-hidden bg-gradient-to-b from-[#FAF9F6] to-white py-16 sm:py-20 lg:py-24 select-none z-10 font-poppins">
+    <section id="founder" className="relative overflow-hidden bg-gradient-to-b from-[#FAF9F6] to-white py-16 sm:py-20 lg:py-24 select-none z-10 font-poppins scroll-mt-[80px]">
       {/* Seamless Bottom Blending Mask */}
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white via-white/60 to-transparent z-[2] pointer-events-none" />
 

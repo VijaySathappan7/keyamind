@@ -122,7 +122,7 @@ const ServicesSection = () => {
       ref={containerRef}
       onMouseMove={handleMouseMove}
       id="our-services" 
-      className="relative w-full flex flex-col justify-center overflow-hidden py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#FAF6F9] to-[#FAF5F7] select-none z-10"
+      className="relative w-full flex flex-col justify-center overflow-hidden py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#FAF6F9] to-[#FAF5F7] select-none z-10 scroll-mt-[80px]"
     >
       {/* Seamless Top & Bottom Blending Masks */}
       

@@ -130,7 +130,7 @@ export default function WhatWeDoSection() {
     <section
       id="what-we-do"
       ref={containerRef}
-      className="relative w-full py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#FAF9F6] to-white overflow-hidden scroll-mt-20 select-none"
+      className="relative w-full py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#FAF9F6] to-white overflow-hidden scroll-mt-[80px] select-none"
     >
       {/* Seamless Top & Bottom Blending Masks */}
       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white via-white/60 to-transparent z-[2] pointer-events-none" />
