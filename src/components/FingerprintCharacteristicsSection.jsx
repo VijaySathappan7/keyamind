@@ -44,7 +44,7 @@ const FingerprintCharacteristicsSection = memo(() => {
     <section 
       ref={containerRef}
       id="fingerprint-characteristics" 
-      className="relative w-full py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#FAF6F8] to-[#FAF2F7] overflow-hidden scroll-mt-[80px]"
+      className="relative w-full py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#FAF6F8] to-[#FAF2F7] overflow-hidden scroll-mt-0"
     >
       {/* Seamless Top & Bottom Blending Masks */}
       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-[#FAF6F8] via-[#FAF6F8]/60 to-transparent z-[2] pointer-events-none" />

@@ -1,6 +1,6 @@
 import { useState, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, HelpCircle, ChevronDown, ShieldCheck } from "lucide-react";
+import { Search, HelpCircle, ChevronDown, ShieldCheck, ArrowRight } from "lucide-react";
 import SEOHead from "../components/SEOHead";
 import ContentSection from "../components/ContentSection";
 
@@ -47,6 +47,23 @@ export default function FaqPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
   const [expandedIndex, setExpandedIndex] = useState(null);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1,
+      transition: { staggerChildren: 0.15, delayChildren: 0.1 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 30, opacity: 0 },
+    visible: { 
+      y: 0, 
+      opacity: 1, 
+      transition: { type: "spring", stiffness: 100, damping: 15 }
+    }
+  };
 
   const categories = ["All", "DMIT Science", "Parenting Guidance", "Safety & Security"];
 
@@ -112,7 +129,7 @@ export default function FaqPage() {
   return (
     <>
       <SEOHead 
-        title="Keyamind FAQs | Scientific Brain Mapping & Security Details"
+        title="Frequently Asked Questions (FAQs) | Keyamind"
         description="Got questions about DMIT safety, scientific accuracy, or parenting counseling? Browse our detailed FAQ center with real, science-backed answers."
         canonical="https://keyamind.com/faq"
         keywords="DMIT safety, fingerprint privacy, biological mapping FAQ, child psychology questions, Keyamind customer support"
@@ -122,7 +139,7 @@ export default function FaqPage() {
         {JSON.stringify(faqSchema)}
       </script>
 
-      <div className="relative min-h-screen pt-24 pb-20 bg-gradient-mesh overflow-x-hidden selection:bg-purple-200 selection:text-dark-lavender">
+      <div className="relative min-h-screen pt-24 pb-20 bg-gradient-to-b from-white via-warm-cream to-soft-lavender overflow-x-hidden selection:bg-purple-200 selection:text-dark-lavender">
         
         {/* Ambient color bubbles */}
         <div className="absolute top-1/4 -left-36 w-96 h-96 rounded-full bg-purple-200/10 blur-3xl pointer-events-none" />
@@ -131,18 +148,37 @@ export default function FaqPage() {
         <div className="max-w-[850px] mx-auto px-4 sm:px-6">
           
           {/* ================= HERO INTRO ================= */}
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-purple-200 bg-purple-50/50 backdrop-blur-md mb-4">
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="text-left mb-12"
+          >
+            <motion.div 
+              variants={itemVariants} 
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-purple-200 bg-purple-50/50 backdrop-blur-md mb-4 self-start"
+            >
               <HelpCircle className="w-3.5 h-3.5 text-purple-600 animate-pulse" />
               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-purple-800">Support & Scientific Integrity</span>
-            </div>
-            <h1 className="text-4xl sm:text-5xl font-black text-dark-lavender font-outfit mb-4">
-              Frequently Asked <span className="text-gradient-purple">Questions</span>
-            </h1>
-            <p className="text-sm sm:text-base text-dark-lavender/70 font-medium leading-relaxed max-w-xl mx-auto">
-              Get detailed, clinical, and transparent answers regarding our biometric scanning security, scientific methodologies, and counseling sessions.
-            </p>
-          </div>
+            </motion.div>
+            
+            <motion.h1 
+              variants={itemVariants}
+              className="text-[clamp(24px,5.5vw,42px)] font-outfit font-black text-dark-lavender leading-[1.12] tracking-tight mb-6 text-left"
+            >
+              Frequently Asked{" "}
+              <span className="text-gradient-purple font-cursive text-[clamp(34px,7.5vw,58px)] capitalize tracking-normal font-normal inline-block mr-2.5 drop-shadow-[0_2px_8px_rgba(139,92,246,0.18)]">
+                Questions
+              </span>
+            </motion.h1>
+            
+            <motion.p 
+              variants={itemVariants}
+              className="text-sm sm:text-base text-dark-lavender/70 font-medium leading-relaxed max-w-xl font-poppins text-left"
+            >
+              Find transparent, science-backed answers regarding our scanning safety, biometric security, and expert counseling methodologies.
+            </motion.p>
+          </motion.div>
 
           {/* ================= SEARCH & CATEGORIES ================= */}
           <div className="space-y-6 mb-12">
@@ -238,30 +274,41 @@ export default function FaqPage() {
           </div>
 
           {/* ================= HIGH-CONVERSION CTA ================= */}
-          <div className="mt-16 text-center">
-            <p className="text-xs text-dark-lavender/50 font-bold uppercase tracking-widest mb-4">Still have unanswered questions?</p>
-            <motion.a
-              whileHover={{ scale: 1.05, y: -1 }}
-              whileTap={{ scale: 0.95 }}
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                if (window.lenis) {
-                  window.lenis.scrollTo("#contact", { offset: -80, duration: 1.2 });
-                } else {
-                  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-                }
-              }}
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-gradient-to-r from-dark-lavender to-purple-800 text-white text-xs font-black uppercase tracking-widest shadow-xl font-poppins cursor-pointer"
-            >
-              <span>Connect directly</span>
-              <ChevronDown className="w-4 h-4 text-white -rotate-90" />
-            </motion.a>
+          <div className="w-full py-8 px-6 sm:py-10 sm:px-12 rounded-[32px] bg-gradient-to-r from-white/95 via-purple-50/90 to-purple-50/90 border border-white shadow-[0_20px_50px_rgba(59,46,94,0.06)] backdrop-blur-md relative overflow-hidden flex flex-col items-center text-center group mt-16 animate-gpu">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-gradient-to-tr from-purple-300/20 to-purple-300/20 rounded-full blur-[70px] pointer-events-none animate-pulse-soft" />
+
+            <div className="relative z-10 max-w-3xl flex flex-col items-center gap-3.5">
+              <h2 className="text-[clamp(20px,4.5vw,32px)] font-outfit font-black text-dark-lavender leading-tight tracking-tight">
+                Still Have <span className="text-gradient-purple font-cursive text-[clamp(24px,5vw,42px)] font-normal capitalize">Unanswered Questions?</span>
+              </h2>
+              
+              <p className="text-xs sm:text-sm font-light text-dark-lavender/80 font-poppins leading-relaxed max-w-2xl">
+                Get in touch with Keyamind's expert consultants directly. We are happy to clarify scan guidelines, diagnostic privacy, or report options.
+              </p>
+
+              <motion.a 
+                whileHover={{ scale: 1.04, y: -2, boxShadow: "0 15px 30px rgba(59,46,94,0.15)" }}
+                whileTap={{ scale: 0.96 }}
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (window.lenis) {
+                    window.lenis.scrollTo("#contact", { offset: 0, duration: 1.2 });
+                  } else {
+                    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
+                className="mt-2 inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-gradient-to-r from-dark-lavender via-purple-700 to-purple-600 text-white font-poppins font-extrabold text-[11px] tracking-[0.2em] uppercase shadow-md shadow-purple-500/10 transition-all duration-300 group cursor-pointer min-h-[44px]"
+              >
+                <span>Connect Directly</span>
+                <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
+              </motion.a>
+            </div>
           </div>
 
         </div>
       </div>
-      <ContentSection />
+      <ContentSection contactOnly={true} />
     </>
   );
 }

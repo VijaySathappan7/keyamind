@@ -87,7 +87,7 @@ export default function BlogDetailPage() {
         {JSON.stringify(articleSchema)}
       </script>
 
-      <div className="relative min-h-screen pt-24 pb-20 bg-gradient-mesh overflow-x-hidden selection:bg-purple-200 selection:text-dark-lavender">
+      <div className="relative min-h-screen pt-24 pb-20 bg-gradient-to-b from-white via-warm-cream to-soft-lavender overflow-x-hidden selection:bg-purple-200 selection:text-dark-lavender">
         
         {/* Aesthetic background glows */}
         <div className="absolute top-1/4 -right-32 w-96 h-96 rounded-full bg-purple-200/10 blur-3xl pointer-events-none" />
@@ -105,18 +105,18 @@ export default function BlogDetailPage() {
           </nav>
 
           {/* ================= ARTICLE HEADER ================= */}
-          <div className="max-w-4xl mx-auto mb-10 text-center">
+          <div className="max-w-4xl mb-10 text-left">
             
             <span className="inline-block px-3.5 py-1 rounded-full bg-purple-50 text-[10px] font-black uppercase tracking-widest text-purple-700 border border-purple-100 mb-6">
               {blog.category}
             </span>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-dark-lavender tracking-tight leading-tight mb-6 font-outfit">
+            <h1 className="text-[clamp(24px,5.5vw,42px)] font-outfit font-black text-dark-lavender leading-[1.12] tracking-tight mb-6 text-left">
               {blog.title}
             </h1>
 
             {/* Author card & timing */}
-            <div className="flex flex-wrap items-center justify-center gap-6 text-[11px] font-black uppercase tracking-widest text-dark-lavender/50">
+            <div className="flex flex-wrap items-center justify-start gap-6 text-[11px] font-black uppercase tracking-widest text-dark-lavender/50">
               
               <div className="flex items-center gap-2.5">
                 <img 
@@ -233,7 +233,7 @@ export default function BlogDetailPage() {
                   </div>
                   <span className="text-[10px] font-black uppercase tracking-widest text-purple-600 block">{blog.author.role}</span>
                   <p className="text-xs text-dark-lavender/65 leading-relaxed font-semibold">
-                    Dr. Rajan and our guest writers review anatomical, dermatoglyphic, and psychological literature to author verified, science-backed educational materials for parents and couples.
+                    I am a Career Consultant and Student Potential Analyst dedicated to helping students and parents discover their innate strengths, learning styles, and true career directions.
                   </p>
                 </div>
               </div>
@@ -277,44 +277,42 @@ export default function BlogDetailPage() {
 
           {/* ================= HIGH-CONVERSION CTA ================= */}
           <div className="max-w-4xl mx-auto mt-20">
-            <motion.div 
-              initial={{ scale: 0.96, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6 }}
-              className="w-full rounded-[32px] bg-gradient-to-r from-dark-lavender via-purple-900 to-purple-800 text-white p-8 sm:p-12 text-center relative overflow-hidden shadow-xl"
-            >
-              <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent pointer-events-none" />
-              
-              <h2 className="text-3xl font-black mb-4 font-outfit">
-                Experience the Science Personally
-              </h2>
-              <p className="text-sm text-purple-200 max-w-2xl mx-auto mb-8 font-medium leading-relaxed">
-                Connect with our certified child development and career counseling consultants today. Request a compatibility scan or career roadmap.
-              </p>
+            <div className="w-full py-8 px-6 sm:py-10 sm:px-12 rounded-[32px] bg-gradient-to-r from-white/95 via-purple-50/90 to-purple-50/90 border border-white shadow-[0_20px_50px_rgba(59,46,94,0.06)] backdrop-blur-md relative overflow-hidden flex flex-col items-center text-center group animate-gpu">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-gradient-to-tr from-purple-300/20 to-purple-300/20 rounded-full blur-[70px] pointer-events-none animate-pulse-soft" />
 
-              <motion.a 
-                whileHover={{ scale: 1.05, y: -2, boxShadow: "0 10px 25px rgba(139, 92, 246, 0.4)" }}
-                whileTap={{ scale: 0.95 }}
-                href="#contact"
-                onClick={(e) => {
-                  e.preventDefault();
-                  if (window.lenis) {
-                    window.lenis.scrollTo("#contact", { offset: -80, duration: 1.2 });
-                  } else {
-                    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-                  }
-                }}
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-dark-lavender font-black text-xs uppercase tracking-widest shadow-xl transition-all font-poppins cursor-pointer"
-              >
-                <span>Book Consultation Session</span>
-                <ArrowLeft className="w-4 h-4 text-purple-600 rotate-180" />
-              </motion.a>
-            </motion.div>
+              <div className="relative z-10 max-w-3xl flex flex-col items-center gap-3.5">
+                <h2 className="text-[clamp(20px,4.5vw,32px)] font-outfit font-black text-dark-lavender leading-tight tracking-tight">
+                  Experience the Science <span className="text-gradient-purple font-cursive text-[clamp(24px,5vw,42px)] font-normal capitalize">Personally</span>
+                </h2>
+                
+                <p className="text-xs sm:text-sm font-light text-dark-lavender/80 font-poppins leading-relaxed max-w-2xl">
+                  Connect with our certified child development and career counseling consultants today. Request a compatibility scan or career roadmap.
+                </p>
+
+                <motion.a 
+                  whileHover={{ scale: 1.04, y: -2, boxShadow: "0 15px 30px rgba(59,46,94,0.15)" }}
+                  whileTap={{ scale: 0.96 }}
+                  href="#contact"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (window.lenis) {
+                      window.lenis.scrollTo("#contact", { offset: 0, duration: 1.2 });
+                    } else {
+                      document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                    }
+                  }}
+                  className="mt-2 inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-gradient-to-r from-dark-lavender via-purple-700 to-purple-600 text-white font-poppins font-extrabold text-[11px] tracking-[0.2em] uppercase shadow-md shadow-purple-500/10 transition-all duration-300 group cursor-pointer min-h-[44px]"
+                >
+                  <span>Book Consultation Session</span>
+                  <ArrowLeft size={16} className="group-hover:translate-x-0.5 transition-transform rotate-180" />
+                </motion.a>
+              </div>
+            </div>
           </div>
 
         </div>
       </div>
-      <ContentSection />
+      <ContentSection contactOnly={true} />
     </>
   );
 }

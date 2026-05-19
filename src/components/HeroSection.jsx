@@ -114,7 +114,7 @@ const HeroSection = () => {
     if (element) {
       if (window.lenis) {
         window.lenis.scrollTo('#' + targetId, {
-          offset: -80,
+          offset: 0,
           duration: 1.2,
           easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
         });

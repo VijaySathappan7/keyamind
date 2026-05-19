@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useMotionValue, useSpring, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
 import { Sparkles, ArrowUpRight } from 'lucide-react';
 import LazyImage from './LazyImage';
 
@@ -143,7 +143,7 @@ const ServicesSection = () => {
       ref={containerRef}
       onMouseMove={handleMouseMove}
       id="our-services" 
-      className="relative w-full flex flex-col justify-center overflow-hidden py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#FAF6F9] to-[#FAF5F7] select-none z-10 scroll-mt-[80px]"
+      className="relative w-full flex flex-col justify-center overflow-hidden py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#FAF6F9] to-[#FAF5F7] select-none z-10 scroll-mt-0"
     >
       {/* Seamless Top & Bottom Blending Masks */}
       
@@ -204,7 +204,7 @@ const ServicesSection = () => {
         <motion.div 
           variants={containerVariants}
           initial="hidden"
-          viewport={{ once: true, margin: "-50px" }} whileInView="visible"
+          whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
           className="grid grid-cols-2 xl:grid-cols-3 gap-6 xl:gap-8 mb-8 items-stretch transform-gpu"
         >
@@ -344,6 +344,7 @@ const ServicesSection = () => {
         </div>
 
         {/* Progress bar dots (Centered between card and buttons) */}
+        {/* PROGRESS BAR DOTS */}
         <div className="flex justify-center gap-2 py-1">
           {services.map((_, i) => (
             <div
@@ -364,21 +365,21 @@ const ServicesSection = () => {
           ))}
         </div>
 
-        {/* Age-Specific Selection Buttons (NOW BELOW THE CARD) */}
-        <div className="grid grid-cols-3 gap-2 mt-2">
+        {/* Premium 2x3 Selection Grid */}
+        <div className="grid grid-cols-3 gap-2 w-full mt-2">
           {services.map((item, index) => {
             const isActive = activeIndex === index;
-            const labels = ["AGE 1-4", "AGE 4-10", "AGE 11-17", "AGE 18+ CAREER", "AGE 25+", "INSTITUTIONS"];
-            const buttonLabel = labels[index] || "INSTITUTIONS";
+            const labels = ["AGE 1-4", "AGE 4-10", "AGE 11-17", "CAREER 18+", "ADULTS 25+", "CORP & SCH"];
+            const buttonLabel = labels[index] || "CORP & SCH";
 
             return (
               <button
                 key={index}
                 onClick={() => handleManualSwitch(index)}
-                className={`flex flex-col items-center justify-center p-3.5 min-h-[44px] rounded-2xl border transition-all duration-500 font-bold text-[9px] uppercase tracking-tighter font-poppins text-center leading-tight cursor-pointer ${
+                className={`flex flex-col items-center justify-center py-2 px-1 min-h-[46px] rounded-2xl border transition-all duration-500 font-extrabold text-[9px] uppercase tracking-wider font-poppins text-center leading-tight cursor-pointer break-words ${
                   isActive 
-                    ? "bg-gradient-to-r from-purple-600 via-purple-500 to-purple-400 border-transparent text-white shadow-xl scale-[1.03]" 
-                    : "bg-white/90 border-purple-100 text-dark-lavender/60"
+                    ? "bg-gradient-to-r from-dark-lavender via-purple-700 to-purple-600 border-transparent text-white shadow-lg scale-[1.02]" 
+                    : "bg-white/90 border-purple-100 text-dark-lavender/60 hover:border-purple-200"
                 }`}
               >
                 <span className="block mb-0.5">{buttonLabel.split(' ')[0]}</span>

@@ -91,7 +91,7 @@ const InherentBrainMappingSection = () => {
     <section 
       id="inherent-mapping"
       ref={containerRef}
-      className="relative min-h-screen w-full flex items-center overflow-hidden py-16 sm:py-20 lg:py-24 m-0 p-0 scroll-mt-[80px] selection:bg-purple-200 selection:text-dark-lavender"
+      className="relative min-h-screen w-full flex items-center overflow-hidden py-16 sm:py-20 lg:py-24 m-0 p-0 scroll-mt-0 selection:bg-purple-200 selection:text-dark-lavender"
     >
       {/* 100% COMPLETE CINEMATIC BACKGROUND VIDEO PLAYING WITH SMOOTH PARALLAX */}
       <motion.div 
@@ -221,7 +221,7 @@ const InherentBrainMappingSection = () => {
                 onClick={(e) => {
                   e.preventDefault();
                   if (window.lenis) {
-                    window.lenis.scrollTo("#contact", { offset: -80, duration: 1.2 });
+                    window.lenis.scrollTo("#contact", { offset: 0, duration: 1.2 });
                   } else {
                     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
                   }
@@ -239,7 +239,7 @@ const InherentBrainMappingSection = () => {
                 onClick={(e) => {
                   e.preventDefault();
                   if (window.lenis) {
-                    window.lenis.scrollTo("#our-services", { offset: -80, duration: 1.2 });
+                    window.lenis.scrollTo("#our-services", { offset: 0, duration: 1.2 });
                   } else {
                     document.getElementById("our-services")?.scrollIntoView({ behavior: "smooth" });
                   }

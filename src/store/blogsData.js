@@ -1,3 +1,5 @@
+import swathiAvatar from "../assets/images/swathi.webp";
+
 export const blogsData = [
   {
     slug: "what-is-dmit",
@@ -7,9 +9,9 @@ export const blogsData = [
     date: "May 18, 2026",
     readTime: "7 min read",
     author: {
-      name: "Dr. Ananya Rajan",
-      role: "Cognitive Neuroscientist",
-      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80"
+      name: "T Swathi Deivanai",
+      role: "Founder & Student Potential Analyst",
+      avatar: swathiAvatar
     },
     image: "https://images.unsplash.com/photo-1507668077129-56e32842fceb?w=800&auto=format&fit=crop&q=80",
     keywords: "DMIT Science, fingerprint analysis, brain mapping, dermatoglyphics, ectodermal ridges, neocortex lobes",
@@ -49,9 +51,9 @@ export const blogsData = [
     date: "May 15, 2026",
     readTime: "6 min read",
     author: {
-      name: "Siddharth Verma",
-      role: "Lead Career Counselor",
-      avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&auto=format&fit=crop&q=80"
+      name: "T Swathi Deivanai",
+      role: "Founder & Student Potential Analyst",
+      avatar: swathiAvatar
     },
     image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&auto=format&fit=crop&q=80",
     keywords: "stream selection class 10, career counseling, IQ EQ AQ CQ, child talent mapping, career mismatch, college selection",
@@ -83,9 +85,9 @@ export const blogsData = [
     date: "May 10, 2026",
     readTime: "8 min read",
     author: {
-      name: "Dr. Ananya Rajan",
-      role: "Cognitive Neuroscientist",
-      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80"
+      name: "T Swathi Deivanai",
+      role: "Founder & Student Potential Analyst",
+      avatar: swathiAvatar
     },
     image: "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?w=800&auto=format&fit=crop&q=80",
     keywords: "scientific parenting, parent-child compatibility, visual auditory kinesthetic, study frustration, behavior consulting",
@@ -106,6 +108,107 @@ export const blogsData = [
       <h2>Calibrating Your Parenting Style</h2>
       <p>Through parent-child compatibility mapping, we evaluate where the parent's behavioral tendencies clash with the child's innate temperament. If an Authoritarian parent (demanding immediate compliance, low explanation) raises an Intrapersonally strong, analytical child, severe behavioral friction will result.</p>
       <p>By shifting to an Authoritative, collaborative communication style that matches the child's organic processing speed, parents can dismantle daily power struggles, convert homework battles into creative sessions, and build a lasting relationship grounded in deep mutual respect and love.</p>
+    `
+  },
+  {
+    slug: "nurturing-genius-within-brain-hemispheres",
+    title: "Nurturing the Genius Within: Understanding Left vs. Right Brain Hemispheres",
+    description: "Whole-brain learning is key. Read how discovering left and right brain dominance helps you support your child's creative and logical skills.",
+    category: "DMIT Science",
+    date: "May 08, 2026",
+    readTime: "5 min read",
+    author: {
+      name: "T Swathi Deivanai",
+      role: "Founder & Student Potential Analyst",
+      avatar: swathiAvatar
+    },
+    image: "https://images.unsplash.com/photo-1558403194-611308249627?w=800&auto=format&fit=crop&q=80",
+    keywords: "left brain, right brain, hemispheric dominance, brain balance, cognitive optimization",
+    content: `
+      <h2>Whole-Brain Integration: The Secret to Organic Cognitive Success</h2>
+      <p>Every child has a natural mental dominance. In the world of child development, understanding whether your child relies more on their **Left Brain** (logical, analytical, linguistic) or their **Right Brain** (creative, emotional, visual-spatial) is a profound game changer. Rather than pushing them to excel in ways that fight their natural cognitive current, you can build a customized bridge to whole-brain harmony.</p>
+      
+      <h2>Logical sequential thinkers vs. Creative visual observers</h2>
+      <p>Let's break down how this hemispheric dominance shows up in daily life:</p>
+      <ul>
+        <li><strong>Left Brain Dominance:</strong> These children love order, step-by-step rules, schedules, and details. They process verbal language quickly, enjoy solving linear math puzzles, and feel secure with logical lists. However, they may struggle with sudden shifts in routine or abstract imagination.</li>
+        <li><strong>Right Brain Dominance:</strong> These children think in pictures, metaphors, and feelings. They are highly intuitive, emotionally sensitive, and love creative arts. When learning, they need the "big picture" before they can focus on smaller details. Oral lists and lectures easily cause them to zone out.</li>
+      </ul>
+
+      <blockquote>
+        “An integrated brain allows a child to bring logic and emotion together, leading to healthier relationships, resilience, and personal happiness.” — T Swathi Deivanai
+      </blockquote>
+
+      <h2>How to Nurture Whole-Brain Harmony</h2>
+      <p>To help a left-dominant child tap into their creativity, encourage open-ended art, music appreciation, and cooperative games where there are no strict rules. To help a right-dominant child focus their creative energy, teach them how to make visual lists, break tasks down into color-coded segments, and use mind maps to outline their thoughts before writing.</p>
+      <p>By shifting our guidance from labeling ("she's just creative" or "he's just analytical") to active integration, we empower our children to build full cognitive confidence and excel at both logic and imagination.</p>
+    `
+  },
+  {
+    slug: "vak-path-customizing-study-methods",
+    title: "The VAK Path: Customizing Study Methods for Visual, Auditory, and Kinesthetic Children",
+    description: "Every child learns differently. Discover the three primary learning channels and learn simple, practical ways to customize studying for your child.",
+    category: "Parenting",
+    date: "May 05, 2026",
+    readTime: "6 min read",
+    author: {
+      name: "T Swathi Deivanai",
+      role: "Founder & Student Potential Analyst",
+      avatar: swathiAvatar
+    },
+    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&auto=format&fit=crop&q=80",
+    keywords: "visual auditory kinesthetic, sensory learning styles, study techniques, parenting tips",
+    content: `
+      <h2>The Fallacy of the 'Standard' Study Method</h2>
+      <p>Does your child struggle to sit still for hours? Or do they read a textbook cover to cover and fail to recall the concepts later? The problem is rarely a lack of intelligence or effort. Instead, it is a mismatch in **learning channels**. Howard Gardner's cognitive research identifies three main pathways through which human minds absorb knowledge: Visual, Auditory, and Kinesthetic (VAK).</p>
+
+      <h2>Understanding the Three VAK Styles</h2>
+      <ul>
+        <li><strong>Visual Learners:</strong> They absorb concepts best through sight. If they can't see it, it doesn't exist. They love colorful diagrams, video explainers, charts, and flashcards. Oral lectures are quickly forgotten.</li>
+        <li><strong>Auditory Learners:</strong> They process information through hearing. They thrive in active discussions, group brainstorming, and explaining concepts aloud. Sights and background noises can easily break their focus.</li>
+        <li><strong>Kinesthetic Learners:</strong> They learn by doing and physically interacting. They can't sit still for three hours. They need frequent breaks, hands-on models, three-dimensional props, and physical activities to lock in complex ideas.</li>
+      </ul>
+
+      <h2>Practical Study Calibrations for Parents</h2>
+      <p>Here are three simple ways to transform your study routine tonight:</p>
+      <ol>
+        <li>For a <strong>Visual child</strong>, replace long study notes with bright, colorful mind maps, sketch-notes, and educational cartoons.</li>
+        <li>For an <strong>Auditory child</strong>, let them record themselves reading their notes aloud, or have them 'teach' the concept back to you over dinner.</li>
+        <li>For a <strong>Kinesthetic child</strong>, encourage them to stand up while reading, use physical index cards they can sort, and study in short, active 25-minute blocks.</li>
+      </ol>
+      <p>Aligning your study expectations with your child's inborn sensory channel completely eliminates academic stress and transforms learning from a nightly battle into an exciting adventure.</p>
+    `
+  },
+  {
+    slug: "choosing-strengths-resolving-stream-choice-anxiety",
+    title: "Choosing Strengths: Resolving Stream Choice Anxiety after 10th & 12th",
+    description: "Academic choices don't have to be stressful. Learn how biological brain quotients (IQ, EQ, CQ, AQ) map out a secure and fulfilling career roadmap.",
+    category: "Career Alignment",
+    date: "May 02, 2026",
+    readTime: "7 min read",
+    author: {
+      name: "T Swathi Deivanai",
+      role: "Founder & Student Potential Analyst",
+      avatar: swathiAvatar
+    },
+    image: "https://images.unsplash.com/photo-1484981138541-3d074aa97716?w=800&auto=format&fit=crop&q=80",
+    keywords: "stream selection after 10th, career stream guidance, brain quotients, SWOT career advice",
+    content: `
+      <h2>The Challenge of Academic Stream Selection</h2>
+      <p>For teenagers, selecting a stream (Science, Commerce, or Humanities) after Class 10 or 12 is a source of intense anxiety. With hundreds of emerging career paths, parents and students worry about making a choice that leads to career dissatisfaction or mismatch. Unfortunately, most stream decisions are based on peer pressure or temporary grades.</p>
+      <p>Surface-level interests change quickly, but **innate brain quotients (IQ, EQ, CQ, and AQ) remain permanent**. By understanding these four quadrants, students can make data-driven academic selections with absolute clarity.</p>
+
+      <h2>Deconstructing the Four Key Quotients</h2>
+      <ul>
+        <li><strong>Intelligence Quotient (IQ):</strong> Rules logical analytical reasoning, numbers, programming languages, and systematic modeling. Ideal for engineering, computer science, and economics.</li>
+        <li><strong>Emotional Quotient (EQ):</strong> Governs team connection, diplomacy, counseling capacity, and active empathy. Vital for management, psychology, human resources, and medicine.</li>
+        <li><strong>Creativity Quotient (CQ):</strong> Measures visual design, original writing, spatial modeling, and musical pitch. Perfect for UI/UX, marketing, copywriting, and fine arts.</li>
+        <li><strong>Adversity Quotient (AQ):</strong> Measures mental resilience under high pressure and contingency problem-solving. Vital for startup founders, surgeons, emergency operations, and defense services.</li>
+      </ul>
+
+      <h2>Mapping Mappings to Clear Success</h2>
+      <p>Rather than pushing a child into a highly competitive field where they must swim against their natural neurological flow, stream mapping aligns their choices with their core quotients. A student with high EQ and IQ will excel in medicine or healthcare counseling, whereas a student with high IQ and CQ is primed for product architecture, data design, or game development.</p>
+      <p>Uncovering these quotients early saves years of academic trial-and-error, giving both parents and teenagers a shared, stress-free vision for future career alignment and life fulfillment.</p>
     `
   }
 ];

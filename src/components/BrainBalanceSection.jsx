@@ -78,7 +78,7 @@ export default function BrainBalanceSection() {
     <section
       id="brain-balance"
       ref={containerRef}
-      className="relative w-full py-16 sm:py-20 lg:py-24 bg-white overflow-hidden scroll-mt-[80px]"
+      className="relative w-full py-16 sm:py-20 lg:py-24 bg-white overflow-hidden scroll-mt-0"
     >
       {/* 100% COMPLETE CINEMATIC BACKGROUND IMAGE WITH SMOOTH PARALLAX */}
       <motion.div

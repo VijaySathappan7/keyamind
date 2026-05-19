@@ -48,19 +48,22 @@ export default function ParentingPage() {
 
   const phases = [
     { 
-      title: "Toddlers & Early Years (Age 2-6)", 
+      title: "Toddlers & Early Years", 
+      age: "Age 2-6",
       subtitle: "Nurturing Innate Curiosity",
       desc: "Understand natural brain dominance to support speech acquisition, early social interaction, motor skill progress, and eliminate sensory irritation.",
       color: "from-pink-500/10 to-pink-500/20 text-pink-700" 
     },
     { 
-      title: "School Age Explorers (Age 7-12)", 
+      title: "School Age Explorers", 
+      age: "Age 7-12",
       subtitle: "Aligning Learning Preferences",
       desc: "Discover if your child is a Visual, Auditory, or Kinesthetic learner. Address study frustration, concentration blocks, and academic anxiety.",
       color: "from-purple-500/10 to-purple-500/20 text-purple-700" 
     },
     { 
-      title: "Transitioning Teens (Age 13-18)", 
+      title: "Transitioning Teens", 
+      age: "Age 13-18",
       subtitle: "Emotional Bonding & Respect",
       desc: "Navigate adolescent changes, emotional sensitivity, and study stress. Align career motivation, and foster a healthy mutual friendship.",
       color: "from-blue-500/10 to-blue-500/20 text-blue-700" 
@@ -70,7 +73,7 @@ export default function ParentingPage() {
   return (
     <>
       <SEOHead 
-        title="Scientific Parenting Consultation & Guidance | Keyamind"
+        title="Parenting Support & Child Counseling | Keyamind"
         description="Friction-free, scientific parenting guidance based on child cognitive mapping. Match your parenting style to your child's innate learning style."
         canonical="https://keyamind.com/parenting"
         keywords="parenting consultation, child counseling, scientific parenting, visual auditory kinesthetic, family relationship guidance"
@@ -80,7 +83,7 @@ export default function ParentingPage() {
         {JSON.stringify(parentingSchema)}
       </script>
 
-      <div className="relative min-h-screen pt-24 pb-20 bg-gradient-mesh overflow-x-hidden selection:bg-purple-200 selection:text-dark-lavender">
+      <div className="relative min-h-screen pt-24 pb-20 bg-gradient-to-b from-white via-warm-cream to-soft-lavender overflow-x-hidden selection:bg-purple-200 selection:text-dark-lavender">
         
         {/* Soft background glows */}
         <div className="absolute top-1/3 -right-32 w-96 h-96 rounded-full bg-pink-200/20 blur-3xl animate-pulse-soft pointer-events-none" />
@@ -93,11 +96,11 @@ export default function ParentingPage() {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="text-center max-w-3xl mx-auto mb-16"
+            className="text-left max-w-3xl mb-16"
           >
             <motion.div 
               variants={itemVariants} 
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-pink-200 bg-pink-50/50 backdrop-blur-md mb-6"
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-pink-200 bg-pink-50/50 backdrop-blur-md mb-6 self-start"
             >
               <Heart className="w-4 h-4 text-pink-600 animate-pulse" />
               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-pink-800">Mindful Parenting Support</span>
@@ -105,19 +108,19 @@ export default function ParentingPage() {
             
             <motion.h1 
               variants={itemVariants}
-              className="text-4xl sm:text-5xl md:text-6xl font-black text-dark-lavender tracking-tight leading-none mb-6 font-outfit"
+              className="text-[clamp(24px,5.5vw,42px)] font-outfit font-black text-dark-lavender leading-[1.12] tracking-tight mb-6 text-left"
             >
-              Harmonize Parenting With <br/>
-              <span className="text-gradient-purple">Scientific Insights</span>
+              Scientific{" "}
+              <span className="text-gradient-purple font-cursive text-[clamp(34px,7.5vw,58px)] capitalize tracking-normal font-normal inline-block mr-2.5 drop-shadow-[0_2px_8px_rgba(139,92,246,0.18)]">
+                Parenting Support
+              </span>
             </motion.h1>
             
             <motion.p 
               variants={itemVariants}
-              className="text-base sm:text-lg text-dark-lavender/70 font-medium leading-relaxed"
+              className="text-sm sm:text-base text-dark-lavender/70 font-medium leading-relaxed max-w-2xl font-poppins text-left"
             >
-              Every child is born unique with a customized operating system. 
-              Stop the comparative struggles. Align your parenting style 
-              harmoniously with your child's innate neurological profile.
+              Understand your child's innate neurological profile and align your parenting style harmoniously with their unique temperament.
             </motion.p>
           </motion.div>
 
@@ -182,8 +185,8 @@ export default function ParentingPage() {
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="space-y-6"
             >
-              <h2 className="text-3xl font-black text-dark-lavender tracking-tight font-outfit">
-                Stop Guessing. Start Understanding.
+              <h2 className="text-[clamp(24px,5.5vw,34px)] lg:text-[36px] font-outfit font-black text-dark-lavender leading-[1.12] tracking-tight">
+                Stop Guessing. <span className="text-gradient-purple font-cursive text-[clamp(28px,7.5vw,48px)] lg:text-[46px] font-normal capitalize tracking-normal inline-block drop-shadow-[0_2px_8px_rgba(139,92,246,0.15)] ml-1">Start Understanding.</span>
               </h2>
               
               <div className="w-16 h-1.5 rounded-full bg-gradient-to-r from-pink-500 to-purple-500" />
@@ -224,8 +227,8 @@ export default function ParentingPage() {
           {/* ================= DEVELOPMENT PHASES ================= */}
           <div className="mb-24">
             <div className="text-center max-w-2xl mx-auto mb-16">
-              <h2 className="text-3xl font-black text-dark-lavender tracking-tight font-outfit">
-                Parenting Guidance Across Childhood Phases
+              <h2 className="text-[clamp(24px,5.5vw,34px)] lg:text-[36px] font-outfit font-black text-dark-lavender leading-[1.12] tracking-tight text-center">
+                Parenting Guidance Across <span className="text-gradient-purple font-cursive text-[clamp(28px,7.5vw,48px)] lg:text-[46px] font-normal capitalize tracking-normal inline-block drop-shadow-[0_2px_8px_rgba(139,92,246,0.15)] ml-1">Childhood Phases</span>
               </h2>
               <p className="text-sm text-dark-lavender/60 font-medium mt-2">
                 Every stage demands a different communication framework. Discover the key solutions.
@@ -243,7 +246,10 @@ export default function ParentingPage() {
                 >
                   <div>
                     <span className="text-[10px] font-black text-pink-500 uppercase tracking-widest block mb-2">{phase.subtitle}</span>
-                    <h3 className="text-lg font-black text-dark-lavender font-poppins mb-4 leading-snug">{phase.title}</h3>
+                    <h3 className="text-lg font-black text-dark-lavender font-poppins mb-4 leading-snug flex flex-col gap-1 text-left">
+                      <span>{phase.title}</span>
+                      <span className="text-xs font-bold text-dark-lavender/50 uppercase tracking-wide">({phase.age})</span>
+                    </h3>
                     <p className="text-xs sm:text-sm text-dark-lavender/65 leading-relaxed font-semibold">{phase.desc}</p>
                   </div>
                   
@@ -271,14 +277,14 @@ export default function ParentingPage() {
                 <span>Parent-Child Synergy</span>
               </span>
               
-              <h2 className="text-2xl sm:text-3xl font-black text-dark-lavender font-outfit mb-4">
-                Dynamic Parent-Child Compatibility Mapping
+              <h2 className="text-[clamp(24px,5.5vw,32px)] lg:text-[34px] font-outfit font-black text-dark-lavender leading-[1.12] tracking-tight mb-4">
+                Dynamic Parent-Child <span className="text-gradient-purple font-cursive text-[clamp(28px,7.5vw,44px)] lg:text-[42px] font-normal capitalize tracking-normal inline-block drop-shadow-[0_2px_8px_rgba(139,92,246,0.15)] ml-1">Compatibility Mapping</span>
               </h2>
               
               <p className="text-sm sm:text-base text-dark-lavender/70 font-medium leading-relaxed mb-6">
                 Are your styles matching or clashing? We map the neurological profiles of both parent and child to generate an actionable compatibility roadmap. This report identifies exactly where communicative gaps exist and outlines customized frameworks for dialogue, motivation, and discipline.
               </p>
-
+ 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="p-4 rounded-2xl bg-white/40 border border-purple-50/50">
                   <h4 className="text-xs font-bold text-dark-lavender uppercase tracking-wider mb-1">Communication Calibration</h4>
@@ -291,11 +297,11 @@ export default function ParentingPage() {
               </div>
             </div>
           </motion.div>
-
+ 
           {/* ================= RELATED RESOURCES & INTERNAL LINKS ================= */}
           <div className="mb-24">
-            <h2 className="text-2xl font-black text-dark-lavender font-outfit mb-8 tracking-tight text-center">
-              Scientific Parenting Resources & Guides
+            <h2 className="text-[clamp(24px,5.5vw,32px)] lg:text-[34px] font-outfit font-black text-dark-lavender leading-[1.12] tracking-tight text-center mb-8">
+              Scientific Parenting <span className="text-gradient-purple font-cursive text-[clamp(28px,7.5vw,44px)] lg:text-[42px] font-normal capitalize tracking-normal inline-block drop-shadow-[0_2px_8px_rgba(139,92,246,0.15)] ml-1">Resources & Guides</span>
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <Link 
@@ -314,7 +320,7 @@ export default function ParentingPage() {
                   <ArrowRight className="w-3.5 h-3.5" />
                 </div>
               </Link>
-
+ 
               <Link 
                 to="/faq" 
                 className="bg-white border border-purple-50 hover:border-purple-300 rounded-3xl p-8 shadow-[0_12px_40px_rgba(0,0,0,0.01)] hover:shadow-md transition-all flex flex-col justify-between"
@@ -333,45 +339,43 @@ export default function ParentingPage() {
               </Link>
             </div>
           </div>
-
+ 
           {/* ================= HIGH-CONVERSION CTA ================= */}
-          <motion.div 
-            initial={{ scale: 0.95, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.6 }}
-            className="w-full rounded-[32px] bg-gradient-to-r from-dark-lavender via-purple-900 to-purple-800 text-white p-8 sm:p-12 text-center relative overflow-hidden shadow-xl"
-          >
-            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-pink-500/20 via-transparent to-transparent pointer-events-none" />
-            
-            <h2 className="text-3xl sm:text-4xl font-black mb-4 font-outfit">
-              Ready to Upgrade Your Parenting Journey?
-            </h2>
-            <p className="text-sm sm:text-base text-purple-200 max-w-2xl mx-auto mb-8 font-medium leading-relaxed">
-              Book a highly personalized parenting counseling and cognitive alignment mapping session with Keyamind's child psychology experts.
-            </p>
+          <div className="w-full py-8 px-6 sm:py-10 sm:px-12 rounded-[32px] bg-gradient-to-r from-white/95 via-purple-50/90 to-purple-50/90 border border-white shadow-[0_20px_50px_rgba(59,46,94,0.06)] backdrop-blur-md relative overflow-hidden flex flex-col items-center text-center group mt-8">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-gradient-to-tr from-purple-300/20 to-purple-300/20 rounded-full blur-[70px] pointer-events-none animate-pulse-soft" />
 
-            <motion.a 
-              whileHover={{ scale: 1.05, y: -2, boxShadow: "0 10px 25px rgba(236, 72, 153, 0.4)" }}
-              whileTap={{ scale: 0.95 }}
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                if (window.lenis) {
-                  window.lenis.scrollTo("#contact", { offset: -80, duration: 1.2 });
-                } else {
-                  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-                }
-              }}
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-dark-lavender font-black text-xs uppercase tracking-widest shadow-xl transition-all font-poppins cursor-pointer"
-            >
-              <span>Schedule Consultation</span>
-              <ArrowRight className="w-4 h-4 text-pink-600" />
-            </motion.a>
-          </motion.div>
+            <div className="relative z-10 max-w-3xl flex flex-col items-center gap-3.5">
+              <h2 className="text-[clamp(20px,4.5vw,32px)] font-outfit font-black text-dark-lavender leading-tight tracking-tight">
+                Ready to Upgrade Your <span className="text-gradient-purple font-cursive text-[clamp(24px,5vw,42px)] font-normal capitalize">Parenting Journey?</span>
+              </h2>
+              
+              <p className="text-xs sm:text-sm font-light text-dark-lavender/80 font-poppins leading-relaxed max-w-2xl">
+                Book a highly personalized parenting counseling and cognitive alignment mapping session with Keyamind's child psychology experts.
+              </p>
+
+              <motion.a 
+                whileHover={{ scale: 1.04, y: -2, boxShadow: "0 15px 30px rgba(59,46,94,0.15)" }}
+                whileTap={{ scale: 0.96 }}
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (window.lenis) {
+                    window.lenis.scrollTo("#contact", { offset: 0, duration: 1.2 });
+                  } else {
+                    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
+                className="mt-2 inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-gradient-to-r from-dark-lavender via-purple-700 to-purple-600 text-white font-poppins font-extrabold text-[11px] tracking-[0.2em] uppercase shadow-md shadow-purple-500/10 transition-all duration-300 group cursor-pointer min-h-[44px]"
+              >
+                <span>Schedule Consultation</span>
+                <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
+              </motion.a>
+            </div>
+          </div>
 
         </div>
       </div>
-      <ContentSection />
+      <ContentSection contactOnly={true} />
     </>
   );
 }

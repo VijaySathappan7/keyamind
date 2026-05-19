@@ -44,7 +44,7 @@ export default function ContactSection() {
   };
 
   return (
-    <div id="contact" className="w-full py-16 scroll-mt-[80px] select-none">
+    <div id="contact" className="w-full py-16 scroll-mt-0 select-none">
       <div className="max-w-[1340px] mx-auto px-6 md:px-12 lg:px-8 w-full">
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">

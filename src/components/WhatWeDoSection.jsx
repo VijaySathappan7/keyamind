@@ -145,7 +145,7 @@ export default function WhatWeDoSection() {
     <section
       id="what-we-do"
       ref={containerRef}
-      className="relative w-full py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#FAF9F6] to-white overflow-hidden scroll-mt-[80px] select-none"
+      className="relative w-full py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#FAF9F6] to-white overflow-hidden scroll-mt-0 select-none"
     >
       {/* Seamless Top & Bottom Blending Masks */}
       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white via-white/60 to-transparent z-[2] pointer-events-none" />
@@ -178,7 +178,7 @@ export default function WhatWeDoSection() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="text-3xl sm:text-4xl md:text-5xl lg:text-[46px] font-outfit font-black text-dark-lavender leading-[1.12] tracking-tight"
           >
-            The Science of <span className="text-gradient-purple font-cursive text-4xl sm:text-5xl md:text-6xl lg:text-[60px] font-normal capitalize tracking-normal inline-block drop-shadow-[0_2px_8px_rgba(139,92,246,0.15)] ml-1">DMIT Fingerprint Analysis</span>
+            The Science of DMIT <span className="text-gradient-purple font-cursive text-4xl sm:text-5xl md:text-6xl lg:text-[60px] font-normal capitalize tracking-normal inline-block drop-shadow-[0_2px_8px_rgba(139,92,246,0.15)] ml-1">Fingerprint Analysis</span>
           </motion.h2>
 
           <motion.p

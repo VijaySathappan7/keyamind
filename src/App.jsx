@@ -15,7 +15,6 @@ const CareerPage = lazy(() => import("./pages/CareerPage"));
 const BlogListPage = lazy(() => import("./pages/BlogListPage"));
 const BlogDetailPage = lazy(() => import("./pages/BlogDetailPage"));
 const FaqPage = lazy(() => import("./pages/FaqPage"));
-const ServicesPage = lazy(() => import("./pages/ServicesPage"));
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -31,10 +30,9 @@ export default function App() {
     import("./pages/BlogListPage").catch(() => {});
     import("./pages/BlogDetailPage").catch(() => {});
     import("./pages/FaqPage").catch(() => {});
-    import("./pages/ServicesPage").catch(() => {});
   }, []);
 
-  // Scroll to top on route change (only if there is no anchor hash)
+  // Scroll to top on route change
   useEffect(() => {
     if (!window.location.hash) {
       window.scrollTo({ top: 0, left: 0 });
@@ -44,12 +42,12 @@ export default function App() {
 
   return (
     <>
-      {/* Splash screen */}
+      {/* Initial load full splash screen */}
       {loading && (
         <SplashScreen onComplete={() => setLoading(false)} />
       )}
 
-      {/* Main website — fades in smoothly after splash exits */}
+      {/* Main website — fades in smoothly after initial splash exits */}
       <AnimatePresence>
         {!loading && (
           <motion.div
@@ -65,7 +63,7 @@ export default function App() {
                 <Navbar />
 
                 {/* Main Dynamic Routing Panel */}
-                <Suspense fallback={<></>}>
+                <Suspense fallback={null}>
                   <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/dmit" element={<DmitPage />} />
@@ -74,7 +72,6 @@ export default function App() {
                     <Route path="/blog" element={<BlogListPage />} />
                     <Route path="/blog/:slug" element={<BlogDetailPage />} />
                     <Route path="/faq" element={<FaqPage />} />
-                    <Route path="/services" element={<ServicesPage />} />
                   </Routes>
                 </Suspense>
 

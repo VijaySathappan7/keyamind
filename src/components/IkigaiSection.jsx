@@ -47,7 +47,7 @@ export default function IkigaiSection() {
     <section 
       ref={containerRef}
       id="ikigai" 
-      className="relative w-full py-16 sm:py-20 lg:py-24 bg-white overflow-hidden scroll-mt-[80px]"
+      className="relative w-full py-16 sm:py-20 lg:py-24 bg-white overflow-hidden scroll-mt-0"
     >
       {/* Seamless Top & Bottom Blending Masks */}
       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white via-white/60 to-transparent z-[2] pointer-events-none" />
@@ -189,7 +189,7 @@ export default function IkigaiSection() {
                 onClick={(e) => {
                   e.preventDefault();
                   if (window.lenis) {
-                    window.lenis.scrollTo("#contact", { offset: -80, duration: 1.2 });
+                    window.lenis.scrollTo("#contact", { offset: 0, duration: 1.2 });
                   } else {
                     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
                   }
@@ -207,7 +207,7 @@ export default function IkigaiSection() {
                 onClick={(e) => {
                   e.preventDefault();
                   if (window.lenis) {
-                    window.lenis.scrollTo("#our-services", { offset: -80, duration: 1.2 });
+                    window.lenis.scrollTo("#our-services", { offset: 0, duration: 1.2 });
                   } else {
                     document.getElementById("our-services")?.scrollIntoView({ behavior: "smooth" });
                   }

@@ -63,7 +63,7 @@ export default function DmitPage() {
   return (
     <>
       <SEOHead 
-        title="DMIT Test for Children & Adults | Brain Mapping | Keyamind"
+        title="Fingerprint Brain Mapping (DMIT) | Keyamind"
         description="Discover your child's innate intelligence, learning style, and brain dominance with the scientific Dermatoglyphics Multiple Intelligence Test (DMIT)."
         canonical="https://keyamind.com/dmit"
         keywords="DMIT Test Chennai, brain mapping children, fingerprint analysis, Multiple Intelligences, Howard Gardner, child potential"
@@ -74,7 +74,7 @@ export default function DmitPage() {
         {JSON.stringify(dmitSchema)}
       </script>
 
-      <div className="relative min-h-screen pt-24 pb-20 bg-gradient-mesh overflow-x-hidden selection:bg-purple-200 selection:text-dark-lavender">
+      <div className="relative min-h-screen pt-24 pb-20 bg-gradient-to-b from-white via-warm-cream to-soft-lavender overflow-x-hidden selection:bg-purple-200 selection:text-dark-lavender">
         
         {/* Decorative background orbits */}
         <div className="absolute top-1/4 -left-32 w-96 h-96 rounded-full bg-purple-300/20 blur-3xl animate-pulse-soft pointer-events-none" />
@@ -87,11 +87,11 @@ export default function DmitPage() {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="text-center max-w-3xl mx-auto mb-16"
+            className="text-left max-w-3xl mb-16"
           >
             <motion.div 
               variants={itemVariants} 
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-purple-200 bg-purple-50/50 backdrop-blur-md mb-6"
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-purple-200 bg-purple-50/50 backdrop-blur-md mb-6 self-start"
             >
               <Fingerprint className="w-4 h-4 text-purple-600 animate-pulse" />
               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-purple-800">Dermatoglyphics Assessment</span>
@@ -99,22 +99,22 @@ export default function DmitPage() {
             
             <motion.h1 
               variants={itemVariants}
-              className="text-4xl sm:text-5xl md:text-6xl font-black text-dark-lavender tracking-tight leading-none mb-6 font-outfit"
+              className="text-[clamp(24px,5.5vw,42px)] font-outfit font-black text-dark-lavender leading-[1.12] tracking-tight mb-6 text-left"
             >
-              Unlock Inherent Potential <br/>
-              With <span className="text-gradient-purple">Scientific DMIT</span>
+              Discover Your{" "}
+              <span className="text-gradient-purple font-cursive text-[clamp(34px,7.5vw,58px)] font-normal capitalize tracking-normal inline-block mr-2.5 drop-shadow-[0_2px_8px_rgba(139,92,246,0.18)]">
+                Innate Talents
+              </span>
             </motion.h1>
             
             <motion.p 
               variants={itemVariants}
-              className="text-base sm:text-lg text-dark-lavender/70 font-medium leading-relaxed"
+              className="text-sm sm:text-base text-dark-lavender/70 font-medium leading-relaxed max-w-2xl font-poppins text-left"
             >
-              Dermatoglyphics Multiple Intelligence Test (DMIT) is a scientific assessment 
-              based on the study of fingerprint patterns, helping parents discover their child's 
-              inborn learning styles, quotient scores, and career inclinations.
+              Discover your child's inborn learning styles, brain quotients, and career inclinations through our scientific fingerprint mapping.
             </motion.p>
           </motion.div>
-
+ 
           {/* ================= HIGH-VALUABLE INFO ROW ================= */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24">
             <motion.div 
@@ -123,8 +123,8 @@ export default function DmitPage() {
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="space-y-6"
             >
-              <h2 className="text-3xl font-black text-dark-lavender tracking-tight font-outfit">
-                The Neurobiological Link: Fingerprints & The Brain
+              <h2 className="text-[clamp(24px,5.5vw,34px)] lg:text-[36px] font-outfit font-black text-dark-lavender leading-[1.12] tracking-tight">
+                The Connection Between <span className="text-gradient-purple font-cursive text-[clamp(28px,7.5vw,48px)] lg:text-[46px] font-normal capitalize tracking-normal inline-block drop-shadow-[0_2px_8px_rgba(139,92,246,0.15)] ml-1">Fingerprints & Brain</span>
               </h2>
               
               <div className="w-16 h-1.5 rounded-full bg-gradient-to-r from-purple-500 to-pink-500" />
@@ -227,8 +227,8 @@ export default function DmitPage() {
           {/* ================= GARDNER'S MULTIPLE INTELLIGENCES ================= */}
           <div className="mb-24">
             <div className="text-center max-w-2xl mx-auto mb-16">
-              <h2 className="text-3xl font-black text-dark-lavender tracking-tight font-outfit">
-                Howard Gardner's Multiple Intelligences
+              <h2 className="text-[clamp(24px,5.5vw,34px)] lg:text-[36px] font-outfit font-black text-dark-lavender leading-[1.12] tracking-tight text-center">
+                Howard Gardner's <span className="text-gradient-purple font-cursive text-[clamp(28px,7.5vw,48px)] lg:text-[46px] font-normal capitalize tracking-normal inline-block drop-shadow-[0_2px_8px_rgba(139,92,246,0.15)] ml-1">Multiple Intelligences</span>
               </h2>
               <p className="text-sm text-dark-lavender/60 font-medium mt-2">
                 Discover the tailored spectrum of natural talents defined by the renowned Harvard psychologist.
@@ -257,8 +257,8 @@ export default function DmitPage() {
 
           {/* ================= BENEFITS MATRIX ================= */}
           <div className="glass-premium rounded-[32px] p-8 sm:p-12 mb-24 border-white/60 shadow-xl">
-            <h2 className="text-3xl font-black text-dark-lavender tracking-tight text-center font-outfit mb-12">
-              Who Benefits from DMIT Brain Mapping?
+            <h2 className="text-[clamp(24px,5.5vw,34px)] lg:text-[36px] font-outfit font-black text-dark-lavender leading-[1.12] tracking-tight text-center mb-12">
+              Who Benefits from DMIT <span className="text-gradient-purple font-cursive text-[clamp(28px,7.5vw,46px)] lg:text-[44px] font-normal capitalize tracking-normal inline-block drop-shadow-[0_2px_8px_rgba(139,92,246,0.15)] ml-1">Mapping</span>?
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -302,8 +302,8 @@ export default function DmitPage() {
 
           {/* ================= RELATED RESOURCES & INTERNAL LINKS ================= */}
           <div className="mb-24">
-            <h2 className="text-2xl font-black text-dark-lavender font-outfit mb-8 tracking-tight text-center">
-              Scientific Resources & Guides
+            <h2 className="text-[clamp(24px,5.5vw,32px)] lg:text-[34px] font-outfit font-black text-dark-lavender leading-[1.12] tracking-tight text-center mb-8">
+              Scientific <span className="text-gradient-purple font-cursive text-[clamp(28px,7.5vw,44px)] lg:text-[42px] font-normal capitalize tracking-normal inline-block drop-shadow-[0_2px_8px_rgba(139,92,246,0.15)] ml-1">Resources & Guides</span>
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <Link 
@@ -343,43 +343,41 @@ export default function DmitPage() {
           </div>
 
           {/* ================= HIGH-CONVERSION CTA ================= */}
-          <motion.div 
-            initial={{ scale: 0.95, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.6 }}
-            className="w-full rounded-[32px] bg-gradient-to-r from-dark-lavender via-purple-900 to-purple-800 text-white p-8 sm:p-12 text-center relative overflow-hidden shadow-xl"
-          >
-            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent pointer-events-none" />
-            
-            <h2 className="text-3xl sm:text-4xl font-black mb-4 font-outfit">
-              Ready to Discover Inherent Talents?
-            </h2>
-            <p className="text-sm sm:text-base text-purple-200 max-w-2xl mx-auto mb-8 font-medium leading-relaxed">
-              Book a scientific fingerprint mapping scanning session with Keyamind's certified cognitive counseling experts. Step-by-step personalized insights await.
-            </p>
+          <div className="w-full py-8 px-6 sm:py-10 sm:px-12 rounded-[32px] bg-gradient-to-r from-white/95 via-purple-50/90 to-purple-50/90 border border-white shadow-[0_20px_50px_rgba(59,46,94,0.06)] backdrop-blur-md relative overflow-hidden flex flex-col items-center text-center group mt-16 animate-gpu">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-gradient-to-tr from-purple-300/20 to-purple-300/20 rounded-full blur-[70px] pointer-events-none animate-pulse-soft" />
 
-            <motion.a 
-              whileHover={{ scale: 1.05, y: -2, boxShadow: "0 10px 25px rgba(139, 92, 246, 0.4)" }}
-              whileTap={{ scale: 0.95 }}
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                if (window.lenis) {
-                  window.lenis.scrollTo("#contact", { offset: -80, duration: 1.2 });
-                } else {
-                  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-                }
-              }}
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-dark-lavender font-black text-xs uppercase tracking-widest shadow-xl transition-all font-poppins cursor-pointer"
-            >
-              <span>Book Mapping Scan</span>
-              <ArrowRight className="w-4 h-4 text-purple-600" />
-            </motion.a>
-          </motion.div>
+            <div className="relative z-10 max-w-3xl flex flex-col items-center gap-3.5">
+              <h2 className="text-[clamp(20px,4.5vw,32px)] font-outfit font-black text-dark-lavender leading-tight tracking-tight">
+                Ready to Discover <span className="text-gradient-purple font-cursive text-[clamp(24px,5vw,42px)] font-normal capitalize">Inherent Talents?</span>
+              </h2>
+              
+              <p className="text-xs sm:text-sm font-light text-dark-lavender/80 font-poppins leading-relaxed max-w-2xl">
+                Book a scientific fingerprint mapping scanning session with Keyamind's certified cognitive counseling experts. Step-by-step personalized insights await.
+              </p>
+
+              <motion.a 
+                whileHover={{ scale: 1.04, y: -2, boxShadow: "0 15px 30px rgba(59,46,94,0.15)" }}
+                whileTap={{ scale: 0.96 }}
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (window.lenis) {
+                    window.lenis.scrollTo("#contact", { offset: 0, duration: 1.2 });
+                  } else {
+                    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
+                className="mt-2 inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-gradient-to-r from-dark-lavender via-purple-700 to-purple-600 text-white font-poppins font-extrabold text-[11px] tracking-[0.2em] uppercase shadow-md shadow-purple-500/10 transition-all duration-300 group cursor-pointer min-h-[44px]"
+              >
+                <span>Book Mapping Scan</span>
+                <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
+              </motion.a>
+            </div>
+          </div>
 
         </div>
       </div>
-      <ContentSection />
+      <ContentSection contactOnly={true} />
     </>
   );
 }

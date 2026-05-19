@@ -5,12 +5,21 @@ import logo from '../assets/logos/logo.webp';
 import titleImage from '../assets/logos/title.webp';
 
 /* ─── Link data ─────────────────────────────────────────────────────────── */
+const subPages = [
+  { name: "DMIT Assessment", to: "/dmit" },
+  { name: "Parenting Guidance", to: "/parenting" },
+  { name: "Career Counseling", to: "/career" },
+  { name: "Knowledge Hub", to: "/blog" },
+  { name: "FAQs & Support", to: "/faq" },
+];
+
+/* ─── Link data ─────────────────────────────────────────────────────────── */
 const mainLinks = [
   { name: "Home",      to: "/", sectionId: "home"        },
   { name: "Services",  to: "/", sectionId: "our-services" },
   { name: "Reviews",   to: "/", sectionId: "testimonials" },
-  { name: "Expertise", to: "/", sectionId: "expertise"    },
   { name: "About",     to: "/", sectionId: "about"        },
+  { name: "Contact",   to: "/", sectionId: "contact"      },
 ];
 
 const learnLinks = [
@@ -62,18 +71,30 @@ const ctaVariants = {
 /* ─── Helper: scroll to a section with Lenis + retry ─────────────────────── */
 function scrollToSection(sectionId) {
   const tryScroll = (attempts = 0) => {
+    // Check if any splash screens are currently active in DOM
+    const isSplashActive = Array.from(document.querySelectorAll('*')).some(el => {
+      const classes = el.className || '';
+      return typeof classes === 'string' && (classes.includes('z-[999999]') || classes.includes('z-[9999999]'));
+    });
+
+    if (isSplashActive) {
+      // Hold/reset attempts and try again in 100ms
+      setTimeout(() => tryScroll(0), 100);
+      return;
+    }
+
     const el = document.getElementById(sectionId);
     if (el) {
       if (window.lenis) {
         window.lenis.scrollTo("#" + sectionId, {
-          offset: -80,
+          offset: 0,
           duration: 1.35,
           easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         });
       } else {
         el.scrollIntoView({ behavior: "smooth", block: "start" });
       }
-    } else if (attempts < 30) {
+    } else if (attempts < 60) {
       setTimeout(() => tryScroll(attempts + 1), 50);
     }
   };
@@ -88,6 +109,7 @@ const Navbar = () => {
   const [menuOpen,    setMenuOpen]    = useState(false);
   const [learnOpen,   setLearnOpen]   = useState(false);
   const [scienceOpen, setScienceOpen] = useState(false);
+  const [desktopMenuOpen, setDesktopMenuOpen] = useState(false);
   const [hidden,      setHidden]      = useState(false);
   const [scrolled,    setScrolled]    = useState(false);
 
@@ -119,6 +141,7 @@ const Navbar = () => {
         window.requestAnimationFrame(() => {
           setLearnOpen(prev => prev ? false : prev);
           setScienceOpen(prev => prev ? false : prev);
+          setDesktopMenuOpen(prev => prev ? false : prev);
           ticking = false;
         });
         ticking = true;
@@ -166,9 +189,10 @@ const Navbar = () => {
   /* ── 4. Click-outside to close dropdowns ─────────────────────────── */
   useEffect(() => {
     const handler = (e) => {
-      if (!e.target.closest(".nav-dropdown-group")) {
+      if (!e.target.closest(".nav-dropdown-group") && !e.target.closest(".desktop-hamburger-group")) {
         setLearnOpen(false);
         setScienceOpen(false);
+        setDesktopMenuOpen(false);
       }
     };
     document.addEventListener("mousedown", handler);
@@ -183,18 +207,34 @@ const Navbar = () => {
     setMenuOpen(false);
     setLearnOpen(false);
     setScienceOpen(false);
+    setDesktopMenuOpen(false);
 
     // Release scroll lock immediately
     document.body.style.overflow           = "";
     document.documentElement.style.overflow = "";
     if (window.lenis) window.lenis.start();
 
+    // Scroll locally to contact form if present on the current page
+    if (link.sectionId === "contact" && document.getElementById("contact")) {
+      setTimeout(() => scrollToSection("contact"), 280);
+      return;
+    }
+
     if (location.pathname !== link.to) {
       // Navigate to the route, hash-effect will scroll
-      navigate(link.to + "#" + link.sectionId);
+      navigate(link.to + (link.sectionId ? "#" + link.sectionId : ""));
     } else {
-      // Same page — scroll after drawer animation finishes
-      setTimeout(() => scrollToSection(link.sectionId), 280);
+      if (link.sectionId) {
+        // Same page — scroll after drawer animation finishes
+        setTimeout(() => scrollToSection(link.sectionId), 280);
+      } else {
+        // Same page, no section — scroll to top
+        if (window.lenis) {
+          window.lenis.scrollTo(0, { duration: 1.2 });
+        } else {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      }
     }
   };
 
@@ -228,13 +268,14 @@ const Navbar = () => {
         <a
           href="/"
           onClick={(e) => handleNavClick(e, mainLinks[0])}
-          className="flex items-center gap-1 sm:gap-1.5 shrink-0"
+          className="flex items-center shrink-0 gap-2 sm:gap-2.5 group"
         >
           <img
             src={logo}
-            width={48} height={48}
-            className="w-11 h-11 sm:w-12 sm:h-12 object-contain"
-            alt="Keyamind logo"
+            width={38}
+            height={38}
+            className="h-[30px] sm:h-[34px] md:h-[36px] w-auto object-contain filter drop-shadow-[0_2px_8px_rgba(139,92,246,0.15)] group-hover:scale-105 transition-transform duration-300"
+            alt="Keyamind Logo"
           />
           <img
             src={titleImage}
@@ -246,8 +287,8 @@ const Navbar = () => {
         </a>
 
         {/* ── DESKTOP LINKS (≥ 1024 px) ─────────────────────────────── */}
-        <div className="hidden lg:flex items-center gap-6 xl:gap-8">
-          <ul className="flex items-center gap-5 xl:gap-6 text-[10.5px] xl:text-[11px] font-black tracking-[0.15em] uppercase font-poppins text-dark-lavender">
+        <div className="hidden lg:flex items-center gap-5 xl:gap-7">
+          <ul className="flex items-center gap-[18px] xl:gap-[22px] text-[10.5px] xl:text-[11px] font-black tracking-[0.15em] uppercase font-poppins text-dark-lavender">
 
             {/* Home */}
             <li>
@@ -271,14 +312,17 @@ const Navbar = () => {
                 aria-haspopup="true"
                 aria-controls="learn-dropdown-menu"
                 aria-label="Toggle Learn and Explore Dropdown"
-                className="flex items-center gap-1.5 hover:text-purple-600 transition-colors duration-200 cursor-pointer py-2 uppercase font-black focus-visible:ring-2 focus-visible:ring-purple-500/50 focus-visible:outline-none rounded-lg"
+                className="flex items-center gap-1 hover:text-purple-600 transition-colors duration-200 cursor-pointer py-2 uppercase font-black focus-visible:ring-2 focus-visible:ring-purple-500/50 focus-visible:outline-none rounded-lg font-poppins"
               >
                 <span>Learn</span>
-                <svg
-                  className={`w-3 h-3 transition-transform duration-300 ${learnOpen ? "rotate-180 text-purple-600" : ""}`}
-                  fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                <svg 
+                  className={`w-2.5 h-2.5 transition-transform duration-200 shrink-0 opacity-80 ${learnOpen ? "rotate-180" : ""}`} 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor" 
+                  strokeWidth="3.5"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                 </svg>
               </button>
 
@@ -324,14 +368,17 @@ const Navbar = () => {
                 aria-haspopup="true"
                 aria-controls="science-dropdown-menu"
                 aria-label="Toggle Science of DMIT Dropdown"
-                className="flex items-center gap-1.5 hover:text-purple-600 transition-colors duration-200 cursor-pointer py-2 uppercase font-black focus-visible:ring-2 focus-visible:ring-purple-500/50 focus-visible:outline-none rounded-lg"
+                className="flex items-center gap-1 hover:text-purple-600 transition-colors duration-200 cursor-pointer py-2 uppercase font-black focus-visible:ring-2 focus-visible:ring-purple-500/50 focus-visible:outline-none rounded-lg font-poppins"
               >
                 <span>Science</span>
-                <svg
-                  className={`w-3 h-3 transition-transform duration-300 ${scienceOpen ? "rotate-180 text-purple-600" : ""}`}
-                  fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                <svg 
+                  className={`w-2.5 h-2.5 transition-transform duration-200 shrink-0 opacity-80 ${scienceOpen ? "rotate-180" : ""}`} 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor" 
+                  strokeWidth="3.5"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                 </svg>
               </button>
 
@@ -389,6 +436,70 @@ const Navbar = () => {
           >
             Get Started
           </motion.button>
+
+          {/* Desktop Hamburger Stack */}
+          <div className="relative desktop-hamburger-group flex items-center">
+            <button
+              type="button"
+              aria-expanded={desktopMenuOpen}
+              aria-label={desktopMenuOpen ? "Close menu" : "Open menu"}
+              onClick={() => setDesktopMenuOpen((v) => !v)}
+              className="flex flex-col justify-center gap-[5px] p-2.5 ml-1 rounded-full border border-purple-100 bg-purple-50/50 hover:bg-purple-100/70 transition-colors duration-200 focus:outline-none cursor-pointer"
+            >
+              <motion.span
+                animate={desktopMenuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                className="block w-5.5 h-[2px] rounded-full bg-dark-lavender origin-center"
+              />
+              <motion.span
+                animate={desktopMenuOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
+                transition={{ duration: 0.2 }}
+                className="block w-5.5 h-[2px] rounded-full bg-dark-lavender"
+              />
+              <motion.span
+                animate={desktopMenuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                className="block w-5.5 h-[2px] rounded-full bg-dark-lavender origin-center"
+              />
+            </button>
+
+            {/* Desktop Dropdown / Popover */}
+            <AnimatePresence>
+              {desktopMenuOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 15, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 15, scale: 0.95 }}
+                  transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                  className="absolute right-0 top-full mt-3 w-64 bg-white/95 backdrop-blur-md border border-purple-100 rounded-3xl p-3 shadow-[0_20px_50px_rgba(139,92,246,0.12)] z-[150]"
+                >
+                  <div className="flex flex-col gap-1">
+                    <p className="text-[9px] font-black uppercase tracking-[0.25em] text-purple-600/70 px-4 py-2 border-b border-purple-50">
+                      Primary Pages
+                    </p>
+                    
+                    {subPages.map((page) => (
+                      <a
+                        key={page.name}
+                        href={page.to}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setDesktopMenuOpen(false);
+                          navigate(page.to);
+                        }}
+                        className="flex items-center justify-between px-4 py-3 rounded-2xl text-[10.5px] font-black uppercase tracking-wider text-dark-lavender hover:bg-purple-50/80 hover:text-purple-600 transition-all duration-300"
+                      >
+                        <span>{page.name}</span>
+                        <svg className="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
+                        </svg>
+                      </a>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
 
         {/* ── MOBILE HAMBURGER (< 1024 px) ──────────────────────────── */}
@@ -452,6 +563,33 @@ const Navbar = () => {
                   </motion.a>
                 ))}
               </nav>
+
+              {/* Divider */}
+              <motion.div variants={labelVariants} className="h-px bg-purple-100 mb-7" />
+
+              {/* ── Section label: Subpages ── */}
+              <motion.p variants={labelVariants} className="text-[9px] tracking-[0.45em] uppercase font-black mb-4 border-l-[3px] border-purple-500 pl-3 text-purple-500/80">
+                Primary Pages
+              </motion.p>
+
+              {/* ── Subpages Links ── */}
+              <div className="flex flex-col gap-2.5 mb-7">
+                {subPages.map((page) => (
+                  <motion.a
+                    key={page.name}
+                    variants={itemVariants}
+                    href={page.to}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setMenuOpen(false);
+                      navigate(page.to);
+                    }}
+                    className="text-base font-black tracking-tight uppercase text-dark-lavender hover:text-purple-600 transition-colors duration-200 py-1"
+                  >
+                    {page.name}
+                  </motion.a>
+                ))}
+              </div>
 
               {/* Divider */}
               <motion.div variants={labelVariants} className="h-px bg-purple-100 mb-7" />

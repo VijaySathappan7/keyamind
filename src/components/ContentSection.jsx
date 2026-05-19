@@ -7,6 +7,10 @@ import logo from '../assets/logos/logo.webp';
 import titleImg from '../assets/logos/title.webp';
 import ContactSection from './ContactSection';
 import useMediaQuery from './useMediaQuery';
+import indianAvatar1 from '../assets/images/indian_avatar_1.png';
+import indianAvatar2 from '../assets/images/indian_avatar_2.png';
+import indianAvatar3 from '../assets/images/indian_avatar_3.png';
+import indianAvatar4 from '../assets/images/indian_avatar_4.png';
 
 const footerNavLinks = [
   { name: "Home", to: "/", sectionId: "home" },
@@ -25,7 +29,16 @@ const scienceLinks = [
   { name: "Personality & Styles", to: "/", sectionId: "personality" }
 ];
 
-export default function ContentSection() {
+const pagesLinks = [
+  { name: "DMIT Mapping", to: "/dmit" },
+  { name: "Parenting", to: "/parenting" },
+  { name: "Career Guidance", to: "/career" },
+  { name: "Blogs", to: "/blog" },
+  { name: "FAQs", to: "/faq" },
+  { name: "Contact Us", to: "/", sectionId: "contact" }
+];
+
+export default function ContentSection({ contactOnly = false }) {
   const navigate = useNavigate();
   const currentYear = new Date().getFullYear();
   const [activeModal, setActiveModal] = useState(null);
@@ -185,24 +198,46 @@ export default function ContentSection() {
 
     // Navigate to route first if on a different page
     if (window.location.pathname !== link.to) {
-      navigate(link.to + '#' + link.sectionId);
+      navigate(link.to + (link.sectionId ? '#' + link.sectionId : ''));
+      return;
+    }
+
+    if (!link.sectionId) {
+      // Already on that page — scroll smoothly to top
+      if (window.lenis) {
+        window.lenis.scrollTo(0, { duration: 1.2 });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
       return;
     }
 
     // Retry polling — works even when sections are lazy-loaded
     const tryScroll = (attempts = 0) => {
+      // Check if any splash screens are currently active in DOM
+      const isSplashActive = Array.from(document.querySelectorAll('*')).some(el => {
+        const classes = el.className || '';
+        return typeof classes === 'string' && (classes.includes('z-[999999]') || classes.includes('z-[9999999]'));
+      });
+
+      if (isSplashActive) {
+        // Hold/reset attempts and try again in 100ms
+        setTimeout(() => tryScroll(0), 100);
+        return;
+      }
+
       const el = document.getElementById(link.sectionId);
       if (el) {
         if (window.lenis) {
           window.lenis.scrollTo('#' + link.sectionId, {
-            offset: -80,
+            offset: 0,
             duration: 1.35,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
           });
         } else {
           el.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-      } else if (attempts < 30) {
+      } else if (attempts < 60) {
         setTimeout(() => tryScroll(attempts + 1), 50);
       }
     };
@@ -211,136 +246,140 @@ export default function ContentSection() {
 
   return (
     <div className="relative w-full pt-20 bg-gradient-to-b from-[#FAF6F8] to-[#FAF2F7] overflow-hidden font-poppins select-none z-10">
-      
+
       {/* Decorative Orbs */}
       <div className="absolute top-[10%] left-[-10%] w-[450px] h-[450px] bg-gradient-to-tr from-purple-100 to-sakura-purple opacity-30 blur-[130px] rounded-full pointer-events-none -z-10" />
       <div className="absolute bottom-[20%] right-[-10%] w-[550px] h-[550px] bg-gradient-to-tr from-purple-100 to-mist-purple opacity-30 blur-[150px] rounded-full pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 mb-20">
-        
+
         {/* ====================================================
             ABOUT US / PHILOSOPHY SECTION
             ==================================================== */}
-        <section ref={aboutRef} id="about" className="py-16 sm:py-20 lg:py-24 scroll-mt-[80px]">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            <motion.div 
-              style={desktopLeftStyle}
-              className="text-left flex flex-col gap-6 lg:col-span-7"
-            >
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-purple-100 bg-white/70 backdrop-blur-md shadow-sm self-start">
-                <div className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-purple-600 via-purple-500 to-purple-400 animate-pulse" />
-                <span className="text-[10px] sm:text-[11px] tracking-[0.25em] uppercase font-extrabold text-dark-lavender font-poppins pl-[0.1em]">
-                  Our Philosophy
-                </span>
-              </div>
-              
-              <h2 className="text-[clamp(24px,5.5vw,42px)] lg:text-[44px] font-outfit font-black text-dark-lavender leading-[1.12] tracking-tight">
-                Empowering Minds, <br />
-                Igniting <span className="text-gradient-purple font-cursive text-[clamp(34px,7.5vw,58px)] lg:text-[56px] font-normal capitalize tracking-normal inline-block drop-shadow-[0_2px_8px_rgba(139,92,246,0.15)] ml-1">Innate Greatness</span>
-              </h2>
-              
-              <p className="text-sm md:text-base text-dark-lavender/75 leading-relaxed font-light font-poppins">
-                At Keyamind Solutions, we believe that every individual holds a unique combination of natural cognitive traits and biological strengths. Our mission is to illuminate these neural pathways, offering a scientific, compassionate mirror to your full potential.
-              </p>
-
-              <div className="flex flex-col gap-5 mt-4">
-                <div className="flex items-start gap-4">
-                  <div className="p-2.5 rounded-xl bg-purple-100 text-purple-600 mt-0.5 shadow-sm">
-                    <Sparkles size={16} />
-                  </div>
-                  <div className="flex flex-col gap-1">
-                    <h4 className="text-sm sm:text-base font-bold text-dark-lavender font-outfit">Cognitive Mapping Architecture</h4>
-                    <p className="text-xs sm:text-sm text-dark-lavender/70 font-light font-poppins">Discover native learning channels, natural focus habits, and inherent processing speeds.</p>
-                  </div>
+        {!contactOnly && (
+          <section ref={aboutRef} id="about" className="py-16 sm:py-20 lg:py-24 scroll-mt-0">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+              <motion.div
+                style={desktopLeftStyle}
+                className="text-left flex flex-col gap-6 lg:col-span-7"
+              >
+                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-purple-100 bg-white/70 backdrop-blur-md shadow-sm self-start">
+                  <div className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-purple-600 via-purple-500 to-purple-400 animate-pulse" />
+                  <span className="text-[10px] sm:text-[11px] tracking-[0.25em] uppercase font-extrabold text-dark-lavender font-poppins pl-[0.1em]">
+                    Our Philosophy
+                  </span>
                 </div>
 
-                <div className="flex items-start gap-4">
-                  <div className="p-2.5 rounded-xl bg-purple-100 text-purple-600 mt-0.5 shadow-sm">
-                    <Compass size={16} />
-                  </div>
-                  <div className="flex flex-col gap-1">
-                    <h4 className="text-sm sm:text-base font-bold text-dark-lavender font-outfit">Personalized Mentorship Integration</h4>
-                    <p className="text-xs sm:text-sm text-dark-lavender/70 font-light font-poppins">Direct feedback loop with trained neuroscience advisors to build tailored growth blueprints.</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+                <h2 className="text-[clamp(24px,5.5vw,42px)] lg:text-[44px] font-outfit font-black text-dark-lavender leading-[1.12] tracking-tight">
+                  Empowering Minds, <br />
+                  Igniting <span className="text-gradient-purple font-cursive text-[clamp(34px,7.5vw,58px)] lg:text-[56px] font-normal capitalize tracking-normal inline-block drop-shadow-[0_2px_8px_rgba(139,92,246,0.15)] ml-1">Innate Greatness</span>
+                </h2>
 
-            <motion.div 
-              style={desktopRightStyle}
-              className="relative flex justify-center lg:col-span-5 w-full"
-            >
-              <div className="absolute w-80 h-80 bg-purple-200/30 rounded-full blur-[70px] pointer-events-none" />
-              <div className="w-full max-w-md p-8 sm:p-10 rounded-[2.5rem] border border-white/60 shadow-xl relative overflow-hidden bg-white/60 backdrop-blur-md">
-                <div className="absolute inset-0 bg-gradient-to-tr from-purple-100/30 via-purple-100/10 to-white/40 pointer-events-none" />
-                <div className="relative z-10 flex flex-col gap-6 text-left">
-                  <span className="text-xs font-bold text-purple-600 tracking-widest uppercase font-poppins">Our Vision</span>
-                  <p className="text-sm sm:text-base text-dark-lavender/85 italic font-light leading-relaxed font-playfair">
-                    "We aspire to touch lives globally, shifting the paradigm of education and careers from standard conformity to self-directed passion and innate excellence."
-                  </p>
-                  <div className="h-px bg-purple-200/40 my-2" />
-                  <div className="flex items-center gap-3.5">
-                    <div className="w-11 h-11 rounded-full bg-gradient-to-tr from-purple-400 to-purple-400 flex items-center justify-center text-white font-outfit font-black text-sm shadow-md">
-                      KM
+                <p className="text-sm md:text-base text-dark-lavender/75 leading-relaxed font-light font-poppins">
+                  At Keyamind Solutions, we believe that every individual holds a unique combination of natural cognitive traits and biological strengths. Our mission is to illuminate these neural pathways, offering a scientific, compassionate mirror to your full potential.
+                </p>
+
+                <div className="flex flex-col gap-5 mt-4">
+                  <div className="flex items-start gap-4">
+                    <div className="p-2.5 rounded-xl bg-purple-100 text-purple-600 mt-0.5 shadow-sm">
+                      <Sparkles size={16} />
                     </div>
-                    <div>
-                      <h5 className="text-xs sm:text-sm font-bold text-dark-lavender font-outfit">The Keyamind Leadership Team</h5>
-                      <p className="text-[10px] sm:text-xs text-dark-lavender/60 font-light font-poppins">Visionary Transformation Specialists</p>
+                    <div className="flex flex-col gap-1">
+                      <h4 className="text-sm sm:text-base font-bold text-dark-lavender font-outfit">Cognitive Mapping Architecture</h4>
+                      <p className="text-xs sm:text-sm text-dark-lavender/70 font-light font-poppins">Discover native learning channels, natural focus habits, and inherent processing speeds.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="p-2.5 rounded-xl bg-purple-100 text-purple-600 mt-0.5 shadow-sm">
+                      <Compass size={16} />
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      <h4 className="text-sm sm:text-base font-bold text-dark-lavender font-outfit">Personalized Mentorship Integration</h4>
+                      <p className="text-xs sm:text-sm text-dark-lavender/70 font-light font-poppins">Direct feedback loop with trained neuroscience advisors to build tailored growth blueprints.</p>
                     </div>
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
+              </motion.div>
+
+              <motion.div
+                style={desktopRightStyle}
+                className="relative flex justify-center lg:col-span-5 w-full"
+              >
+                <div className="absolute w-80 h-80 bg-purple-200/30 rounded-full blur-[70px] pointer-events-none" />
+                <div className="w-full max-w-md p-8 sm:p-10 rounded-[2.5rem] border border-white/60 shadow-xl relative overflow-hidden bg-white/60 backdrop-blur-md">
+                  <div className="absolute inset-0 bg-gradient-to-tr from-purple-100/30 via-purple-100/10 to-white/40 pointer-events-none" />
+                  <div className="relative z-10 flex flex-col gap-6 text-left">
+                    <span className="text-xs font-bold text-purple-600 tracking-widest uppercase font-poppins">Our Vision</span>
+                    <p className="text-sm sm:text-base text-dark-lavender/85 italic font-light leading-relaxed font-playfair">
+                      "We aspire to touch lives globally, shifting the paradigm of education and careers from standard conformity to self-directed passion and innate excellence."
+                    </p>
+                    <div className="h-px bg-purple-200/40 my-2" />
+                    <div className="flex items-center gap-3.5">
+                      <div className="w-11 h-11 rounded-full bg-gradient-to-tr from-purple-400 to-purple-400 flex items-center justify-center text-white font-outfit font-black text-sm shadow-md">
+                        KM
+                      </div>
+                      <div>
+                        <h5 className="text-xs sm:text-sm font-bold text-dark-lavender font-outfit">The Keyamind Leadership Team</h5>
+                        <p className="text-[10px] sm:text-xs text-dark-lavender/60 font-light font-poppins">Visionary Transformation Specialists</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </section>
+        )}
 
         {/* ====================================================
             FINAL CTA SECTION
             ==================================================== */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full rounded-[2.5rem] sm:rounded-[3rem] p-8 sm:p-12 lg:p-16 text-left relative overflow-hidden bg-gradient-r from-sakura-purple/70 via-ivory-peach/80 to-mist-purple/70 border border-white/60 shadow-xl shadow-purple-200/10 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 mb-10"
-        >
-          <div className="absolute inset-0 bg-gradient-mesh mix-blend-overlay opacity-60 pointer-events-none" />
-          <div className="absolute -bottom-24 -right-24 w-80 h-80 bg-purple-200/30 rounded-full blur-[100px] pointer-events-none animate-pulse-soft" />
+        {!contactOnly && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full rounded-[2.5rem] sm:rounded-[3rem] p-8 sm:p-12 lg:p-16 text-left relative overflow-hidden bg-gradient-r from-sakura-purple/70 via-ivory-peach/80 to-mist-purple/70 border border-white/60 shadow-xl shadow-purple-200/10 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 mb-10"
+          >
+            <div className="absolute inset-0 bg-gradient-mesh mix-blend-overlay opacity-60 pointer-events-none" />
+            <div className="absolute -bottom-24 -right-24 w-80 h-80 bg-purple-200/30 rounded-full blur-[100px] pointer-events-none animate-pulse-soft" />
 
-          <div className="flex flex-col gap-4 max-w-2xl relative z-10">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-purple-100 bg-white/70 backdrop-blur-md shadow-sm self-start">
-              <div className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-purple-600 via-purple-500 to-purple-400 animate-pulse" />
-              <span className="text-[10px] sm:text-[11px] tracking-[0.25em] uppercase font-extrabold text-dark-lavender font-poppins pl-[0.1em]">
-                Take Action Today
-              </span>
+            <div className="flex flex-col gap-4 max-w-2xl relative z-10">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-purple-100 bg-white/70 backdrop-blur-md shadow-sm self-start">
+                <div className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-purple-600 via-purple-500 to-purple-400 animate-pulse" />
+                <span className="text-[10px] sm:text-[11px] tracking-[0.25em] uppercase font-extrabold text-dark-lavender font-poppins pl-[0.1em]">
+                  Take Action Today
+                </span>
+              </div>
+
+              <h3 className="text-[clamp(24px,5.5vw,42px)] lg:text-[44px] font-outfit font-black text-dark-lavender leading-[1.12] tracking-tight">
+                Your Potential Deserves <br />the <span className="text-gradient-purple font-cursive text-[clamp(34px,7.5vw,58px)] lg:text-[56px] font-normal capitalize tracking-normal inline-block drop-shadow-[0_2px_8px_rgba(139,92,246,0.15)] ml-1">Right Direction</span>
+              </h3>
+
+              <p className="text-sm md:text-base text-dark-lavender/80 font-light max-w-lg leading-relaxed font-poppins">
+                Take the next step toward lifelong clarity, purpose, and confidence. Partner with our senior growth advisors to unleash your true biological strengths.
+              </p>
             </div>
 
-            <h3 className="text-[clamp(24px,5.5vw,42px)] lg:text-[44px] font-outfit font-black text-dark-lavender leading-[1.12] tracking-tight">
-              Your Potential Deserves <br />the <span className="text-gradient-purple font-cursive text-[clamp(34px,7.5vw,58px)] lg:text-[56px] font-normal capitalize tracking-normal inline-block drop-shadow-[0_2px_8px_rgba(139,92,246,0.15)] ml-1">Right Direction</span>
-            </h3>
-
-            <p className="text-sm md:text-base text-dark-lavender/80 font-light max-w-lg leading-relaxed font-poppins">
-              Take the next step toward lifelong clarity, purpose, and confidence. Partner with our senior growth advisors to unleash your true biological strengths.
-            </p>
-          </div>
-
-          <div className="relative z-10 shrink-0 w-full lg:w-auto">
-            <a 
-              href="#contact" 
-              onClick={(e) => {
-                e.preventDefault();
-                if (window.lenis) {
-                  window.lenis.scrollTo("#contact", { offset: -80, duration: 1.2 });
-                } else {
-                  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-                }
-              }}
-              className="group relative w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4.5 rounded-full font-extrabold text-xs uppercase tracking-widest text-white shadow-lg shadow-purple-900/10 bg-gradient-to-r from-dark-lavender via-purple-700 to-purple-600 hover:opacity-95 transition-opacity cursor-pointer active:scale-95 overflow-hidden font-poppins"
-            >
-              <span>Book a Consultation</span>
-              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-            </a>
-          </div>
-        </motion.div>
+            <div className="relative z-10 shrink-0 w-full lg:w-auto">
+              <a
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (window.lenis) {
+                    window.lenis.scrollTo("#contact", { offset: 0, duration: 1.2 });
+                  } else {
+                    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
+                className="group relative w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4.5 rounded-full font-extrabold text-xs uppercase tracking-widest text-white shadow-lg shadow-purple-900/10 bg-gradient-to-r from-dark-lavender via-purple-700 to-purple-600 hover:opacity-95 transition-opacity cursor-pointer active:scale-95 overflow-hidden font-poppins"
+              >
+                <span>Book a Consultation</span>
+                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+              </a>
+            </div>
+          </motion.div>
+        )}
 
         {/* ====================================================
             CONTACT US SECTION (WHATSAPP INTEGRATION)
@@ -357,11 +396,11 @@ export default function ContentSection() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90%] h-[500px] bg-gradient-to-r from-purple-600 via-purple-500 to-purple-400/5 rounded-full blur-[140px] pointer-events-none -z-10" />
 
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 relative z-10">
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-16 mb-20">
 
-            {/* BRAND ARCHITECTURE — LG:COL-SPAN-5 */}
-            <div className="flex flex-col gap-8 lg:col-span-5">
+            {/* BRAND ARCHITECTURE — LG:COL-SPAN-4 */}
+            <div className="flex flex-col gap-8 lg:col-span-4">
               <a href="/" onClick={(e) => handleFooterNav(e, { sectionId: "home", to: "/" })} className="flex items-center gap-1.5 group">
                 <div className="relative">
                   <div className="absolute inset-0 bg-purple-200/20 rounded-2xl blur-xl group-hover:bg-purple-300/30 transition-all duration-500" />
@@ -369,31 +408,51 @@ export default function ContentSection() {
                 </div>
                 <img src={titleImg} width={220} height={53} loading="lazy" alt="Keyamind Title" className="h-[53px] w-auto object-contain" />
               </a>
-              
-              <p className="text-dark-lavender/80 text-sm font-medium leading-relaxed max-w-md">
+
+              <p className="text-dark-lavender/80 text-sm font-medium leading-relaxed max-w-md font-poppins">
                 Keyamind Solutions is a premier growth advisory firm integrating advanced neuroscience with DMIT assessment architecture to illuminate inherent biological strengths and chart precision paths for life and career.
               </p>
 
               <div className="flex items-center gap-4 mt-2">
                 <div className="flex -space-x-2">
-                  {[1,2,3,4].map(i => (
-                    <div key={i} className="w-8 h-8 rounded-full border-2 border-white bg-gradient-to-tr from-purple-100 to-purple-100 shadow-sm" />
+                  {[indianAvatar1, indianAvatar2, indianAvatar3, indianAvatar4].map((imgSrc, idx) => (
+                    <img
+                      key={idx}
+                      src={imgSrc}
+                      alt={`User Profile ${idx + 1}`}
+                      className="w-8 h-8 rounded-full border-2 border-white object-cover shadow-sm bg-purple-50"
+                      loading="lazy"
+                    />
                   ))}
                 </div>
-                <span className="text-[10px] font-black text-dark-lavender/40 uppercase tracking-widest">
-                  Trusted by 5000+ Individuals
+                <span className="text-[10px] font-black text-dark-lavender/40 uppercase tracking-widest font-poppins">
+                  5000+ Consultations
                 </span>
+              </div>
+            </div>
+
+            {/* PAGES — LG:COL-SPAN-2 */}
+            <div className="flex flex-col gap-8 lg:col-span-2">
+              <h4 className="text-dark-lavender text-[11px] font-black tracking-[0.3em] uppercase font-poppins">
+                Pages
+              </h4>
+              <div className="flex flex-col gap-4">
+                {pagesLinks.map((link) => (
+                  <a key={link.name} href={link.to} onClick={(e) => handleFooterNav(e, link)} className="text-dark-lavender/60 hover:text-purple-600 text-[13px] font-bold transition-all hover:translate-x-1 uppercase tracking-wider font-poppins">
+                    {link.name}
+                  </a>
+                ))}
               </div>
             </div>
 
             {/* NAVIGATION — LG:COL-SPAN-2 */}
             <div className="flex flex-col gap-8 lg:col-span-2">
-              <h4 className="text-dark-lavender text-[11px] font-black tracking-[0.3em] uppercase">
+              <h4 className="text-dark-lavender text-[11px] font-black tracking-[0.3em] uppercase font-poppins">
                 Platform
               </h4>
               <div className="flex flex-col gap-4">
                 {footerNavLinks.map((link) => (
-                  <a key={link.name} href="/" onClick={(e) => handleFooterNav(e, link)} className="text-dark-lavender/60 hover:text-purple-600 text-[13px] font-bold transition-all hover:translate-x-1 uppercase tracking-wider">
+                  <a key={link.name} href="/" onClick={(e) => handleFooterNav(e, link)} className="text-dark-lavender/60 hover:text-purple-600 text-[13px] font-bold transition-all hover:translate-x-1 uppercase tracking-wider font-poppins">
                     {link.name}
                   </a>
                 ))}
@@ -402,21 +461,21 @@ export default function ContentSection() {
 
             {/* SCIENCE — LG:COL-SPAN-2 */}
             <div className="flex flex-col gap-8 lg:col-span-2">
-              <h4 className="text-dark-lavender text-[11px] font-black tracking-[0.3em] uppercase">
+              <h4 className="text-dark-lavender text-[11px] font-black tracking-[0.3em] uppercase font-poppins">
                 Science
               </h4>
               <div className="flex flex-col gap-4">
                 {scienceLinks.map((link) => (
-                  <a key={link.name} href="/" onClick={(e) => handleFooterNav(e, link)} className="text-dark-lavender/60 hover:text-purple-600 text-[13px] font-bold transition-all hover:translate-x-1 uppercase tracking-wider">
+                  <a key={link.name} href="/" onClick={(e) => handleFooterNav(e, link)} className="text-dark-lavender/60 hover:text-purple-600 text-[13px] font-bold transition-all hover:translate-x-1 uppercase tracking-wider font-poppins">
                     {link.name}
                   </a>
                 ))}
               </div>
             </div>
 
-            {/* SUPPORT — LG:COL-SPAN-3 */}
-            <div className="flex flex-col gap-8 lg:col-span-3">
-              <h4 className="text-dark-lavender text-[11px] font-black tracking-[0.3em] uppercase">
+            {/* SUPPORT — LG:COL-SPAN-2 */}
+            <div className="flex flex-col gap-8 lg:col-span-2">
+              <h4 className="text-dark-lavender text-[11px] font-black tracking-[0.3em] uppercase font-poppins">
                 Connect
               </h4>
               <div className="flex flex-col gap-4">
@@ -425,7 +484,7 @@ export default function ContentSection() {
                     {link.name}
                   </button>
                 ))}
-                
+
                 <div className="mt-6 pt-6 border-t border-dark-lavender/5">
                   <div className="flex flex-col gap-1.5">
                     <span className="text-purple-500 text-[10px] font-black tracking-widest uppercase">Global Operations</span>
@@ -449,7 +508,7 @@ export default function ContentSection() {
                 For website related queries contact: +91 6369888789
               </p>
             </div>
-            
+
             <div className="flex items-center gap-2 sm:gap-3">
 
               {/* LinkedIn */}

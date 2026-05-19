@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 
 export default function SEOHead({
-  title = "DMIT Test, Career Counselling & Fingerprint Analysis | Keyamind Solutions",
+  title = "Keyamind Solutions | Best DMIT Test, Fingerprint Analysis & Expert Career Counselling",
   description = "Discover clarity with India's trusted DMIT Test, Fingerprint Analysis, and expert Career Counselling. Unlock your intelligence and career potential with Keyamind Solutions.",
   keywords = `
     DMIT Test,
@@ -16,7 +16,25 @@ export default function SEOHead({
     Parenting Consultation,
     Learning Style Analysis,
     Mid Brain Activation,
-    Personality Analysis
+    Personality Analysis,
+    DMIT Test India,
+    Best DMIT Center,
+    Career Assessment Test,
+    Student Stream Selection Assessment,
+    Cognitive Ability Mapping,
+    Multiple Intelligence Assessment,
+    Psychological Counselling,
+    Fingerprint Scanner Counseling,
+    Dermatoglyphics Multiple Intelligence Test,
+    Brain Lobe Dominance Test,
+    Learning Styles and Habits Assessment,
+    Parenting Style Counseling,
+    Best Career Counsellor in Chennai,
+    Corporate Assessment and Team Building,
+    Inborn Talents Assessment,
+    Adult Career Transition Mapping,
+    Child Intelligence Assessment,
+    Fingerprint Analysis India
   `,
   canonical = "https://keyamind.com/",
   ogImage = "https://keyamind.com/og-image.webp",

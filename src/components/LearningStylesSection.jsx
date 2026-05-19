@@ -50,7 +50,7 @@ const LearningStylesSection = memo(() => {
   ];
 
   return (
-    <section ref={containerRef} id="learning-styles" className="relative w-full py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#FAF2F7] to-[#FAF6F9] overflow-hidden scroll-mt-[80px]">
+    <section ref={containerRef} id="learning-styles" className="relative w-full py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#FAF2F7] to-[#FAF6F9] overflow-hidden scroll-mt-0">
       {/* Seamless Top & Bottom Blending Masks */}
       
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white via-white/60 to-transparent z-[2] pointer-events-none" />

@@ -10,7 +10,7 @@
   --color-purple-glow: #FAF5FF;
   --color-mist-purple: #F1ECFF;
   --color-dark-lavender: #3B2E5E;
-  
+
   /* New Flowing Narrative Palette */
   --color-ivory: #FAF9F6;
   --color-soft-lavender: #F3E8FF;
@@ -34,17 +34,23 @@
 }
 
 @layer base {
-  *, *::before, *::after {
+
+  *,
+  *::before,
+  *::after {
     box-sizing: border-box;
   }
+
   html {
-    scroll-behavior: auto !important; /* Handled by Lenis for buttery-smooth momentum scroll */
+    scroll-behavior: auto !important;
+    /* Handled by Lenis for buttery-smooth momentum scroll */
     font-family: var(--font-outfit), var(--font-poppins), sans-serif;
     color: #4A3E6D;
     background-color: var(--color-warm-cream);
     overflow-x: hidden;
     width: 100%;
   }
+
   body {
     overflow-x: hidden;
     width: 100%;
@@ -60,29 +66,39 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(59, 46, 94, 0.05); /* Extremely soft translucent violet track */
+  background: rgba(59, 46, 94, 0.05);
+  /* Extremely soft translucent violet track */
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #7C5EB9 0%, #3B2E5E 100%); /* Premium high-contrast violet-to-dark-lavender gradient */
+  background: linear-gradient(180deg, #7C5EB9 0%, #3B2E5E 100%);
+  /* Premium high-contrast violet-to-dark-lavender gradient */
   border-radius: 9999px;
-  border: 2px solid #FFF9F5; /* Crisp padding border matching body bg, creating a beautiful floating pill effect */
+  border: 2px solid #FFF9F5;
+  /* Crisp padding border matching body bg, creating a beautiful floating pill effect */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #9333EA 0%, #3B2E5E 100%); /* Highly vibrant violet highlight on hover */
+  background: linear-gradient(180deg, #9333EA 0%, #3B2E5E 100%);
+  /* Highly vibrant violet highlight on hover */
 }
 
 /* Custom visual effects */
 .glass-premium {
-  background: rgba(255, 255, 255, 0.38); /* Extra translucent high-contrast crystal white backing */
-  backdrop-filter: blur(8px); /* Optimized macOS frosted glass refraction */
+  background: rgba(255, 255, 255, 0.38);
+  /* Extra translucent high-contrast crystal white backing */
+  backdrop-filter: blur(8px);
+  /* Optimized macOS frosted glass refraction */
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.65); /* Specular premium border limit */
-  box-shadow: 
-    0 15px 45px rgba(0, 0, 0, 0.05), /* Subtle soft atmospheric float shadow */
-    inset 0 1.5px 2px rgba(255, 255, 255, 0.9), /* High-spec top glare line */
-    inset 0 -1.5px 2px rgba(0, 0, 0, 0.02); /* Crisp base offset grounding */
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  /* Specular premium border limit */
+  box-shadow:
+    0 15px 45px rgba(0, 0, 0, 0.05),
+    /* Subtle soft atmospheric float shadow */
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.9),
+    /* High-spec top glare line */
+    inset 0 -1.5px 2px rgba(0, 0, 0, 0.02);
+  /* Crisp base offset grounding */
 }
 
 /* Premium glassmorphism for mobile devices to reduce GPU paint & composite overhead */
@@ -90,16 +106,18 @@
   .glass-premium {
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
-    background: rgba(255, 255, 255, 0.68); /* Slightly more opaque for identical premium contrast */
+    background: rgba(255, 255, 255, 0.68);
+    /* Slightly more opaque for identical premium contrast */
   }
 }
 
 .glass-premium-dark {
-  background: rgba(12, 6, 23, 0.35); /* Executive Obsidian Dark Glass */
+  background: rgba(12, 6, 23, 0.35);
+  /* Executive Obsidian Dark Glass */
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 
+  box-shadow:
     0 25px 65px rgba(0, 0, 0, 0.35),
     inset 0 1px 1.5px rgba(255, 255, 255, 0.2),
     inset 0 -1px 1.5px rgba(0, 0, 0, 0.1);
@@ -130,7 +148,7 @@
 }
 
 .bg-gradient-mesh {
-  background-image: 
+  background-image:
     radial-gradient(at 10% 20%, rgba(216, 180, 254, 0.4) 0px, transparent 50%),
     radial-gradient(at 90% 10%, rgba(203, 189, 255, 0.45) 0px, transparent 50%),
     radial-gradient(at 50% 80%, rgba(255, 242, 232, 0.5) 0px, transparent 50%),
@@ -139,20 +157,45 @@
 
 /* Float animations (Hardware accelerated 120FPS GPU optimized) */
 @keyframes float {
-  0% { transform: translate3d(0, 0, 0) rotate(0deg); }
-  50% { transform: translate3d(0, -15px, 0) rotate(2deg); }
-  100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+
+  50% {
+    transform: translate3d(0, -15px, 0) rotate(2deg);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
 }
 
 @keyframes float-slow {
-  0% { transform: translate3d(0, 0, 0) scale3d(1, 1, 1) rotate(0deg); }
-  50% { transform: translate3d(0, -25px, 0) scale3d(1.03, 1.03, 1) rotate(-3deg); }
-  100% { transform: translate3d(0, 0, 0) scale3d(1, 1, 1) rotate(0deg); }
+  0% {
+    transform: translate3d(0, 0, 0) scale3d(1, 1, 1) rotate(0deg);
+  }
+
+  50% {
+    transform: translate3d(0, -25px, 0) scale3d(1.03, 1.03, 1) rotate(-3deg);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) scale3d(1, 1, 1) rotate(0deg);
+  }
 }
 
 @keyframes pulse-soft {
-  0%, 100% { opacity: 0.3; transform: scale3d(1, 1, 1); }
-  50% { opacity: 0.6; transform: scale3d(1.15, 1.15, 1); }
+
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    opacity: 0.6;
+    transform: scale3d(1.15, 1.15, 1);
+  }
 }
 
 .animate-float {
@@ -177,25 +220,56 @@
 }
 
 @keyframes marquee {
-  0% { transform: translate3d(0, 0, 0); }
-  100% { transform: translate3d(-100%, 0, 0); }
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(-100%, 0, 0);
+  }
 }
 
 @keyframes marquee-reverse {
-  0% { transform: translate3d(-100%, 0, 0); }
-  100% { transform: translate3d(0, 0, 0); }
+  0% {
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 .animate-marquee {
-  animation: marquee 45s linear infinite;
+  animation: marquee 38s linear infinite;
   will-change: transform;
-  backface-visibility: hidden;
+}
+
+.animate-marquee-slow {
+  animation: marquee 50s linear infinite;
+  will-change: transform;
 }
 
 .animate-marquee-reverse {
-  animation: marquee-reverse 45s linear infinite;
+  animation: marquee-reverse 38s linear infinite;
   will-change: transform;
-  backface-visibility: hidden;
+}
+
+.animate-marquee-reverse-slow {
+  animation: marquee-reverse 50s linear infinite;
+  will-change: transform;
+}
+
+/* Pause on hover - target the hover-pause-marquee wrapper used in JSX */
+.hover-pause-marquee:hover .animate-marquee,
+.hover-pause-marquee:hover .animate-marquee-slow,
+.hover-pause-marquee:hover .animate-marquee-reverse,
+.hover-pause-marquee:hover .animate-marquee-reverse-slow {
+  animation-play-state: paused;
+}
+
+/* Also support standard class-level paused for individual nodes */
+.hover\:paused:hover * {
+  animation-play-state: paused;
 }
 
 .mask-gradient-horizontal {
@@ -205,7 +279,7 @@
 
 /* GPU hardware acceleration composite triggers */
 .gpu-optimize {
-  transform: translate3d(0,0,0);
+  transform: translate3d(0, 0, 0);
   will-change: transform, opacity;
   backface-visibility: hidden;
   perspective: 1000px;
@@ -215,13 +289,17 @@
 .scrollbar-none::-webkit-scrollbar {
   display: none;
 }
+
 .scrollbar-none {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 /* Premium Lenis smooth scrolling rules */
-html.lenis, html.lenis body {
+html.lenis,
+html.lenis body {
   height: auto;
 }
 
@@ -282,4 +360,3 @@ img {
   transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.8s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, box-shadow, border-color;
 }
-

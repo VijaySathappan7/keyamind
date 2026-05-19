@@ -42,16 +42,25 @@ export default function BlogListPage() {
     }
   };
 
+  const itemVariants = {
+    hidden: { y: 30, opacity: 0 },
+    visible: { 
+      y: 0, 
+      opacity: 1, 
+      transition: { type: "spring", stiffness: 100, damping: 15 }
+    }
+  };
+
   return (
     <>
       <SEOHead 
-        title="Scientific Parenting & Cognitive Mapping Blogs | Keyamind"
+        title="Blogs & Parenting Resources | Keyamind"
         description="Explore expert, science-backed articles on DMIT brain mapping, child development, cognitive testing, brain quotients, and parenting methodologies."
         canonical="https://keyamind.com/blog"
         keywords="brain mapping blogs, parenting advice science, multiple intelligences Gardner, DMIT test articles, career alignment tips"
       />
 
-      <div className="relative min-h-screen pt-24 pb-20 bg-gradient-mesh overflow-x-hidden selection:bg-purple-200 selection:text-dark-lavender">
+      <div className="relative min-h-screen pt-24 pb-20 bg-gradient-to-b from-white via-warm-cream to-soft-lavender overflow-x-hidden selection:bg-purple-200 selection:text-dark-lavender">
         
         {/* Soft atmospheric background lights */}
         <div className="absolute top-1/4 -left-32 w-96 h-96 rounded-full bg-purple-200/20 blur-3xl pointer-events-none" />
@@ -60,18 +69,37 @@ export default function BlogListPage() {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
           
           {/* ================= HERO TITLE ================= */}
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-purple-200 bg-purple-50/50 backdrop-blur-md mb-4">
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="text-left max-w-2xl mb-12"
+          >
+            <motion.div 
+              variants={itemVariants} 
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-purple-200 bg-purple-50/50 backdrop-blur-md mb-4 self-start"
+            >
               <BookOpen className="w-3.5 h-3.5 text-purple-600 animate-pulse" />
               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-purple-800">Keyamind Cognitive Hub</span>
-            </div>
-            <h1 className="text-4xl sm:text-5xl font-black text-dark-lavender font-outfit mb-4">
-              Innate Wisdom & <span className="text-gradient-purple">Science</span>
-            </h1>
-            <p className="text-sm sm:text-base text-dark-lavender/70 font-medium leading-relaxed">
-              Read expert, clinical reviews and resources on child psychology, brain mapping science, stream planning, quotients, and parent synergy.
-            </p>
-          </div>
+            </motion.div>
+            
+            <motion.h1 
+              variants={itemVariants}
+              className="text-[clamp(24px,5.5vw,42px)] font-outfit font-black text-dark-lavender leading-[1.12] tracking-tight mb-6 text-left"
+            >
+              Parenting &{" "}
+              <span className="text-gradient-purple font-cursive text-[clamp(34px,7.5vw,58px)] capitalize tracking-normal font-normal inline-block mr-2.5 drop-shadow-[0_2px_8px_rgba(139,92,246,0.18)]">
+                Educational Blogs
+              </span>
+            </motion.h1>
+            
+            <motion.p 
+              variants={itemVariants}
+              className="text-sm sm:text-base text-dark-lavender/70 font-medium leading-relaxed max-w-xl font-poppins text-left"
+            >
+              Explore our scientific articles on child psychology, Multiple Intelligences, learning preferences, and expert parenting strategies.
+            </motion.p>
+          </motion.div>
 
           {/* ================= SEARCH & TABS HUB ================= */}
           <div className="glass-premium rounded-3xl p-6 mb-12 border-white/60 shadow-xl flex flex-col md:flex-row gap-6 items-center justify-between">
@@ -218,7 +246,7 @@ export default function BlogListPage() {
 
         </div>
       </div>
-      <ContentSection />
+      <ContentSection contactOnly={true} />
     </>
   );
 }

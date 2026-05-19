@@ -1,19 +1,9 @@
 import { useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { motion } from 'framer-motion';
 import founderImage from '../assets/images/swathi.webp';
-import useMediaQuery from './useMediaQuery';
 
 export default function FounderProfileSection() {
   const containerRef = useRef(null);
-  const isDesktop = useMediaQuery("(min-width: 1024px)");
-
-  // Track scroll progress of this section
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
-
-  // Scroll tracking kept for other elements if needed
 
   const fadeUp = {
     hidden: { opacity: 0, y: 30 },
@@ -29,7 +19,7 @@ export default function FounderProfileSection() {
   };
 
   return (
-    <section ref={containerRef} id="founder" className="relative overflow-hidden bg-gradient-to-b from-[#FAF9F6] to-white py-16 sm:py-20 lg:py-24 select-none z-10 font-poppins scroll-mt-[80px]">
+    <section ref={containerRef} id="founder" className="relative overflow-hidden bg-gradient-to-b from-[#FAF9F6] to-white py-16 sm:py-20 lg:py-24 select-none z-10 font-poppins scroll-mt-0">
       {/* Seamless Bottom Blending Mask */}
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white via-white/60 to-transparent z-[2] pointer-events-none" />
 
@@ -154,7 +144,7 @@ export default function FounderProfileSection() {
                 onClick={(e) => {
                   e.preventDefault();
                   if (window.lenis) {
-                    window.lenis.scrollTo("#contact", { offset: -80, duration: 1.2 });
+                    window.lenis.scrollTo("#contact", { offset: 0, duration: 1.2 });
                   } else {
                     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
                   }
