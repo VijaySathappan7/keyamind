@@ -402,6 +402,19 @@ img {
 }
 
 /* Ensure all dynamic ID-targeted sections clear the fixed floating navbar when scrolled to */
-section[id] {
-  scroll-margin-top: 96px;
+[id="home"],
+[id="our-services"],
+[id="testimonials"],
+[id="about"],
+[id="contact"],
+[id="ikigai"],
+[id="inherent-mapping"],
+[id="fingerprint-characteristics"],
+[id="what-we-do"],
+[id="brain-balance"],
+[id="brain-lobes"],
+[id="human-quotients"],
+[id="personality"],
+[id="learning-styles"] {
+  scroll-margin-top: 96px !important;
 }

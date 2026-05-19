@@ -201,7 +201,6 @@ export default function ContentSection({ contactOnly = false }) {
       ]
     }
   };
-
   const handleFooterNav = (e, link) => {
     e.preventDefault();
 
@@ -246,8 +245,12 @@ export default function ContentSection({ contactOnly = false }) {
         } else {
           el.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-      } else if (attempts < 60) {
-        setTimeout(() => tryScroll(attempts + 1), 50);
+      } else {
+        // Dispatch custom event to mount all lazy components instantly
+        window.dispatchEvent(new CustomEvent("force-lazy-load"));
+        if (attempts < 60) {
+          setTimeout(() => tryScroll(attempts + 1), 50);
+        }
       }
     };
     tryScroll();
