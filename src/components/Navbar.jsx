@@ -96,7 +96,7 @@ function scrollToSection(sectionId) {
     if (el) {
       if (window.lenis) {
         window.lenis.scrollTo("#" + sectionId, {
-          offset: 0,
+          offset: -96,
           duration: 1.35,
           easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         });
@@ -556,7 +556,7 @@ const Navbar = () => {
             data-lenis-prevent="true"
           >
             {/* Optimized top padding to clear the navbar capsule on smaller phones */}
-            <div className="pt-[76px] px-6 sm:px-10 pb-6 flex flex-col flex-1 justify-between">
+            <div className="pt-[110px] px-6 sm:px-10 pb-6 flex flex-col flex-1 justify-between">
 
               <div>
                 {/* ── Section label: Navigation ── */}

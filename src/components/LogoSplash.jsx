@@ -40,10 +40,10 @@ export default function LogoSplash({ onComplete }) {
 
   if (!mounted) return null;
 
-  // Ultra-generous proportions for maximum screen visibility
-  const containerSize = isMobile ? 320 : 420;
-  const spinnerSize   = isMobile ? 260 : 340;
-  const logoSize      = isMobile ? 150 : 200;
+  // Optimized premium proportions for maximum screen aesthetic
+  const containerSize = isMobile ? 200 : 420;
+  const spinnerSize   = isMobile ? 160 : 340;
+  const logoSize      = isMobile ? 90 : 200;
 
   return (
     <AnimatePresence>

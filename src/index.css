@@ -400,3 +400,8 @@ img {
 .will-change-opacity {
   will-change: opacity;
 }
+
+/* Ensure all dynamic ID-targeted sections clear the fixed floating navbar when scrolled to */
+section[id] {
+  scroll-margin-top: 96px;
+}
