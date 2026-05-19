@@ -173,7 +173,7 @@ const Navbar = () => {
         ticking = true;
       }
 
-      // Auto-reveal after idle
+      // Auto-reveal when there is no scrolling of the website (stops scrolling)
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => setHidden(false), 800);
     };
@@ -224,6 +224,14 @@ const Navbar = () => {
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, []);
+
+  /* ── 5. Auto-close all menus on route/hash transition ────────────── */
+  useEffect(() => {
+    setMenuOpen(false);
+    setLearnOpen(false);
+    setScienceOpen(false);
+    setDesktopMenuOpen(false);
+  }, [location.pathname, location.hash]);
 
   /* ── handleNavClick ───────────────────────────────────────────────── */
   const handleNavClick = (e, link) => {
@@ -319,7 +327,7 @@ const Navbar = () => {
             {/* Home */}
             <li>
               <a
-                href="/"
+                href={mainLinks[0].to + (mainLinks[0].sectionId ? '#' + mainLinks[0].sectionId : '')}
                 onClick={(e) => handleNavClick(e, mainLinks[0])}
                 className="hover:text-purple-600 transition-colors duration-200 py-2"
               >
@@ -369,7 +377,7 @@ const Navbar = () => {
                       {learnLinks.map((link) => (
                         <a
                           key={link.name}
-                          href="/"
+                          href={link.to + (link.sectionId ? '#' + link.sectionId : '')}
                           role="menuitem"
                           onClick={(e) => handleNavClick(e, link)}
                           className="block px-4 py-2.5 rounded-xl text-[10px] hover:bg-purple-50 hover:text-purple-600 transition-all uppercase tracking-wider font-black focus-visible:bg-purple-50 focus-visible:text-purple-600 focus-visible:outline-none"
@@ -425,7 +433,7 @@ const Navbar = () => {
                       {scienceLinks.map((link) => (
                         <a
                           key={link.name}
-                          href="/"
+                          href={link.to + (link.sectionId ? '#' + link.sectionId : '')}
                           role="menuitem"
                           onClick={(e) => handleNavClick(e, link)}
                           className="block px-4 py-2.5 rounded-xl text-[10px] hover:bg-purple-50 hover:text-purple-600 transition-all uppercase tracking-wider font-black focus-visible:bg-purple-50 focus-visible:text-purple-600 focus-visible:outline-none"
@@ -443,7 +451,7 @@ const Navbar = () => {
             {mainLinks.slice(1).map((link) => (
               <li key={link.name}>
                 <a
-                  href="/"
+                  href={link.to + (link.sectionId ? '#' + link.sectionId : '')}
                   onClick={(e) => handleNavClick(e, link)}
                   className="hover:text-purple-600 transition-colors duration-200 py-2"
                 >
@@ -510,11 +518,7 @@ const Navbar = () => {
                         href={page.to}
                         onMouseEnter={() => prefetchPage(page.to)}
                         onFocus={() => prefetchPage(page.to)}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setDesktopMenuOpen(false);
-                          navigate(page.to);
-                        }}
+                        onClick={(e) => handleNavClick(e, page)}
                         className="flex items-center justify-between px-4 py-3 rounded-2xl text-[10.5px] font-black uppercase tracking-wider text-dark-lavender hover:bg-purple-50/80 hover:text-purple-600 transition-all duration-300"
                       >
                         <span>{page.name}</span>
@@ -584,7 +588,7 @@ const Navbar = () => {
                     <motion.a
                       key={link.name}
                       variants={itemVariants}
-                      href={link.to}
+                      href={link.to + (link.sectionId ? '#' + link.sectionId : '')}
                       onClick={(e) => handleNavClick(e, link)}
                       className="text-[17px] font-black tracking-tight uppercase text-dark-lavender hover:text-purple-600 transition-colors duration-200 py-1"
                     >
@@ -610,11 +614,7 @@ const Navbar = () => {
                       href={page.to}
                       onMouseEnter={() => prefetchPage(page.to)}
                       onFocus={() => prefetchPage(page.to)}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setMenuOpen(false);
-                        navigate(page.to);
-                      }}
+                      onClick={(e) => handleNavClick(e, page)}
                       className="text-[13px] font-black tracking-tight uppercase text-dark-lavender hover:text-purple-600 transition-colors duration-200 py-0.5"
                     >
                       {page.name}
@@ -636,7 +636,7 @@ const Navbar = () => {
                     <motion.a
                       key={link.name}
                       variants={itemVariants}
-                      href={link.to}
+                      href={link.to + (link.sectionId ? '#' + link.sectionId : '')}
                       onClick={(e) => handleNavClick(e, link)}
                       className="text-[10.5px] font-black tracking-wide uppercase text-dark-lavender/65 hover:text-purple-600 transition-colors duration-200 py-0.5"
                     >

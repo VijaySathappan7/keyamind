@@ -3,13 +3,14 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
 import SplashScreen from "./components/SplashScreen";
-import LogoSplash from "./components/LogoSplash";
+import PageLoader from "./components/PageLoader";
 import Navbar from "./components/Navbar";
 import ScrollToTop from "./components/ScrollToTop";
 import SmoothScroll from "./components/SmoothScroll";
 
+import HomePage from "./pages/HomePage";
+
 // Lazy-loaded pages
-const HomePage = lazy(() => import("./pages/HomePage"));
 const DmitPage = lazy(() => import("./pages/DmitPage"));
 const ParentingPage = lazy(() => import("./pages/ParentingPage"));
 const CareerPage = lazy(() => import("./pages/CareerPage"));
@@ -20,17 +21,7 @@ const FaqPage = lazy(() => import("./pages/FaqPage"));
 export default function App() {
   const [loading, setLoading] = useState(true);
   const [isInitial, setIsInitial] = useState(true);
-  const [switching, setSwitching] = useState(false);
   const { pathname } = useLocation();
-  const [prevPathname, setPrevPathname] = useState(pathname);
-
-  // Synchronous state derivation on route changes to prevent 1-frame flashes
-  if (pathname !== prevPathname) {
-    setPrevPathname(pathname);
-    if (!isInitial) {
-      setSwitching(true);
-    }
-  }
 
   // Scroll to top on route change
   useEffect(() => {
@@ -47,10 +38,7 @@ export default function App() {
         <SplashScreen onComplete={() => { setLoading(false); setIsInitial(false); }} />
       )}
 
-      {/* Intermediate route switching loader */}
-      {switching && (
-        <LogoSplash onComplete={() => setSwitching(false)} />
-      )}
+
 
       {/* Main website — fades in smoothly after initial splash exits */}
       <AnimatePresence>
@@ -68,7 +56,7 @@ export default function App() {
                 <Navbar />
 
                 {/* Main Dynamic Routing Panel */}
-                <Suspense fallback={null}>
+                <Suspense fallback={<PageLoader />}>
                   <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/dmit" element={<DmitPage />} />

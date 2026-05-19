@@ -461,7 +461,7 @@ export default function ContentSection({ contactOnly = false }) {
                 {pagesLinks.map((link) => (
                   <a 
                     key={link.name} 
-                    href={link.to} 
+                    href={link.to + (link.sectionId ? '#' + link.sectionId : '')} 
                     onMouseEnter={() => prefetchPage(link.to)}
                     onFocus={() => prefetchPage(link.to)}
                     onClick={(e) => handleFooterNav(e, link)} 
@@ -480,7 +480,7 @@ export default function ContentSection({ contactOnly = false }) {
               </h4>
               <div className="flex flex-col gap-4">
                 {footerNavLinks.map((link) => (
-                  <a key={link.name} href="/" onClick={(e) => handleFooterNav(e, link)} className="text-dark-lavender/60 hover:text-purple-600 text-[13px] font-bold transition-all hover:translate-x-1 uppercase tracking-wider font-poppins">
+                  <a key={link.name} href={link.to + (link.sectionId ? '#' + link.sectionId : '')} onClick={(e) => handleFooterNav(e, link)} className="text-dark-lavender/60 hover:text-purple-600 text-[13px] font-bold transition-all hover:translate-x-1 uppercase tracking-wider font-poppins">
                     {link.name}
                   </a>
                 ))}
@@ -494,7 +494,7 @@ export default function ContentSection({ contactOnly = false }) {
               </h4>
               <div className="flex flex-col gap-4">
                 {scienceLinks.map((link) => (
-                  <a key={link.name} href="/" onClick={(e) => handleFooterNav(e, link)} className="text-dark-lavender/60 hover:text-purple-600 text-[13px] font-bold transition-all hover:translate-x-1 uppercase tracking-wider font-poppins">
+                  <a key={link.name} href={link.to + (link.sectionId ? '#' + link.sectionId : '')} onClick={(e) => handleFooterNav(e, link)} className="text-dark-lavender/60 hover:text-purple-600 text-[13px] font-bold transition-all hover:translate-x-1 uppercase tracking-wider font-poppins">
                     {link.name}
                   </a>
                 ))}
