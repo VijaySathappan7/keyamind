@@ -238,7 +238,7 @@ const InherentBrainMappingSection = () => {
                 onClick={(e) => {
                   e.preventDefault();
                   if (window.lenis) {
-                    window.lenis.scrollTo("#our-services", { offset: 0, duration: 1.2 });
+                    window.lenis.scrollTo("#our-services", { offset: -96, duration: 1.2 });
                   } else {
                     document.getElementById("our-services")?.scrollIntoView({ behavior: "smooth" });
                   }

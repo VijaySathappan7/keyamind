@@ -10,7 +10,7 @@ window.scrollToContact = () => {
   const el = document.getElementById("contact");
   if (el) {
     if (window.lenis) {
-      window.lenis.scrollTo("#contact", { duration: 1.25 });
+      window.lenis.scrollTo("#contact", { offset: -96, duration: 1.25 });
     } else {
       el.scrollIntoView({ behavior: "smooth" });
     }
@@ -21,7 +21,7 @@ window.scrollToContact = () => {
       const target = document.getElementById("contact");
       if (target) {
         if (window.lenis) {
-          window.lenis.scrollTo("#contact", { duration: 1.25 });
+          window.lenis.scrollTo("#contact", { offset: -96, duration: 1.25 });
         } else {
           target.scrollIntoView({ behavior: "smooth" });
         }

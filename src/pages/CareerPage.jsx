@@ -473,7 +473,7 @@ export default function CareerPage() {
                 onClick={(e) => {
                   e.preventDefault();
                   if (window.lenis) {
-                    window.lenis.scrollTo("#contact", { offset: 0, duration: 1.2 });
+                    window.lenis.scrollTo("#contact", { offset: -96, duration: 1.2 });
                   } else {
                     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
                   }

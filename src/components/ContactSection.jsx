@@ -1,13 +1,49 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { Send, MessageSquare } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Send, MessageSquare, ChevronDown } from "lucide-react";
+
+const INTEREST_OPTIONS = [
+  {
+    value: "Parenting & Toddler Growth (1-4 yrs)",
+    title: "Parenting & Toddler Growth",
+    subtitle: "Ages 1 – 4 Years",
+  },
+  {
+    value: "Learning Style Mapping (4-10 yrs)",
+    title: "Learning Style Mapping",
+    subtitle: "Ages 4 – 10 Years",
+  },
+  {
+    value: "Teenage Career Mapping (11-17 yrs)",
+    title: "Teenage Career Mapping",
+    subtitle: "Ages 11 – 17 Years",
+  },
+  {
+    value: "Career Guidance & Course Selection (18+)",
+    title: "Career Guidance & Course Selection",
+    subtitle: "Ages 18+ Years",
+  },
+  {
+    value: "Adult Relationship & Personal Growth (25+)",
+    title: "Adult Relationship & Personal Growth",
+    subtitle: "Ages 25+ Years",
+  },
+  {
+    value: "Corporate Talent & Institutional Solutions",
+    title: "Corporate & Institutional Solutions",
+    subtitle: "Corporate & Institutional Services",
+  },
+];
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
     name: "",
-    interest: "Career Guidance",
+    interest: INTEREST_OPTIONS[0].value,
     message: "",
   });
+  const [isOpen, setIsOpen] = useState(false);
+
+  const selectedOption = INTEREST_OPTIONS.find(opt => opt.value === formData.interest) || INTEREST_OPTIONS[0];
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -23,7 +59,7 @@ export default function ContactSection() {
       return;
     }
 
-    const whatsappText = `Hello Keyamind! My name is ${formData.name}. I am looking for ${formData.interest}. Message: ${formData.message || "I would like to know more details."}`;
+    const whatsappText = `*New Inquiry via Keyamind* \n\n*Name:* ${formData.name}\n*Interest:* ${formData.interest}\n*Message:* ${formData.message || "I would like to know more details."}`;
     const encodedText = encodeURIComponent(whatsappText);
     const whatsappUrl = `https://api.whatsapp.com/send?phone=919344094369&text=${encodedText}`;
 
@@ -227,27 +263,81 @@ export default function ContactSection() {
                 </div>
 
                 {/* INTEREST / STAGE */}
-                <div className="flex flex-col gap-1.5">
-                  <label htmlFor="interest" className="text-xs font-extrabold text-dark-lavender uppercase tracking-wider pl-1">
+                <div className="flex flex-col gap-1.5 relative">
+                  <label className="text-xs font-extrabold text-dark-lavender uppercase tracking-wider pl-1">
                     Select Area of Interest
                   </label>
-                  <select
-                    id="interest"
-                    name="interest"
-                    value={formData.interest}
-                    onChange={handleChange}
-                    className="w-full px-3.5 py-3 sm:px-4 sm:py-3.5 min-h-[44px] sm:min-h-[48px] rounded-xl bg-white/80 border border-dark-lavender/10 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/10 text-sm text-dark-lavender transition-all font-light cursor-pointer"
+                  
+                  {/* Dropdown Toggle Button */}
+                  <button
+                    type="button"
+                    onClick={() => setIsOpen(!isOpen)}
+                    className="w-full flex items-center justify-between px-3.5 py-2 min-h-[50px] rounded-xl bg-white/85 border border-dark-lavender/10 focus:border-purple-500 focus:outline-none text-left cursor-pointer transition-all hover:bg-white"
                   >
-                    <option value="Parenting & Toddler Growth (1-4 yrs)">Parenting & Toddler Growth (1-4 yrs)</option>
-                    <option value="Learning Style Mapping (4-10 yrs)">Learning Style Mapping (4-10 yrs)</option>
-                    <option value="Teenage Career Mapping (11-17 yrs)">Teenage Career Mapping (11-17 yrs)</option>
-                    <option value="Career Guidance & Course Selection (18+)">Career Guidance & Course Selection (18+)</option>
-                    <option value="Adult Relationship & Personal Growth (25+)">Adult Relationship & Personal Growth (25+)</option>
-                    <option value="Corporate Talent & Institutional Solutions">Corporate Talent & Institutional Solutions</option>
-                  </select>
+                    <div className="flex flex-col pr-2">
+                      <span className="text-[13px] font-bold text-dark-lavender leading-normal">
+                        {selectedOption.title}
+                      </span>
+                      <span className="text-[9.5px] text-dark-lavender/65 font-light leading-none mt-0.5">
+                        {selectedOption.subtitle}
+                      </span>
+                    </div>
+                    <ChevronDown
+                      size={16}
+                      className={`text-dark-lavender/60 shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                    />
+                  </button>
+
+                  {/* Dropdown Options List */}
+                  <AnimatePresence>
+                    {isOpen && (
+                      <>
+                        {/* Backdrop to close dropdown */}
+                        <div
+                          className="fixed inset-0 z-30"
+                          onClick={() => setIsOpen(false)}
+                        />
+                        <motion.div
+                          initial={{ opacity: 0, y: -6, scale: 0.98 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: -6, scale: 0.98 }}
+                          transition={{ duration: 0.15, ease: "easeOut" }}
+                          className="absolute left-0 right-0 top-[calc(100%+4px)] z-40 max-h-[220px] overflow-y-auto rounded-xl border border-dark-lavender/10 bg-white/95 backdrop-blur-md shadow-xl py-1 custom-scrollbar"
+                        >
+                          {INTEREST_OPTIONS.map((option) => {
+                            const isSelected = option.value === formData.interest;
+                            return (
+                              <button
+                                key={option.value}
+                                type="button"
+                                onClick={() => {
+                                  setFormData((prev) => ({
+                                    ...prev,
+                                    interest: option.value,
+                                  }));
+                                  setIsOpen(false);
+                                }}
+                                className={`w-full flex flex-col text-left px-4 py-2 transition-colors cursor-pointer border-b border-dark-lavender/5 last:border-0 ${
+                                  isSelected
+                                    ? "bg-purple-500/10 text-purple-700 font-semibold"
+                                    : "hover:bg-dark-lavender/5 text-dark-lavender"
+                                }`}
+                              >
+                                <span className="text-xs font-bold leading-normal">
+                                  {option.title}
+                                </span>
+                                <span className="text-[9px] opacity-75 font-light leading-none mt-0.5">
+                                  {option.subtitle}
+                                </span>
+                              </button>
+                            );
+                          })}
+                        </motion.div>
+                      </>
+                    )}
+                  </AnimatePresence>
                 </div>
 
-                {/* MESSAGE */}
                 <div className="flex flex-col gap-1.5">
                   <label htmlFor="message" className="text-xs font-extrabold text-dark-lavender uppercase tracking-wider pl-1">
                     Your Message

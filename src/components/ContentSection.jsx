@@ -239,7 +239,7 @@ export default function ContentSection({ contactOnly = false }) {
       if (el) {
         if (window.lenis) {
           window.lenis.scrollTo('#' + link.sectionId, {
-            offset: 0,
+            offset: -96,
             duration: 1.35,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
           });
@@ -376,7 +376,7 @@ export default function ContentSection({ contactOnly = false }) {
                 onClick={(e) => {
                   e.preventDefault();
                   if (window.lenis) {
-                    window.lenis.scrollTo("#contact", { offset: 0, duration: 1.2 });
+                    window.lenis.scrollTo("#contact", { offset: -96, duration: 1.2 });
                   } else {
                     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
                   }
