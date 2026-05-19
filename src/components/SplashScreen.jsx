@@ -159,6 +159,7 @@ export default function SplashScreen({ onComplete }) {
             className="
               relative z-20 object-contain
               pointer-events-none select-none will-change-transform
+              max-w-none
             "
             style={{ width: `${lw}px`, height: `${lw}px` }}
             initial={{ opacity: 0, scale: 0.42, filter: "blur(22px)", x: 0 }}

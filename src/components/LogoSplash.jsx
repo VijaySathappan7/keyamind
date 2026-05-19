@@ -5,6 +5,17 @@ import logo from "../assets/logos/logo.webp";
 export default function LogoSplash({ onComplete }) {
   const [mounted, setMounted] = useState(true);
   const [isExit, setIsExit] = useState(false);
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" ? window.innerWidth < 500 : true
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 500);
+    };
+    window.addEventListener("resize", handleResize, { passive: true });
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -29,6 +40,11 @@ export default function LogoSplash({ onComplete }) {
 
   if (!mounted) return null;
 
+  // Ultra-generous proportions for maximum screen visibility
+  const containerSize = isMobile ? 320 : 420;
+  const spinnerSize   = isMobile ? 260 : 340;
+  const logoSize      = isMobile ? 150 : 200;
+
   return (
     <AnimatePresence>
       <motion.div
@@ -48,10 +64,17 @@ export default function LogoSplash({ onComplete }) {
         </div>
 
         {/* Circular Spinner & Logo Container */}
-        <div className="relative flex items-center justify-center w-72 h-72 sm:w-96 sm:h-96">
+        <div 
+          className="relative flex items-center justify-center"
+          style={{ width: `${containerSize}px`, height: `${containerSize}px` }}
+        >
 
           {/* SVG Circular Loader Ring */}
-          <svg className="absolute w-60 h-60 sm:w-80 sm:h-80 animate-spin" viewBox="0 0 100 100" style={{ animationDuration: "1.2s" }}>
+          <svg 
+            className="absolute animate-spin" 
+            viewBox="0 0 100 100" 
+            style={{ width: `${spinnerSize}px`, height: `${spinnerSize}px`, animationDuration: "1.2s" }}
+          >
             <defs>
               <linearGradient id="spinner-grad" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor="#8b5cf6" stopOpacity="1" />
@@ -76,7 +99,8 @@ export default function LogoSplash({ onComplete }) {
             src={logo}
             alt="KeyAmind Logo"
             draggable={false}
-            className="w-28 h-28 sm:w-36 sm:h-36 object-contain relative z-10"
+            className="object-contain relative z-10 max-w-none"
+            style={{ width: `${logoSize}px`, height: `${logoSize}px` }}
             initial={{ scale: 0.75, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5, ease: [0.34, 1.56, 0.64, 1] }}
