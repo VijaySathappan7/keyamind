@@ -92,7 +92,7 @@ const YoutubeSection = memo(() => {
             ==================================================== */}
         <motion.div
           style={desktopVideoScaleStyle}
-          className="relative w-full max-w-4xl group mx-auto"
+          className="relative w-full max-w-4xl group mx-auto gpu-optimize"
         >
           {/* ── Multi-Layered Cinematic Shadows ── */}
           <div className="absolute -inset-4 bg-purple-500/5 blur-[60px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 -z-10" />

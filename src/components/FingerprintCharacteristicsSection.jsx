@@ -1,6 +1,7 @@
 import { useRef, memo } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
+import useMediaQuery from './useMediaQuery';
 
 // Import images directly from assets for Vite build optimization
 import uniquenessImg from '../assets/images/uniqueness.webp';
@@ -28,6 +29,7 @@ const fingerprintCharacteristics = [
 
 const FingerprintCharacteristicsSection = memo(() => {
   const containerRef = useRef(null);
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
 
   // Track scroll progress of this section
   const { scrollYProgress } = useScroll({
@@ -38,6 +40,8 @@ const FingerprintCharacteristicsSection = memo(() => {
   // Dynamic image scaling on scroll
   const rawScale = useTransform(scrollYProgress, [0, 0.5], [1.0, 1.15]);
   const imgScale = useSpring(rawScale, { stiffness: 95, damping: 26, mass: 0.35 });
+
+  const desktopImgStyle = isDesktop ? { scale: imgScale } : {};
 
 
   return (
@@ -105,7 +109,7 @@ const FingerprintCharacteristicsSection = memo(() => {
                 <motion.img 
                   src={item.image} 
                   alt={item.title} 
-                  style={{ scale: imgScale }}
+                  style={desktopImgStyle}
                   className="w-full h-full object-cover select-none pointer-events-none transition-transform duration-1000 group-hover:scale-110" 
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent pointer-events-none" />

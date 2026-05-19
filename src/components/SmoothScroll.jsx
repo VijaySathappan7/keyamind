@@ -37,9 +37,24 @@ export default function SmoothScroll({ children }) {
 
     rafId = requestAnimationFrame(raf);
 
+    // High-performance ResizeObserver to handle page transitions, lazy sections and accordion expansions
+    let resizeRafId;
+    const resizeObserver = new ResizeObserver(() => {
+      cancelAnimationFrame(resizeRafId);
+      resizeRafId = requestAnimationFrame(() => {
+        lenis.resize();
+      });
+    });
+
+    if (document.body) {
+      resizeObserver.observe(document.body);
+    }
+
     // Clean up connections on unmount to prevent memory leaks
     return () => {
       cancelAnimationFrame(rafId);
+      cancelAnimationFrame(resizeRafId);
+      resizeObserver.disconnect();
       lenis.destroy();
       window.lenis = null;
     };

@@ -55,54 +55,48 @@ const TypewriterText = memo(() => {
 });
 
 // Pre-calculated stable seed parameters for cherry blossom petals to ensure strict render purity (React Compiler compliant)
-const PETAL_SEEDS = Array.from({ length: 60 }).map((_, i) => ({
-  size: Math.random() * 12 + 6,
-  delay: Math.random() * 20,
-  duration: Math.random() * 12 + 8,
-  leftStart: `${Math.random() * 120 - 10}%`,
-  scale: Math.random() * 0.4 + 0.4,
-  leftEnd: `${(Math.random() * 40) - 20 + (i * 2)}%`
-}));
+const PETAL_SEEDS = Array.from({ length: 20 }).map((_, i) => {
+  const size = Math.random() * 12 + 6;
+  return {
+    size,
+    delay: Math.random() * 20,
+    duration: Math.random() * 12 + 8,
+    leftStart: `${Math.random() * 120 - 10}%`,
+    scale: Math.random() * 0.4 + 0.4,
+    leftEnd: `${(Math.random() * 40) - 20 + (i * 6)}%`,
+    rotX: Math.random() * 360 + 360,
+    rotY: Math.random() * 360 + 360,
+    rotZ: Math.random() * 360 + 180,
+  };
+});
 
-// ENHANCED CHERRY BLOSSOM PETAL SYSTEM (MOBILE ONLY - DENSE & DYNAMIC)
+// ENHANCED CHERRY BLOSSOM PETAL SYSTEM (MOBILE ONLY - LIGHTWEIGHT & GPU-ACCELERATED)
 const FallingPetals = () => {
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden z-[4] lg:hidden">
       {PETAL_SEEDS.map((seed, i) => (
-        <motion.div
+        <div
           key={i}
-          initial={{ 
-            top: -50, 
-            left: seed.leftStart,
-            opacity: 0,
-            rotate: 0,
-            scale: seed.scale
-          }}
-          animate={{ 
-            top: "115%", 
-            left: seed.leftEnd,
-            opacity: [0, 0.8, 0.8, 0],
-            rotate: [0, 180, 360, 540],
-            rotateX: [0, 360],
-            rotateY: [0, 360],
-          }}
-          transition={{ 
-            duration: seed.duration, 
-            repeat: Infinity, 
-            ease: [0.4, 0, 0.2, 1], // More natural falling ease
-            delay: seed.delay
-          }}
-          className="absolute bg-gradient-to-tr from-purple-200/60 to-purple-300/40 blur-[0.5px]"
-          style={{ 
-            width: seed.size, 
+          className="absolute animate-cherry-blossom bg-gradient-to-tr from-purple-200/60 to-purple-300/40 blur-[0.5px]"
+          style={{
+            '--start-x': seed.leftStart,
+            '--end-x': seed.leftEnd,
+            '--scale': seed.scale,
+            '--duration': `${seed.duration}s`,
+            '--rot-x': `${seed.rotX}deg`,
+            '--rot-y': `${seed.rotY}deg`,
+            '--rot-z': `${seed.rotZ}deg`,
+            width: seed.size,
             height: seed.size * 0.8,
-            borderRadius: '80% 10% 80% 10% / 80% 10% 80% 10%' 
-          }} 
+            borderRadius: '80% 10% 80% 10% / 80% 10% 80% 10%',
+            animationDelay: `${seed.delay}s`,
+          }}
         />
       ))}
     </div>
   );
 };
+
 
 const HeroSection = () => {
   const isMobile = useMediaQuery("(max-width: 1023px)");

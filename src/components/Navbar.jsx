@@ -137,7 +137,10 @@ const Navbar = () => {
         setScrolled(prev => prev !== false ? false : prev);
       } else {
         const diff = y - lastScrollY.current;
-        if (Math.abs(diff) > 4) {
+        // High-performance dynamic threshold: prevent menu vibrating from micro finger tremors or overscroll on touch screens
+        const isMobileDevice = window.innerWidth < 1024;
+        const threshold = isMobileDevice ? 25 : 12;
+        if (Math.abs(diff) > threshold) {
           const nextHidden = diff > 0;
           setHidden(prev => prev !== nextHidden ? nextHidden : prev);
         }
@@ -549,110 +552,92 @@ const Navbar = () => {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="lg:hidden fixed inset-0 z-[190] flex flex-col overflow-y-auto bg-white/96 backdrop-blur-md"
+            className="lg:hidden fixed inset-0 z-[190] flex flex-col overflow-y-auto bg-white/96 backdrop-blur-md transform-gpu"
             data-lenis-prevent="true"
           >
-            {/* Top padding to clear the navbar capsule */}
-            <div className="pt-[88px] px-7 sm:px-10 pb-10 flex flex-col flex-1">
+            {/* Optimized top padding to clear the navbar capsule on smaller phones */}
+            <div className="pt-[76px] px-6 sm:px-10 pb-6 flex flex-col flex-1 justify-between">
 
-              {/* ── Section label: Navigation ── */}
-              <motion.p variants={labelVariants} className="text-[9px] tracking-[0.45em] uppercase font-black mb-5 border-l-[3px] border-purple-500 pl-3 text-purple-500/80">
-                Navigation
-              </motion.p>
+              <div>
+                {/* ── Section label: Navigation ── */}
+                <motion.p variants={labelVariants} className="text-[9px] tracking-[0.45em] uppercase font-black mb-2 border-l-[3px] border-purple-500 pl-3 text-purple-500/80">
+                  Navigation
+                </motion.p>
 
-              {/* ── Main links ── */}
-              <nav className="flex flex-col gap-2 mb-9">
-                {mainLinks.map((link) => (
-                  <motion.a
-                    key={link.name}
-                    variants={itemVariants}
-                    href={link.to}
-                    onClick={(e) => handleNavClick(e, link)}
-                    className="text-[22px] font-black tracking-tight uppercase text-dark-lavender hover:text-purple-600 transition-colors duration-200 py-1.5"
-                  >
-                    {link.name}
-                  </motion.a>
-                ))}
-              </nav>
+                {/* ── Main links ── */}
+                <nav className="flex flex-col gap-1 mb-4">
+                  {mainLinks.map((link) => (
+                    <motion.a
+                      key={link.name}
+                      variants={itemVariants}
+                      href={link.to}
+                      onClick={(e) => handleNavClick(e, link)}
+                      className="text-[17px] font-black tracking-tight uppercase text-dark-lavender hover:text-purple-600 transition-colors duration-200 py-1"
+                    >
+                      {link.name}
+                    </motion.a>
+                  ))}
+                </nav>
 
-              {/* Divider */}
-              <motion.div variants={labelVariants} className="h-px bg-purple-100 mb-7" />
+                {/* Divider */}
+                <motion.div variants={labelVariants} className="h-px bg-purple-100/60 mb-4" />
 
-              {/* ── Section label: Subpages ── */}
-              <motion.p variants={labelVariants} className="text-[9px] tracking-[0.45em] uppercase font-black mb-4 border-l-[3px] border-purple-500 pl-3 text-purple-500/80">
-                Primary Pages
-              </motion.p>
+                {/* ── Section label: Subpages ── */}
+                <motion.p variants={labelVariants} className="text-[9px] tracking-[0.45em] uppercase font-black mb-2.5 border-l-[3px] border-purple-500 pl-3 text-purple-500/80">
+                  Primary Pages
+                </motion.p>
 
-              {/* ── Subpages Links ── */}
-              <div className="flex flex-col gap-2.5 mb-7">
-                {subPages.map((page) => (
-                  <motion.a
-                    key={page.name}
-                    variants={itemVariants}
-                    href={page.to}
-                    onMouseEnter={() => prefetchPage(page.to)}
-                    onFocus={() => prefetchPage(page.to)}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setMenuOpen(false);
-                      navigate(page.to);
-                    }}
-                    className="text-base font-black tracking-tight uppercase text-dark-lavender hover:text-purple-600 transition-colors duration-200 py-1"
-                  >
-                    {page.name}
-                  </motion.a>
-                ))}
+                {/* ── Subpages Links ── */}
+                <div className="flex flex-col gap-1.5 mb-4">
+                  {subPages.map((page) => (
+                    <motion.a
+                      key={page.name}
+                      variants={itemVariants}
+                      href={page.to}
+                      onMouseEnter={() => prefetchPage(page.to)}
+                      onFocus={() => prefetchPage(page.to)}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setMenuOpen(false);
+                        navigate(page.to);
+                      }}
+                      className="text-[13px] font-black tracking-tight uppercase text-dark-lavender hover:text-purple-600 transition-colors duration-200 py-0.5"
+                    >
+                      {page.name}
+                    </motion.a>
+                  ))}
+                </div>
+
+                {/* Divider */}
+                <motion.div variants={labelVariants} className="h-px bg-purple-100/60 mb-4" />
+
+                {/* ── Combined Section label: Explore & Science ── */}
+                <motion.p variants={labelVariants} className="text-[9px] tracking-[0.45em] uppercase font-black mb-2.5 border-l-[3px] border-purple-400/60 pl-3 text-purple-500/70">
+                  Explore & Science
+                </motion.p>
+
+                {/* ── Explore & Science links combined in a clean 2-column layout ── */}
+                <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-6">
+                  {[...learnLinks, ...scienceLinks].map((link) => (
+                    <motion.a
+                      key={link.name}
+                      variants={itemVariants}
+                      href={link.to}
+                      onClick={(e) => handleNavClick(e, link)}
+                      className="text-[10.5px] font-black tracking-wide uppercase text-dark-lavender/65 hover:text-purple-600 transition-colors duration-200 py-0.5"
+                    >
+                      {link.name}
+                    </motion.a>
+                  ))}
+                </div>
               </div>
 
-              {/* Divider */}
-              <motion.div variants={labelVariants} className="h-px bg-purple-100 mb-7" />
-
-              {/* ── Section label: Learn ── */}
-              <motion.p variants={labelVariants} className="text-[9px] tracking-[0.45em] uppercase font-black mb-4 border-l-[3px] border-purple-400/60 pl-3 text-purple-500/70">
-                Learn & Explore
-              </motion.p>
-
-              {/* ── Learn links ── */}
-              <div className="grid grid-cols-2 gap-x-6 gap-y-3 mb-8">
-                {learnLinks.map((link) => (
-                  <motion.a
-                    key={link.name}
-                    variants={itemVariants}
-                    href={link.to}
-                    onClick={(e) => handleNavClick(e, link)}
-                    className="text-xs font-black tracking-wide uppercase text-dark-lavender/65 hover:text-purple-600 transition-colors duration-200"
-                  >
-                    {link.name}
-                  </motion.a>
-                ))}
-              </div>
-
-              {/* ── Section label: Science ── */}
-              <motion.p variants={labelVariants} className="text-[9px] tracking-[0.45em] uppercase font-black mb-4 border-l-[3px] border-purple-400/60 pl-3 text-purple-500/70">
-                Science of DMIT
-              </motion.p>
-
-              {/* ── Science links ── */}
-              <div className="grid grid-cols-2 gap-x-6 gap-y-3 mb-10">
-                {scienceLinks.map((link) => (
-                  <motion.a
-                    key={link.name}
-                    variants={itemVariants}
-                    href={link.to}
-                    onClick={(e) => handleNavClick(e, link)}
-                    className="text-xs font-black tracking-wide uppercase text-dark-lavender/65 hover:text-purple-600 transition-colors duration-200"
-                  >
-                    {link.name}
-                  </motion.a>
-                ))}
-              </div>
-
-              {/* ── CTA ── */}
+              {/* ── CTA (Pushed neatly to bottom, optimized tap height) ── */}
               <motion.button
                 variants={ctaVariants}
                 whileTap={{ scale: 0.97 }}
                 onClick={(e) => handleNavClick(e, { sectionId: "contact", to: "/" })}
-                className="mt-auto w-full py-4 rounded-2xl bg-gradient-to-r from-dark-lavender via-purple-700 to-purple-600 text-white text-[11px] font-black uppercase tracking-[0.22em] shadow-xl shadow-purple-900/12 cursor-pointer"
+                className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-dark-lavender via-purple-700 to-purple-600 text-white text-[10px] font-black uppercase tracking-[0.22em] shadow-xl shadow-purple-900/12 cursor-pointer mt-2"
               >
                 Get Started
               </motion.button>

@@ -10,9 +10,7 @@ export default function ScrollToTop() {
   // Watch scrollY to toggle visibility (triggers state change ONLY when crossing 300px threshold)
   useMotionValueEvent(scrollY, "change", (latest) => {
     const shouldBeVisible = latest > 300;
-    if (isVisible !== shouldBeVisible) {
-      setIsVisible(shouldBeVisible);
-    }
+    setIsVisible((prev) => (prev !== shouldBeVisible ? shouldBeVisible : prev));
   });
 
   const scrollToTop = () => {

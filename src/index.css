@@ -324,7 +324,7 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  scroll-behavior: smooth;
+  scroll-behavior: auto !important; /* FIXED: WAS smooth, which severely conflicts with Lenis and causes extreme vibrating/stuttering scroll lag! */
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -359,4 +359,44 @@ img {
 .apple-card-hover {
   transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.8s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, box-shadow, border-color;
+}
+
+/* GPU-Accelerated Sakura/Cherry Blossom Falling Petals Animation */
+@keyframes falling-petals {
+  0% {
+    transform: translate3d(var(--start-x), -50px, 0) rotate(0deg) rotateX(0deg) rotateY(0deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate3d(var(--end-x), 115vh, 0) rotate(var(--rot-z)) rotateX(var(--rot-x)) rotateY(var(--rot-y));
+    opacity: 0;
+  }
+}
+
+.animate-cherry-blossom {
+  animation: falling-petals var(--duration) linear infinite;
+  will-change: transform, opacity;
+  transform: translate3d(var(--start-x), -50px, 0);
+  backface-visibility: hidden;
+}
+
+/* High-performance GPU layer promotion utilities */
+.transform-gpu {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
 }
