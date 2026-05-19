@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
 import SplashScreen from "./components/SplashScreen";
+import LogoSplash from "./components/LogoSplash";
 import Navbar from "./components/Navbar";
 import ScrollToTop from "./components/ScrollToTop";
 import SmoothScroll from "./components/SmoothScroll";
@@ -18,7 +19,18 @@ const FaqPage = lazy(() => import("./pages/FaqPage"));
 
 export default function App() {
   const [loading, setLoading] = useState(true);
+  const [isInitial, setIsInitial] = useState(true);
+  const [switching, setSwitching] = useState(false);
   const { pathname } = useLocation();
+  const [prevPathname, setPrevPathname] = useState(pathname);
+
+  // Synchronous state derivation on route changes to prevent 1-frame flashes
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
+    if (!isInitial) {
+      setSwitching(true);
+    }
+  }
 
   // Eagerly prefetch dynamic route chunks during the 7s splash screen to ensure instantaneous page mounting
   useEffect(() => {
@@ -44,7 +56,12 @@ export default function App() {
     <>
       {/* Initial load full splash screen */}
       {loading && (
-        <SplashScreen onComplete={() => setLoading(false)} />
+        <SplashScreen onComplete={() => { setLoading(false); setIsInitial(false); }} />
+      )}
+
+      {/* Intermediate route switching loader */}
+      {switching && (
+        <LogoSplash onComplete={() => setSwitching(false)} />
       )}
 
       {/* Main website — fades in smoothly after initial splash exits */}
