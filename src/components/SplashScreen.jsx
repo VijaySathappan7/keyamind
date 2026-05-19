@@ -7,7 +7,7 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
 // Phases: intro → show → split → merge → exit
 export default function SplashScreen({ onComplete }) {
-  const [phase, setPhase]           = useState("intro");
+  const [phase, setPhase] = useState("intro");
   const [deviceWidth, setDeviceWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 1024
   );
@@ -68,19 +68,19 @@ export default function SplashScreen({ onComplete }) {
     let lw, tw, gap;
     const isMobileSize = deviceWidth < 500 || deviceHeight < 500;
     const isTabletSize = (deviceWidth >= 500 && deviceWidth < 768) || (deviceHeight >= 500 && deviceHeight < 680);
-    
+
     if (isMobileSize) {
-      lw = 50; tw = 98; gap = -26;
+      lw = 120; tw = 195; gap = 8;
     } else if (isTabletSize) {
-      lw = 110; tw = 220; gap = -10;
+      lw = 110; tw = 220; gap = 32;
     } else if (deviceWidth < 1024) {
-      lw = 135; tw = 270; gap = -12;
+      lw = 135; tw = 270; gap = 40;
     } else {
-      lw = 155; tw = 310; gap = -16;
+      lw = 155; tw = 310; gap = 48;
     }
     const th = Math.round(tw * 0.3125);
-    return { 
-      logoX: (gap + tw) / 2, 
+    return {
+      logoX: (gap + tw) / 2,
       titleX: (gap + lw) / 2,
       lw,
       tw,
@@ -90,7 +90,7 @@ export default function SplashScreen({ onComplete }) {
 
   const isSplit = phase === "split";
   const isMerge = phase === "merge";
-  const isExit  = phase === "exit";
+  const isExit = phase === "exit";
   const isIntro = phase === "intro";
 
   if (!mounted) return null;
@@ -100,13 +100,13 @@ export default function SplashScreen({ onComplete }) {
       <motion.div
         key="splash"
         className="fixed inset-0 z-[999999] flex items-center justify-center overflow-hidden select-none pointer-events-none"
-        style={{ 
+        style={{
           background: "radial-gradient(ellipse at 60% 40%, #f0eeff 0%, #faf9f6 55%, #fff4f9 100%)",
           willChange: "transform, opacity"
         }}
-        animate={{ 
-          opacity: isExit ? 0 : 1, 
-          scale: isExit ? 1.08 : 1 
+        animate={{
+          opacity: isExit ? 0 : 1,
+          scale: isExit ? 1.08 : 1
         }}
         transition={{ duration: 0.85, ease: [0.33, 1, 0.68, 1] }}
       >
@@ -165,15 +165,15 @@ export default function SplashScreen({ onComplete }) {
             initial={{ opacity: 0, scale: 0.42, filter: "blur(22px)", x: 0 }}
             animate={{
               opacity: 1,
-              scale:   isIntro ? 0.42 : 1,
-              filter:  isIntro ? "blur(22px)" : "blur(0px)",
-              x:       isSplit ? -logoX : 0,
+              scale: isIntro ? 0.42 : 1,
+              filter: isIntro ? "blur(22px)" : "blur(0px)",
+              x: isSplit ? -logoX : 0,
             }}
             transition={{
               // Reveal: slow, silky
               opacity: { duration: 1.4, ease: [0.16, 1, 0.3, 1] },
-              scale:   { duration: 1.4, ease: [0.16, 1, 0.3, 1] },
-              filter:  { duration: 1.2, ease: [0.16, 1, 0.3, 1] },
+              scale: { duration: 1.4, ease: [0.16, 1, 0.3, 1] },
+              filter: { duration: 1.2, ease: [0.16, 1, 0.3, 1] },
               // Movement: snappier spring-like
               x: { duration: 0.95, ease: [0.22, 1, 0.36, 1] },
             }}
