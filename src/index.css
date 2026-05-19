@@ -418,3 +418,22 @@ img {
 [id="learning-styles"] {
   scroll-margin-top: 96px !important;
 }
+
+@media (max-width: 1024px) {
+  [id="home"],
+  [id="our-services"],
+  [id="testimonials"],
+  [id="about"],
+  [id="contact"],
+  [id="ikigai"],
+  [id="inherent-mapping"],
+  [id="fingerprint-characteristics"],
+  [id="what-we-do"],
+  [id="brain-balance"],
+  [id="brain-lobes"],
+  [id="human-quotients"],
+  [id="personality"],
+  [id="learning-styles"] {
+    scroll-margin-top: 80px !important;
+  }
+}

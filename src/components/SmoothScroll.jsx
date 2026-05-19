@@ -25,7 +25,16 @@ export default function SmoothScroll({ children }) {
       infinite: false,
     });
 
-    // Expose lenis instance globally for anchor triggers and scrollTo top controls
+    // Expose lenis instance globally with dynamic mobile offset interception
+    const originalScrollTo = lenis.scrollTo.bind(lenis);
+    lenis.scrollTo = (target, options = {}) => {
+      if (options && (options.offset === -96 || options.offset === -80)) {
+        const isMobile = window.innerWidth < 1024;
+        options.offset = isMobile ? -80 : -96;
+      }
+      return originalScrollTo(target, options);
+    };
+
     window.lenis = lenis;
 
     // High performance RAF tick loop
