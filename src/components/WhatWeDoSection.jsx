@@ -339,12 +339,18 @@ export default function WhatWeDoSection() {
                     setActiveIndex(nextOpen ? index : -1);
                     if (nextOpen) {
                       setTimeout(() => {
-                        const targetEl = document.getElementById(`what-we-do-step-${index}`);
+                        const targetId = `what-we-do-step-${index}`;
+                        const targetEl = document.getElementById(targetId);
                         if (targetEl) {
-                          // Scroll with an offset of 80px to accommodate navbar
-                          const yOffset = -80;
-                          const y = targetEl.getBoundingClientRect().top + window.pageYOffset + yOffset;
-                          window.scrollTo({ top: y, behavior: "smooth" });
+                          if (window.lenis) {
+                            window.lenis.scrollTo("#" + targetId, {
+                              offset: -96,
+                              duration: 1.0,
+                            });
+                          } else {
+                            const y = targetEl.getBoundingClientRect().top + window.pageYOffset - 96;
+                            window.scrollTo({ top: y, behavior: "smooth" });
+                          }
                         }
                       }, 180);
                     }
