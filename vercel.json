@@ -1,8 +1,7 @@
 {
-  "cleanUrls": true,
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/((?!assets/|sitemap.xml|robots.txt|manifest.json|logo.webp|title.webp|logosquare.webp|og-image.png|favicon.svg|.*\\..*).*)",
       "destination": "/index.html"
     }
   ],
