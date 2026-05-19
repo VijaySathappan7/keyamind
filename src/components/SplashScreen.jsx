@@ -70,13 +70,13 @@ export default function SplashScreen({ onComplete }) {
     const isTabletSize = (deviceWidth >= 500 && deviceWidth < 768) || (deviceHeight >= 500 && deviceHeight < 680);
 
     if (isMobileSize) {
-      lw = 120; tw = 195; gap = 8;
+      lw = 130; tw = 260; gap = -60;
     } else if (isTabletSize) {
-      lw = 110; tw = 220; gap = 32;
+      lw = 110; tw = 220; gap = -50;
     } else if (deviceWidth < 1024) {
-      lw = 135; tw = 270; gap = 40;
+      lw = 135; tw = 270; gap = -65;
     } else {
-      lw = 155; tw = 310; gap = 48;
+      lw = 155; tw = 310; gap = -75;
     }
     const th = Math.round(tw * 0.3125);
     return {
