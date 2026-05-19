@@ -322,6 +322,7 @@ export default function WhatWeDoSection() {
             return (
               <motion.div
                 key={index}
+                id={`what-we-do-step-${index}`}
                 initial={{ opacity: 0, y: 30 }}
                 viewport={{ once: true, margin: "-50px" }} whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
@@ -333,7 +334,21 @@ export default function WhatWeDoSection() {
               >
                 {/* Accordion Trigger Button */}
                 <button
-                  onClick={() => setActiveIndex(isOpen ? -1 : index)}
+                  onClick={() => {
+                    const nextOpen = !isOpen;
+                    setActiveIndex(nextOpen ? index : -1);
+                    if (nextOpen) {
+                      setTimeout(() => {
+                        const targetEl = document.getElementById(`what-we-do-step-${index}`);
+                        if (targetEl) {
+                          // Scroll with an offset of 80px to accommodate navbar
+                          const yOffset = -80;
+                          const y = targetEl.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                          window.scrollTo({ top: y, behavior: "smooth" });
+                        }
+                      }, 180);
+                    }
+                  }}
                   className="w-full text-left p-7 flex items-center justify-between gap-4 select-none"
                 >
                   <div className="flex items-center gap-4">
@@ -408,7 +423,7 @@ export default function WhatWeDoSection() {
                             <motion.button
                               whileHover={{ scale: 1.04, y: -2, boxShadow: "0 15px 30px rgba(59,46,94,0.15)" }}
                               whileTap={{ scale: 0.96 }}
-                              onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                              onClick={() => window.scrollToContact ? window.scrollToContact() : document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
                               className="px-8 py-3.5 rounded-full bg-gradient-to-r from-dark-lavender via-purple-700 to-purple-600 text-white font-extrabold text-[11px] tracking-[0.2em] uppercase shadow-md shadow-purple-500/10 transition-all duration-300 font-poppins text-center flex items-center justify-center gap-2 cursor-pointer min-h-[44px]"
                             >
                               Get Started

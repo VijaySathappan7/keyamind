@@ -70,7 +70,7 @@ export default function SplashScreen({ onComplete }) {
     const isTabletSize = (deviceWidth >= 500 && deviceWidth < 768) || (deviceHeight >= 500 && deviceHeight < 680);
     
     if (isMobileSize) {
-      lw = 80; tw = 160; gap = 24;
+      lw = 65; tw = 130; gap = 6;
     } else if (isTabletSize) {
       lw = 110; tw = 220; gap = 32;
     } else if (deviceWidth < 1024) {
@@ -131,7 +131,7 @@ export default function SplashScreen({ onComplete }) {
             className="
               absolute z-10 object-contain
               pointer-events-none select-none will-change-transform
-              w-auto max-w-none
+              max-w-none
             "
             style={{ width: `${tw}px`, height: `${th}px` }}
             initial={{ x: -logoX, clipPath: "inset(0 0% 0 100%)", opacity: 0 }}

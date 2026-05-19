@@ -6,12 +6,16 @@ export default function LazySection({ children, height = '300px' }) {
   const ref = useRef(null);
 
   useEffect(() => {
+    const handleForceLoad = () => setVisible(true);
+    window.addEventListener("force-lazy-load", handleForceLoad);
+
     // High-performance SEO protection guard: Detect search bots or performance auditors
     const isBot = typeof navigator !== 'undefined' && 
       /bot|google|baidu|bing|msn|duckduckbot|teoma|slurp|yandex|lighthouse|headless/i.test(navigator.userAgent);
     
     if (isBot) {
       setVisible(true);
+      window.removeEventListener("force-lazy-load", handleForceLoad);
       return;
     }
 
@@ -33,6 +37,7 @@ export default function LazySection({ children, height = '300px' }) {
 
     observer.observe(el);
     return () => {
+      window.removeEventListener("force-lazy-load", handleForceLoad);
       if (el) {
         observer.unobserve(el);
       }

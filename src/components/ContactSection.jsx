@@ -45,7 +45,7 @@ export default function ContactSection() {
 
   return (
     <div id="contact" className="w-full py-16 scroll-mt-0 select-none">
-      <div className="max-w-[1340px] mx-auto px-6 md:px-12 lg:px-8 w-full">
+      <div className="max-w-[1340px] mx-auto px-3.5 sm:px-6 md:px-12 lg:px-8 w-full">
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
@@ -187,7 +187,7 @@ export default function ContactSection() {
             variants={fadeUp}
             className="lg:col-span-7 w-full"
           >
-            <div className="w-full p-5 sm:p-10 rounded-[32px] bg-white/70 backdrop-blur-md border border-white shadow-[0_20px_60px_rgba(59,46,94,0.08)] relative overflow-hidden text-left font-poppins">
+            <div className="w-full p-4.5 sm:p-10 rounded-[2.5rem] bg-white/70 backdrop-blur-md border border-white shadow-[0_20px_60px_rgba(59,46,94,0.08)] relative overflow-hidden text-left font-poppins">
               
               {/* TOP WHATSAPP STATUS HEADER */}
               <div className="flex items-center justify-between pb-6 border-b border-dark-lavender/5">

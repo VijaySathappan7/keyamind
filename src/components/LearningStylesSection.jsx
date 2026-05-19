@@ -125,10 +125,10 @@ const LearningStylesSection = memo(() => {
               return (
                 <div 
                   key={card.id}
-                  className="rounded-[28px] bg-white/70 border border-white shadow-[0_10px_30px_rgba(59,46,94,0.04)] backdrop-blur-md flex flex-row items-stretch overflow-hidden min-h-[90px] sm:min-h-[110px]"
+                  className="rounded-[28px] bg-white/70 border border-white shadow-[0_10px_30px_rgba(59,46,94,0.04)] backdrop-blur-md flex flex-col md:flex-row items-stretch overflow-hidden min-h-[90px] sm:min-h-[110px]"
                 >
                   {/* Left Corner Filled Entirely with Image (Landscape Format) */}
-                  <div className="w-[130px] sm:w-[180px] lg:w-[220px] bg-purple-50/30 shrink-0 relative overflow-hidden flex items-center justify-center">
+                  <div className="w-full h-44 md:h-auto md:w-[180px] lg:w-[220px] bg-purple-50/30 shrink-0 relative overflow-hidden flex items-center justify-center">
                      <LazyImage 
                        src={card.image} 
                        alt={card.title} 
@@ -146,7 +146,7 @@ const LearningStylesSection = memo(() => {
                   </div>
 
                   {/* Minimal Content on the Right Hand Side */}
-                  <div className="flex flex-col text-left justify-center p-6 sm:p-8 flex-1 gap-2">
+                  <div className="flex flex-col text-left justify-center p-5 sm:p-8 flex-1 gap-2">
                     <div className="flex items-center justify-between w-full">
                       <h3 className="text-xl sm:text-2xl font-black text-dark-lavender font-outfit tracking-tight">
                         {card.title}

@@ -220,8 +220,8 @@ const InherentBrainMappingSection = () => {
                 href="#contact"
                 onClick={(e) => {
                   e.preventDefault();
-                  if (window.lenis) {
-                    window.lenis.scrollTo("#contact", { offset: 0, duration: 1.2 });
+                  if (window.scrollToContact) {
+                    window.scrollToContact();
                   } else {
                     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
                   }

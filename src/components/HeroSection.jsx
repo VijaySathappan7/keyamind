@@ -111,6 +111,10 @@ const HeroSection = () => {
 
   const handleCtaClick = (e, targetId) => {
     e.preventDefault();
+    if (targetId === "contact" && window.scrollToContact) {
+      window.scrollToContact();
+      return;
+    }
     const element = document.getElementById(targetId);
     if (element) {
       if (window.lenis) {
