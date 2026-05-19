@@ -6,12 +6,12 @@ export default function LogoSplash({ onComplete }) {
   const [mounted, setMounted] = useState(true);
   const [isExit, setIsExit] = useState(false);
   const [isMobile, setIsMobile] = useState(
-    typeof window !== "undefined" ? window.innerWidth < 500 : true
+    typeof window !== "undefined" ? window.innerWidth < 768 : true
   );
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 500);
+      setIsMobile(window.innerWidth < 768);
     };
     window.addEventListener("resize", handleResize, { passive: true });
     return () => window.removeEventListener("resize", handleResize);

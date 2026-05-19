@@ -66,14 +66,12 @@ export default function SplashScreen({ onComplete }) {
   // Centering math: (logo + gap + title) perfectly centered
   const { logoX, titleX, lw, tw, th } = (() => {
     let lw, tw, gap;
-    const isMobileSize = deviceWidth < 500 || deviceHeight < 500;
-    const isTabletSize = (deviceWidth >= 500 && deviceWidth < 768) || (deviceHeight >= 500 && deviceHeight < 680);
+    const isMobileSize = deviceWidth < 768;
+    const isTabletSize = deviceWidth >= 768 && deviceWidth < 1024;
 
     if (isMobileSize) {
       lw = 130; tw = 260; gap = -60;
     } else if (isTabletSize) {
-      lw = 110; tw = 220; gap = -50;
-    } else if (deviceWidth < 1024) {
       lw = 135; tw = 270; gap = -65;
     } else {
       lw = 155; tw = 310; gap = -75;
