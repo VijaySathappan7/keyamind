@@ -229,7 +229,7 @@ const HeroSection = () => {
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="flex flex-col items-center gap-4 w-full max-w-[320px] sm:max-w-[380px] lg:max-w-none mx-auto"
+            className="flex flex-col items-center gap-4 w-full max-w-[440px] sm:max-w-[480px] lg:max-w-none mx-auto"
           >
             {/* Logo shield block - SMALLER ON MOBILE */}
             <img 
@@ -238,7 +238,7 @@ const HeroSection = () => {
               width={260}
               height={260}
               fetchPriority="high"
-              className="w-[50%] sm:w-[54%] lg:w-[46%] h-auto object-contain drop-shadow-[0_20px_60px_rgba(255,255,255,0.45)] drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] filter saturate-[1.25]"
+              className="w-[64%] sm:w-[54%] lg:w-[46%] h-auto object-contain drop-shadow-[0_20px_60px_rgba(255,255,255,0.45)] drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] filter saturate-[1.25]"
             />
 
             {/* Title signature block - SMALLER ON MOBILE */}
@@ -248,7 +248,7 @@ const HeroSection = () => {
               width={400}
               height={94}
               fetchPriority="high"
-              className="w-[82%] sm:w-[86%] lg:w-[72%] h-auto object-contain"
+              className="w-[92%] sm:w-[86%] lg:w-[72%] h-auto object-contain"
               style={{
                 filter: "brightness(0) drop-shadow(0 2px 10px rgba(255,255,255,0.7)) drop-shadow(0 0 6px rgba(255,255,255,0.4))"
               }}
