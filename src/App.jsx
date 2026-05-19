@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import SplashScreen from "./components/SplashScreen";
 import PageLoader from "./components/PageLoader";
+import LogoSplash from "./components/LogoSplash";
 import Navbar from "./components/Navbar";
 import ScrollToTop from "./components/ScrollToTop";
 import SmoothScroll from "./components/SmoothScroll";
@@ -21,7 +22,17 @@ const FaqPage = lazy(() => import("./pages/FaqPage"));
 export default function App() {
   const [loading, setLoading] = useState(true);
   const [isInitial, setIsInitial] = useState(true);
+  const [switching, setSwitching] = useState(false);
   const { pathname } = useLocation();
+  const [prevPathname, setPrevPathname] = useState(pathname);
+
+  // Synchronous state derivation on route changes to prevent 1-frame flashes
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
+    if (!isInitial) {
+      setSwitching(true);
+    }
+  }
 
   // Scroll to top on route change
   useEffect(() => {
@@ -36,6 +47,11 @@ export default function App() {
       {/* Initial load full splash screen */}
       {loading && (
         <SplashScreen onComplete={() => { setLoading(false); setIsInitial(false); }} />
+      )}
+
+      {/* Intermediate route switching loader */}
+      {switching && (
+        <LogoSplash onComplete={() => setSwitching(false)} />
       )}
 
 
