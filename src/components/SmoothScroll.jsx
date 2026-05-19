@@ -25,12 +25,11 @@ export default function SmoothScroll({ children }) {
       infinite: false,
     });
 
-    // Expose lenis instance globally with dynamic mobile offset interception
+    // Expose lenis instance globally with dynamic 10% screen-height offset interception
     const originalScrollTo = lenis.scrollTo.bind(lenis);
     lenis.scrollTo = (target, options = {}) => {
       if (options && (options.offset === -96 || options.offset === -80)) {
-        const isMobile = window.innerWidth < 1024;
-        options.offset = isMobile ? -80 : -96;
+        options.offset = -Math.round(window.innerHeight * 0.10);
       }
       return originalScrollTo(target, options);
     };
