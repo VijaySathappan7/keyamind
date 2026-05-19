@@ -72,7 +72,7 @@ export default function App() {
                 <Navbar />
 
                 {/* Main Dynamic Routing Panel */}
-                <Suspense fallback={<PageLoader />}>
+                <Suspense fallback={null}>
                   <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/dmit" element={<DmitPage />} />
