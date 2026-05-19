@@ -32,18 +32,6 @@ export default function App() {
     }
   }
 
-  // Eagerly prefetch dynamic route chunks during the 7s splash screen to ensure instantaneous page mounting
-  useEffect(() => {
-    // Fire off asynchronous imports to pre-cache the chunks in the browser thread
-    import("./pages/HomePage").catch(() => {});
-    import("./pages/DmitPage").catch(() => {});
-    import("./pages/ParentingPage").catch(() => {});
-    import("./pages/CareerPage").catch(() => {});
-    import("./pages/BlogListPage").catch(() => {});
-    import("./pages/BlogDetailPage").catch(() => {});
-    import("./pages/FaqPage").catch(() => {});
-  }, []);
-
   // Scroll to top on route change
   useEffect(() => {
     if (!window.location.hash) {

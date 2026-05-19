@@ -1,10 +1,11 @@
-import { useRef, memo } from "react";
+import { useState, useRef, memo } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import useMediaQuery from "./useMediaQuery";
 
 const YoutubeSection = memo(() => {
   const containerRef = useRef(null);
   const isDesktop = useMediaQuery("(min-width: 1024px)");
+  const [playVideo, setPlayVideo] = useState(false);
 
   // Track scroll progress of this section
   const { scrollYProgress } = useScroll({
@@ -111,14 +112,36 @@ const YoutubeSection = memo(() => {
 
             {/* Video Container */}
             <div className="relative aspect-video rounded-[2.8rem] sm:rounded-[3.3rem] overflow-hidden bg-black shadow-inner">
-              <iframe
-                className="absolute inset-0 w-full h-full z-10"
-                src="https://www.youtube.com/embed/iCRy8voU5dE?rel=0&modestbranding=1&showinfo=0&end=150"
-                title="Why Are Your Fingerprints Unique?"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
+              {playVideo ? (
+                <iframe
+                  className="absolute inset-0 w-full h-full z-10"
+                  src="https://www.youtube.com/embed/iCRy8voU5dE?rel=0&modestbranding=1&showinfo=0&end=150&autoplay=1"
+                  title="Why Are Your Fingerprints Unique?"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              ) : (
+                <div 
+                  onClick={() => setPlayVideo(true)}
+                  className="absolute inset-0 w-full h-full z-10 flex items-center justify-center cursor-pointer group/cover"
+                >
+                  <img 
+                    src="https://img.youtube.com/vi/iCRy8voU5dE/maxresdefault.jpg" 
+                    alt="Why Are Your Fingerprints Unique Video Thumbnail" 
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/cover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-black/35 group-hover/cover:bg-black/25 transition-colors duration-500 z-10" />
+                  
+                  {/* Premium glassy play button with pulse ring */}
+                  <div className="relative w-20 h-20 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center shadow-2xl z-20 group-hover/cover:scale-110 group-hover/cover:bg-white/35 transition-all duration-500">
+                    <div className="absolute -inset-2 rounded-full border border-purple-400/30 opacity-70 group-hover/cover:animate-ping -z-10" />
+                    <svg className="w-8 h-8 text-white fill-current ml-1 filter drop-shadow-md" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </div>
+                </div>
+              )}
               
               {/* Soft Edge Integration Mask */}
               <div className="absolute inset-0 pointer-events-none z-20 shadow-[inset_0_0_40px_rgba(0,0,0,0.1)]" />

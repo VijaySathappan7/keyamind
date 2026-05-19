@@ -12,6 +12,15 @@ import indianAvatar2 from '../assets/images/indian_avatar_2.png';
 import indianAvatar3 from '../assets/images/indian_avatar_3.png';
 import indianAvatar4 from '../assets/images/indian_avatar_4.png';
 
+/* ─── Hover Prefetching Intent Logic ─── */
+const prefetchPage = (to) => {
+  if (to === "/dmit") import("../pages/DmitPage").catch(() => {});
+  else if (to === "/parenting") import("../pages/ParentingPage").catch(() => {});
+  else if (to === "/career") import("../pages/CareerPage").catch(() => {});
+  else if (to === "/blog") import("../pages/BlogListPage").catch(() => {});
+  else if (to === "/faq") import("../pages/FaqPage").catch(() => {});
+};
+
 const footerNavLinks = [
   { name: "Home", to: "/", sectionId: "home" },
   { name: "Services", to: "/", sectionId: "our-services" },
@@ -438,7 +447,14 @@ export default function ContentSection({ contactOnly = false }) {
               </h4>
               <div className="flex flex-col gap-4">
                 {pagesLinks.map((link) => (
-                  <a key={link.name} href={link.to} onClick={(e) => handleFooterNav(e, link)} className="text-dark-lavender/60 hover:text-purple-600 text-[13px] font-bold transition-all hover:translate-x-1 uppercase tracking-wider font-poppins">
+                  <a 
+                    key={link.name} 
+                    href={link.to} 
+                    onMouseEnter={() => prefetchPage(link.to)}
+                    onFocus={() => prefetchPage(link.to)}
+                    onClick={(e) => handleFooterNav(e, link)} 
+                    className="text-dark-lavender/60 hover:text-purple-600 text-[13px] font-bold transition-all hover:translate-x-1 uppercase tracking-wider font-poppins"
+                  >
                     {link.name}
                   </a>
                 ))}

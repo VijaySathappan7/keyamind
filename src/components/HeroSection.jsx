@@ -7,6 +7,7 @@ import mobileBackground from "../assets/images/mobilebackground.webp";
 import logo from "../assets/logos/logo.webp";
 import titleImage from "../assets/logos/title.webp";
 import useMediaQuery from "./useMediaQuery";
+import LazyVideo from "./LazyVideo";
 
 const phrases = [
   "DMIT Brain Mapping",
@@ -170,15 +171,10 @@ const HeroSection = () => {
         className="absolute inset-0 z-0 overflow-hidden scale-[1.12] will-change-transform"
       >
         {/* Desktop Video Background */}
-        <video 
-          ref={videoRef}
-          autoPlay 
-          muted 
-          playsInline 
+        <LazyVideo 
+          src={heroBackgroundVideo}
           className="hidden lg:block absolute inset-0 w-full h-full object-cover blur-none saturate-[1.05] brightness-[1.05] contrast-[1.05]"
-        >
-          <source src={heroBackgroundVideo} type="video/mp4" />
-        </video>
+        />
 
         {/* Mobile Portrait Image Background */}
         <img 

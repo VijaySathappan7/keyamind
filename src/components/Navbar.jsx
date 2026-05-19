@@ -4,6 +4,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import logo from '../assets/logos/logo.webp';
 import titleImage from '../assets/logos/title.webp';
 
+/* ─── Hover Prefetching Intent Logic ─── */
+const prefetchPage = (to) => {
+  if (to === "/dmit") import("../pages/DmitPage").catch(() => {});
+  else if (to === "/parenting") import("../pages/ParentingPage").catch(() => {});
+  else if (to === "/career") import("../pages/CareerPage").catch(() => {});
+  else if (to === "/blog") import("../pages/BlogListPage").catch(() => {});
+  else if (to === "/faq") import("../pages/FaqPage").catch(() => {});
+};
+
 /* ─── Link data ─────────────────────────────────────────────────────────── */
 const subPages = [
   { name: "DMIT Assessment", to: "/dmit" },
@@ -482,6 +491,8 @@ const Navbar = () => {
                       <a
                         key={page.name}
                         href={page.to}
+                        onMouseEnter={() => prefetchPage(page.to)}
+                        onFocus={() => prefetchPage(page.to)}
                         onClick={(e) => {
                           e.preventDefault();
                           setDesktopMenuOpen(false);
@@ -579,6 +590,8 @@ const Navbar = () => {
                     key={page.name}
                     variants={itemVariants}
                     href={page.to}
+                    onMouseEnter={() => prefetchPage(page.to)}
+                    onFocus={() => prefetchPage(page.to)}
                     onClick={(e) => {
                       e.preventDefault();
                       setMenuOpen(false);

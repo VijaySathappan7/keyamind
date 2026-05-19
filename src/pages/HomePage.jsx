@@ -1,21 +1,24 @@
+import { lazy } from "react";
 import HeroSection from "../components/HeroSection";
 import SEOHead from "../components/SEOHead";
+import LazySection from "../components/LazySection";
 
-import IkigaiSection from "../components/IkigaiSection";
-import InherentBrainMappingSection from "../components/InherentBrainMappingSection";
-import FingerprintCharacteristicsSection from "../components/FingerprintCharacteristicsSection";
-import YoutubeSection from "../components/YoutubeSection";
-import WhatWeDoSection from "../components/WhatWeDoSection";
-import BrainBalanceSection from "../components/BrainBalanceSection";
-import BrainLobeFunctionalitySection from "../components/BrainLobeFunctionalitySection";
-import HumanQuotientsSection from "../components/HumanQuotientsSection";
-import PersonalitySection from "../components/PersonalitySection";
-import LearningStylesSection from "../components/LearningStylesSection";
-import ServicesSection from "../components/ServicesSection";
-import FeedbackMarqueeSection from "../components/FeedbackMarqueeSection";
-import FounderProfileSection from "../components/FounderProfileSection";
-import ExpertiseSection from "../components/ExpertiseSection";
-import ContentSection from "../components/ContentSection";
+// Lazy-loaded below-the-fold sections
+const IkigaiSection = lazy(() => import("../components/IkigaiSection"));
+const InherentBrainMappingSection = lazy(() => import("../components/InherentBrainMappingSection"));
+const FingerprintCharacteristicsSection = lazy(() => import("../components/FingerprintCharacteristicsSection"));
+const YoutubeSection = lazy(() => import("../components/YoutubeSection"));
+const WhatWeDoSection = lazy(() => import("../components/WhatWeDoSection"));
+const BrainBalanceSection = lazy(() => import("../components/BrainBalanceSection"));
+const BrainLobeFunctionalitySection = lazy(() => import("../components/BrainLobeFunctionalitySection"));
+const HumanQuotientsSection = lazy(() => import("../components/HumanQuotientsSection"));
+const PersonalitySection = lazy(() => import("../components/PersonalitySection"));
+const LearningStylesSection = lazy(() => import("../components/LearningStylesSection"));
+const ServicesSection = lazy(() => import("../components/ServicesSection"));
+const FeedbackMarqueeSection = lazy(() => import("../components/FeedbackMarqueeSection"));
+const FounderProfileSection = lazy(() => import("../components/FounderProfileSection"));
+const ExpertiseSection = lazy(() => import("../components/ExpertiseSection"));
+const ContentSection = lazy(() => import("../components/ContentSection"));
 
 export default function HomePage() {
   return (
@@ -23,53 +26,83 @@ export default function HomePage() {
       {/* Primary default SEO tags for Homepage */}
       <SEOHead />
 
-      {/* 1. Hero */}
+      {/* 1. Hero (Statically imported - above the fold) */}
       <HeroSection />
 
       {/* 2. Ikigai */}
-      <IkigaiSection />
+      <LazySection height="550px">
+        <IkigaiSection />
+      </LazySection>
 
       {/* 3. Inherent Brain Mapping */}
-      <InherentBrainMappingSection />
+      <LazySection height="650px">
+        <InherentBrainMappingSection />
+      </LazySection>
 
       {/* 4. Fingerprint Story */}
-      <FingerprintCharacteristicsSection />
+      <LazySection height="600px">
+        <FingerprintCharacteristicsSection />
+      </LazySection>
 
       {/* 4.5 Video Deep Dive */}
-      <YoutubeSection />
+      <LazySection height="450px">
+        <YoutubeSection />
+      </LazySection>
 
       {/* 5. What We Do */}
-      <WhatWeDoSection />
+      <LazySection height="650px">
+        <WhatWeDoSection />
+      </LazySection>
 
       {/* 6. Brain Left and Right Balance */}
-      <BrainBalanceSection />
+      <LazySection height="700px">
+        <BrainBalanceSection />
+      </LazySection>
 
       {/* 7. Lobes of the Brain */}
-      <BrainLobeFunctionalitySection />
+      <LazySection height="700px">
+        <BrainLobeFunctionalitySection />
+      </LazySection>
 
       {/* 8. Quotients */}
-      <HumanQuotientsSection />
+      <LazySection height="600px">
+        <HumanQuotientsSection />
+      </LazySection>
 
       {/* 9. Natural Personality */}
-      <PersonalitySection />
+      <LazySection height="700px">
+        <PersonalitySection />
+      </LazySection>
 
       {/* 10. Learning Styles */}
-      <LearningStylesSection />
+      <LazySection height="750px">
+        <LearningStylesSection />
+      </LazySection>
 
       {/* 11. Services */}
-      <ServicesSection />
+      <LazySection height="600px">
+        <ServicesSection />
+      </LazySection>
 
       {/* 12. Feedbacks */}
-      <FeedbackMarqueeSection />
+      <LazySection height="450px">
+        <FeedbackMarqueeSection />
+      </LazySection>
 
       {/* 13. Founder Profile */}
-      <FounderProfileSection />
+      <LazySection height="600px">
+        <FounderProfileSection />
+      </LazySection>
 
       {/* 14. Expertise */}
-      <ExpertiseSection />
+      <LazySection height="500px">
+        <ExpertiseSection />
+      </LazySection>
 
       {/* 15. Contact & Footer */}
-      <ContentSection />
+      <LazySection height="800px">
+        <ContentSection />
+      </LazySection>
     </>
   );
 }
