@@ -180,7 +180,7 @@ export default function IkigaiSection() {
               initial="hidden"
               whileInView="visible" viewport={{ once: true, margin: "-50px" }}
               variants={fadeUp}
-              className="flex flex-row flex-wrap gap-4 w-full mt-4"
+              className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mt-4"
             >
               <motion.a
                 whileHover={{ scale: 1.04, y: -2, boxShadow: "0 15px 30px rgba(59,46,94,0.15)" }}
@@ -194,10 +194,9 @@ export default function IkigaiSection() {
                     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
                   }
                 }}
-                className="px-8 py-3.5 rounded-full font-extrabold text-[11px] tracking-[0.2em] uppercase text-white bg-gradient-to-r from-dark-lavender via-purple-700 to-purple-600 shadow-md shadow-purple-500/10 transition-all duration-300 font-poppins text-center flex items-center justify-center gap-2 cursor-pointer min-h-[44px]"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-full font-extrabold text-[11px] tracking-[0.2em] uppercase text-white bg-gradient-to-r from-dark-lavender via-purple-700 to-purple-600 shadow-md shadow-purple-500/10 transition-all duration-300 font-poppins text-center flex items-center justify-center cursor-pointer min-h-[44px]"
               >
                 Explore Your Potential
-                <ArrowRight size={13} />
               </motion.a>
 
               <motion.a
@@ -212,7 +211,7 @@ export default function IkigaiSection() {
                     document.getElementById("our-services")?.scrollIntoView({ behavior: "smooth" });
                   }
                 }}
-                className="px-8 py-3.5 rounded-full font-extrabold text-[11px] uppercase tracking-wider text-dark-lavender/90 border border-purple-200 bg-white/50 transition-all duration-300 backdrop-blur-sm flex items-center justify-center font-poppins min-w-[170px] text-center cursor-pointer"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-full font-extrabold text-[11px] uppercase tracking-wider text-dark-lavender/90 border border-purple-200 bg-white/50 transition-all duration-300 backdrop-blur-sm flex items-center justify-center font-poppins text-center cursor-pointer min-h-[44px]"
               >
                 Learn More
               </motion.a>

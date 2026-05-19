@@ -93,7 +93,7 @@ export default function ContactSection() {
             </motion.p>
 
             {/* CONTACT DETAILS CARDS */}
-            <div className="flex flex-col gap-4 mt-2 font-poppins">
+            <div className="flex flex-col gap-4.5 mt-2 font-poppins">
               
               {/* PHONE */}
               <motion.a
@@ -102,18 +102,18 @@ export default function ContactSection() {
                 whileInView="visible" viewport={{ once: true, margin: "-50px" }}
                 variants={fadeUp}
                 href="tel:+919344094369"
-                className="flex items-center gap-4 p-4 rounded-2xl bg-white/60 backdrop-blur-md border border-white/80 shadow-[0_10px_30px_rgba(59,46,94,0.04)] hover:bg-white/90 hover:scale-[1.015] transition-all duration-300 group cursor-pointer min-h-[48px]"
+                className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-2xl bg-white/60 backdrop-blur-md border border-white/80 shadow-[0_10px_30px_rgba(59,46,94,0.04)] hover:bg-white/90 hover:scale-[1.015] transition-all duration-300 group cursor-pointer min-h-[48px]"
               >
-                <div className="w-11 h-11 rounded-xl bg-emerald-50 flex items-center justify-center border border-emerald-100 group-hover:bg-emerald-500 transition-colors shrink-0">
-                  <svg viewBox="0 0 24 24" className="w-5.5 h-5.5 fill-[#25D366] group-hover:fill-white transition-colors shrink-0" xmlns="http://www.w3.org/2000/svg">
+                <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-emerald-50 flex items-center justify-center border border-emerald-100 group-hover:bg-emerald-500 transition-colors shrink-0">
+                  <svg viewBox="0 0 24 24" className="w-4.5 h-4.5 sm:w-5.5 sm:h-5.5 fill-[#25D366] group-hover:fill-white transition-colors shrink-0" xmlns="http://www.w3.org/2000/svg">
                     <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-2.2 2.2a15.045 15.045 0 0 1-6.59-6.59l2.2-2.2c.28-.28.36-.67.25-1.02C8.79 6.34 8.59 5.15 8.59 3.92A1 1 0 0 0 7.59 3H3.92c-.5 0-.92.42-.92.92C3 14.18 11.82 23 22.08 23c.5 0 .92-.42.92-.92v-3.69a1 1 0 0 0-1-1.01z"/>
                   </svg>
                 </div>
                 <div>
-                  <p className="text-[11px] text-dark-lavender/60 font-medium uppercase tracking-widest">
+                  <p className="text-[10px] sm:text-[11px] text-dark-lavender/60 font-medium uppercase tracking-widest">
                     Call WhatsApp / Mobile
                   </p>
-                  <p className="text-base font-extrabold text-dark-lavender font-outfit tracking-wide mt-0.5">
+                  <p className="text-sm sm:text-base font-extrabold text-dark-lavender font-outfit tracking-wide mt-0.5">
                     +91 93440 94369
                   </p>
                 </div>
@@ -126,10 +126,10 @@ export default function ContactSection() {
                 whileInView="visible" viewport={{ once: true, margin: "-50px" }}
                 variants={fadeUp}
                 href="mailto:contact@keyamind.com"
-                className="flex items-center gap-4 p-4 rounded-2xl bg-white/60 backdrop-blur-md border border-white/80 shadow-[0_10px_30px_rgba(59,46,94,0.04)] hover:bg-white/90 hover:scale-[1.015] transition-all duration-300 group cursor-pointer min-h-[48px]"
+                className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-2xl bg-white/60 backdrop-blur-md border border-white/80 shadow-[0_10px_30px_rgba(59,46,94,0.04)] hover:bg-white/90 hover:scale-[1.015] transition-all duration-300 group cursor-pointer min-h-[48px]"
               >
-                <div className="w-11 h-11 rounded-xl bg-red-50 flex items-center justify-center border border-red-100 group-hover:bg-red-100 transition-colors shrink-0">
-                  <svg viewBox="0 0 48 48" className="w-5.5 h-5.5 shrink-0" xmlns="http://www.w3.org/2000/svg">
+                <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-red-50 flex items-center justify-center border border-red-100 group-hover:bg-red-100 transition-colors shrink-0">
+                  <svg viewBox="0 0 48 48" className="w-4.5 h-4.5 sm:w-5.5 sm:h-5.5 shrink-0" xmlns="http://www.w3.org/2000/svg">
                     <path fill="#4285F4" d="M45 16.2v22.3c0 2.2-1.8 4-4 4h-7V22.5L24 30.7 14 22.5v20H7c-2.2 0-4-1.8-4-4V16.2c0-2.2 2.3-3.6 4.2-2.5L24 25l16.8-11.3c1.9-1.1 4.2.3 4.2 2.5z"/>
                     <path fill="#34A853" d="M45 16.2v22.3c0 2.2-1.8 4-4 4h-7V22.5z"/>
                     <path fill="#EA4335" d="M24 30.7l17-11.4V16.2c0-2.2-2.3-3.6-4.2-2.5L24 25 7.2 13.7C5.3 12.6 3 14 3 16.2v3.1l17 11.4c1.2.8 2.8.8 4 0z"/>
@@ -137,10 +137,10 @@ export default function ContactSection() {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-[11px] text-dark-lavender/60 font-medium uppercase tracking-widest">
+                  <p className="text-[10px] sm:text-[11px] text-dark-lavender/60 font-medium uppercase tracking-widest">
                     Email Address
                   </p>
-                  <p className="text-base font-extrabold text-dark-lavender font-outfit tracking-wide mt-0.5">
+                  <p className="text-sm sm:text-base font-extrabold text-dark-lavender font-outfit tracking-wide mt-0.5">
                     contact@keyamind.com
                   </p>
                 </div>
@@ -152,10 +152,10 @@ export default function ContactSection() {
                 initial="hidden"
                 whileInView="visible" viewport={{ once: true, margin: "-50px" }}
                 variants={fadeUp}
-                className="flex items-center gap-4 p-4 rounded-2xl bg-white/60 backdrop-blur-md border border-white/80 shadow-[0_10px_30px_rgba(59,46,94,0.04)] min-h-[48px]"
+                className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-2xl bg-white/60 backdrop-blur-md border border-white/80 shadow-[0_10px_30px_rgba(59,46,94,0.04)] min-h-[48px]"
               >
-                <div className="w-11 h-11 rounded-xl bg-blue-50 flex items-center justify-center border border-blue-100 shrink-0">
-                  <svg viewBox="0 0 24 24" className="w-5.5 h-5.5 shrink-0" xmlns="http://www.w3.org/2000/svg">
+                <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-blue-50 flex items-center justify-center border border-blue-100 shrink-0">
+                  <svg viewBox="0 0 24 24" className="w-4.5 h-4.5 sm:w-5.5 sm:h-5.5 shrink-0" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#EA4335" />
                     <path d="M12 2c3.87 0 7 3.13 7 7c0 .77-.12 1.5-.35 2.18L12 9V2z" fill="#FBBC05" />
                     <path d="M12 9l6.65 2.18L12 22V9z" fill="#34A853" />
@@ -164,10 +164,10 @@ export default function ContactSection() {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-[11px] text-dark-lavender/60 font-medium uppercase tracking-widest">
+                  <p className="text-[10px] sm:text-[11px] text-dark-lavender/60 font-medium uppercase tracking-widest">
                     Office Locations
                   </p>
-                  <p className="text-base font-extrabold text-dark-lavender font-outfit tracking-wide mt-0.5">
+                  <p className="text-sm sm:text-base font-extrabold text-dark-lavender font-outfit tracking-wide mt-0.5">
                     Trichy & Karaikudi, Tamil Nadu
                   </p>
                 </div>
@@ -187,7 +187,7 @@ export default function ContactSection() {
             variants={fadeUp}
             className="lg:col-span-7 w-full"
           >
-            <div className="w-full p-6 sm:p-10 rounded-[32px] bg-white/70 backdrop-blur-md border border-white shadow-[0_20px_60px_rgba(59,46,94,0.08)] relative overflow-hidden text-left font-poppins">
+            <div className="w-full p-5 sm:p-10 rounded-[32px] bg-white/70 backdrop-blur-md border border-white shadow-[0_20px_60px_rgba(59,46,94,0.08)] relative overflow-hidden text-left font-poppins">
               
               {/* TOP WHATSAPP STATUS HEADER */}
               <div className="flex items-center justify-between pb-6 border-b border-dark-lavender/5">
@@ -207,7 +207,7 @@ export default function ContactSection() {
               </div>
 
               {/* FORM */}
-              <form onSubmit={handleSubmit} className="flex flex-col gap-5 pt-6">
+              <form onSubmit={handleSubmit} className="flex flex-col gap-4.5 pt-6">
                 
                 {/* NAME INPUT */}
                 <div className="flex flex-col gap-1.5">
@@ -222,7 +222,7 @@ export default function ContactSection() {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Enter your full name"
-                    className="w-full px-4 py-3.5 min-h-[48px] rounded-xl bg-white/80 border border-dark-lavender/10 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/10 text-sm text-dark-lavender placeholder:text-dark-lavender/40 transition-all font-light"
+                    className="w-full px-3.5 py-3 sm:px-4 sm:py-3.5 min-h-[44px] sm:min-h-[48px] rounded-xl bg-white/80 border border-dark-lavender/10 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/10 text-sm text-dark-lavender placeholder:text-dark-lavender/40 transition-all font-light"
                   />
                 </div>
 
@@ -236,7 +236,7 @@ export default function ContactSection() {
                     name="interest"
                     value={formData.interest}
                     onChange={handleChange}
-                    className="w-full px-4 py-3.5 min-h-[48px] rounded-xl bg-white/80 border border-dark-lavender/10 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/10 text-sm text-dark-lavender transition-all font-light cursor-pointer"
+                    className="w-full px-3.5 py-3 sm:px-4 sm:py-3.5 min-h-[44px] sm:min-h-[48px] rounded-xl bg-white/80 border border-dark-lavender/10 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/10 text-sm text-dark-lavender transition-all font-light cursor-pointer"
                   >
                     <option value="Parenting & Toddler Growth (1-4 yrs)">Parenting & Toddler Growth (1-4 yrs)</option>
                     <option value="Learning Style Mapping (4-10 yrs)">Learning Style Mapping (4-10 yrs)</option>
@@ -255,11 +255,11 @@ export default function ContactSection() {
                   <textarea
                     id="message"
                     name="message"
-                    rows={4}
+                    rows={3}
                     value={formData.message}
                     onChange={handleChange}
                     placeholder="Share any questions or details about what you're looking for..."
-                    className="w-full px-4 py-3.5 rounded-xl bg-white/80 border border-dark-lavender/10 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/10 text-sm text-dark-lavender placeholder:text-dark-lavender/40 transition-all font-light resize-none"
+                    className="w-full px-3.5 py-3 sm:px-4 sm:py-3.5 rounded-xl bg-white/80 border border-dark-lavender/10 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/10 text-sm text-dark-lavender placeholder:text-dark-lavender/40 transition-all font-light resize-none"
                   />
                 </div>
 
@@ -272,7 +272,6 @@ export default function ContactSection() {
                 >
                   <MessageSquare size={18} className="fill-white" />
                   <span>Send Message via WhatsApp</span>
-                  <Send size={16} className="group-hover:translate-x-1 transition-transform" />
                 </motion.button>
 
                 <p className="text-[11px] text-center text-dark-lavender/50 font-light mt-1">

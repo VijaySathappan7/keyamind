@@ -370,7 +370,7 @@ export default function ContentSection({ contactOnly = false }) {
               </p>
             </div>
 
-            <div className="relative z-10 shrink-0 w-full lg:w-auto">
+            <div className="relative z-10 shrink-0 w-full sm:w-auto">
               <a
                 href="#contact"
                 onClick={(e) => {
@@ -381,10 +381,9 @@ export default function ContentSection({ contactOnly = false }) {
                     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
                   }
                 }}
-                className="group relative w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4.5 rounded-full font-extrabold text-xs uppercase tracking-widest text-white shadow-lg shadow-purple-900/10 bg-gradient-to-r from-dark-lavender via-purple-700 to-purple-600 hover:opacity-95 transition-opacity cursor-pointer active:scale-95 overflow-hidden font-poppins"
+                className="group relative w-full sm:w-auto inline-flex items-center justify-center px-8 py-4.5 rounded-full font-extrabold text-xs uppercase tracking-widest text-white shadow-lg shadow-purple-900/10 bg-gradient-to-r from-dark-lavender via-purple-700 to-purple-600 hover:opacity-95 transition-opacity cursor-pointer active:scale-95 overflow-hidden font-poppins"
               >
                 <span>Book a Consultation</span>
-                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
           </motion.div>

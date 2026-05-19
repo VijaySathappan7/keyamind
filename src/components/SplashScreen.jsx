@@ -11,6 +11,9 @@ export default function SplashScreen({ onComplete }) {
   const [deviceWidth, setDeviceWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 1024
   );
+  const [deviceHeight, setDeviceHeight] = useState(
+    typeof window !== "undefined" ? window.innerHeight : 768
+  );
   const [mounted, setMounted] = useState(true);
   const started = useRef(false);
 
@@ -21,6 +24,7 @@ export default function SplashScreen({ onComplete }) {
       if (timeoutId) clearTimeout(timeoutId);
       timeoutId = setTimeout(() => {
         setDeviceWidth(window.innerWidth);
+        setDeviceHeight(window.innerHeight);
       }, 100);
     };
     window.addEventListener("resize", fn, { passive: true });
@@ -60,13 +64,28 @@ export default function SplashScreen({ onComplete }) {
   }, [onComplete]);
 
   // Centering math: (logo + gap + title) perfectly centered
-  const { logoX, titleX } = (() => {
+  const { logoX, titleX, lw, tw, th } = (() => {
     let lw, tw, gap;
-    if      (deviceWidth < 640)  { lw = 115; tw = 230; gap = 36; }
-    else if (deviceWidth < 768)  { lw = 130; tw = 256; gap = 40; }
-    else if (deviceWidth < 1024) { lw = 148; tw = 288; gap = 46; }
-    else                         { lw = 165; tw = 320; gap = 52; }
-    return { logoX: (gap + tw) / 2, titleX: (gap + lw) / 2 };
+    const isMobileSize = deviceWidth < 500 || deviceHeight < 500;
+    const isTabletSize = (deviceWidth >= 500 && deviceWidth < 768) || (deviceHeight >= 500 && deviceHeight < 680);
+    
+    if (isMobileSize) {
+      lw = 80; tw = 160; gap = 24;
+    } else if (isTabletSize) {
+      lw = 110; tw = 220; gap = 32;
+    } else if (deviceWidth < 1024) {
+      lw = 135; tw = 270; gap = 40;
+    } else {
+      lw = 155; tw = 310; gap = 48;
+    }
+    const th = Math.round(tw * 0.3125);
+    return { 
+      logoX: (gap + tw) / 2, 
+      titleX: (gap + lw) / 2,
+      lw,
+      tw,
+      th
+    };
   })();
 
   const isSplit = phase === "split";
@@ -112,9 +131,9 @@ export default function SplashScreen({ onComplete }) {
             className="
               absolute z-10 object-contain
               pointer-events-none select-none will-change-transform
-              h-[72px] sm:h-[80px] md:h-[90px] lg:h-[100px]
               w-auto max-w-none
             "
+            style={{ width: `${tw}px`, height: `${th}px` }}
             initial={{ x: -logoX, clipPath: "inset(0 0% 0 100%)", opacity: 0 }}
             animate={{
               x: isSplit ? titleX : (isMerge || isExit) ? -logoX + 25 : -logoX,
@@ -140,8 +159,8 @@ export default function SplashScreen({ onComplete }) {
             className="
               relative z-20 object-contain
               pointer-events-none select-none will-change-transform
-              w-[115px] sm:w-[130px] md:w-[148px] lg:w-[165px]
             "
+            style={{ width: `${lw}px`, height: `${lw}px` }}
             initial={{ opacity: 0, scale: 0.42, filter: "blur(22px)", x: 0 }}
             animate={{
               opacity: 1,

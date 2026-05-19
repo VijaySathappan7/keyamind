@@ -328,10 +328,9 @@ const HeroSection = () => {
                 whileTap={{ scale: 0.96 }}
                 href="#contact"
                 onClick={(e) => handleCtaClick(e, "contact")}
-                className="px-8 py-3.5 rounded-full font-extrabold text-[11px] tracking-[0.2em] uppercase text-white bg-gradient-to-r from-dark-lavender via-purple-700 to-purple-600 shadow-md shadow-purple-500/10 transition-all duration-300 font-poppins text-center flex items-center justify-center gap-2 cursor-pointer min-h-[44px]"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-full font-extrabold text-[11px] tracking-[0.2em] uppercase text-white bg-gradient-to-r from-dark-lavender via-purple-700 to-purple-600 shadow-md shadow-purple-500/10 transition-all duration-300 font-poppins text-center flex items-center justify-center cursor-pointer min-h-[44px]"
               >
                 Get Started
-                <ArrowRight size={13} />
               </motion.a>
 
               <motion.a
@@ -339,7 +338,7 @@ const HeroSection = () => {
                 whileTap={{ scale: 0.96 }}
                 href="#our-services"
                 onClick={(e) => handleCtaClick(e, "our-services")}
-                className="px-8 py-3.5 rounded-full font-extrabold text-[11px] tracking-[0.2em] uppercase text-dark-lavender border border-purple-200 bg-white/40 transition-all duration-300 backdrop-blur-sm flex items-center justify-center font-poppins text-center min-h-[44px]"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-full font-extrabold text-[11px] tracking-[0.2em] uppercase text-dark-lavender border border-purple-200 bg-white/40 transition-all duration-300 backdrop-blur-sm flex items-center justify-center font-poppins text-center min-h-[44px]"
               >
                 Explore Services
               </motion.a>

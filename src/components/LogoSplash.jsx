@@ -48,10 +48,10 @@ export default function LogoSplash({ onComplete }) {
         </div>
 
         {/* Circular Spinner & Logo Container */}
-        <div className="relative flex items-center justify-center w-72 h-72">
+        <div className="relative flex items-center justify-center w-52 h-52 sm:w-72 sm:h-72">
 
           {/* SVG Circular Loader Ring */}
-          <svg className="absolute w-56 h-56 animate-spin" viewBox="0 0 100 100" style={{ animationDuration: "1.2s" }}>
+          <svg className="absolute w-40 h-40 sm:w-56 sm:h-56 animate-spin" viewBox="0 0 100 100" style={{ animationDuration: "1.2s" }}>
             <defs>
               <linearGradient id="spinner-grad" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor="#8b5cf6" stopOpacity="1" />
@@ -76,7 +76,7 @@ export default function LogoSplash({ onComplete }) {
             src={logo}
             alt="KeyAmind Logo"
             draggable={false}
-            className="w-24 h-24 object-contain relative z-10"
+            className="w-18 h-18 sm:w-24 sm:h-24 object-contain relative z-10"
             initial={{ scale: 0.75, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5, ease: [0.34, 1.56, 0.64, 1] }}

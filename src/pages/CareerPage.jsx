@@ -430,12 +430,11 @@ export default function CareerPage() {
                     Learn how evaluating biological brain quotients (IQ, EQ, CQ, AQ) eliminates academic stream and major selection anxiety.
                   </p>
                 </div>
-                <div className="mt-4 flex items-center gap-1.5 text-xs font-black uppercase text-blue-600">
+                <div className="mt-4 flex items-center text-xs font-black uppercase text-blue-600">
                   <span>Read Article</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
                 </div>
               </Link>
-
+ 
               <Link 
                 to="/faq" 
                 className="bg-white border border-purple-50 hover:border-purple-300 rounded-3xl p-8 shadow-[0_12px_40px_rgba(0,0,0,0.01)] hover:shadow-md transition-all flex flex-col justify-between"
@@ -447,18 +446,17 @@ export default function CareerPage() {
                     Read our transparent review on fingerprint privacy, scanning session duration, report delivery, and counseling.
                   </p>
                 </div>
-                <div className="mt-4 flex items-center gap-1.5 text-xs font-black uppercase text-blue-600">
+                <div className="mt-4 flex items-center text-xs font-black uppercase text-blue-600">
                   <span>Browse FAQs</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
                 </div>
               </Link>
             </div>
           </div>
-
+ 
           {/* ================= HIGH-CONVERSION CTA ================= */}
           <div className="w-full py-8 px-6 sm:py-10 sm:px-12 rounded-[32px] bg-gradient-to-r from-white/95 via-purple-50/90 to-purple-50/90 border border-white shadow-[0_20px_50px_rgba(59,46,94,0.06)] backdrop-blur-md relative overflow-hidden flex flex-col items-center text-center group mt-8">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-gradient-to-tr from-purple-300/20 to-purple-300/20 rounded-full blur-[70px] pointer-events-none animate-pulse-soft" />
-
+ 
             <div className="relative z-10 max-w-3xl flex flex-col items-center gap-3.5">
               <h2 className="text-[clamp(20px,4.5vw,32px)] font-outfit font-black text-dark-lavender leading-tight tracking-tight">
                 Ready to Align Your <span className="text-gradient-purple font-cursive text-[clamp(24px,5vw,42px)] font-normal capitalize">Professional Path?</span>
@@ -467,7 +465,7 @@ export default function CareerPage() {
               <p className="text-xs sm:text-sm font-light text-dark-lavender/80 font-poppins leading-relaxed max-w-2xl">
                 Schedule a data-driven career counseling, stream assessment, or transition mapping session with Keyamind's expert occupational psychologists.
               </p>
-
+ 
               <motion.a 
                 whileHover={{ scale: 1.04, y: -2, boxShadow: "0 15px 30px rgba(59,46,94,0.15)" }}
                 whileTap={{ scale: 0.96 }}
@@ -480,10 +478,9 @@ export default function CareerPage() {
                     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
                   }
                 }}
-                className="mt-2 inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-gradient-to-r from-dark-lavender via-purple-700 to-purple-600 text-white font-poppins font-extrabold text-[11px] tracking-[0.2em] uppercase shadow-md shadow-purple-500/10 transition-all duration-300 group cursor-pointer min-h-[44px]"
+                className="w-full sm:w-auto mt-2 inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-gradient-to-r from-dark-lavender via-purple-700 to-purple-600 text-white font-poppins font-extrabold text-[11px] tracking-[0.2em] uppercase shadow-md shadow-purple-500/10 transition-all duration-300 group cursor-pointer min-h-[44px]"
               >
                 <span>Book Career Assessment</span>
-                <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
               </motion.a>
             </div>
           </div>

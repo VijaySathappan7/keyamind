@@ -301,10 +301,9 @@ export default function BlogDetailPage() {
                       document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
                     }
                   }}
-                  className="mt-2 inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-gradient-to-r from-dark-lavender via-purple-700 to-purple-600 text-white font-poppins font-extrabold text-[11px] tracking-[0.2em] uppercase shadow-md shadow-purple-500/10 transition-all duration-300 group cursor-pointer min-h-[44px]"
+                  className="w-full sm:w-auto mt-2 inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-gradient-to-r from-dark-lavender via-purple-700 to-purple-600 text-white font-poppins font-extrabold text-[11px] tracking-[0.2em] uppercase shadow-md shadow-purple-500/10 transition-all duration-300 group cursor-pointer min-h-[44px]"
                 >
                   <span>Book Consultation Session</span>
-                  <ArrowLeft size={16} className="group-hover:translate-x-0.5 transition-transform rotate-180" />
                 </motion.a>
               </div>
             </div>

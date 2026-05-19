@@ -226,10 +226,9 @@ const InherentBrainMappingSection = () => {
                     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
                   }
                 }}
-                className="px-8 py-3.5 rounded-full font-extrabold text-[11px] tracking-[0.2em] uppercase text-white bg-gradient-to-r from-dark-lavender via-purple-700 to-purple-600 shadow-md shadow-purple-500/10 transition-all duration-300 font-poppins text-center flex items-center justify-center gap-2 cursor-pointer min-h-[44px]"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-full font-extrabold text-[11px] tracking-[0.2em] uppercase text-white bg-gradient-to-r from-dark-lavender via-purple-700 to-purple-600 shadow-md shadow-purple-500/10 transition-all duration-300 font-poppins text-center flex items-center justify-center cursor-pointer min-h-[44px]"
               >
                 Explore Your Potential
-                <ArrowRight size={13} />
               </motion.a>
 
               <motion.a 
@@ -244,7 +243,7 @@ const InherentBrainMappingSection = () => {
                     document.getElementById("our-services")?.scrollIntoView({ behavior: "smooth" });
                   }
                 }}
-                className="px-8 py-3.5 rounded-full font-extrabold text-[11px] tracking-[0.2em] uppercase text-dark-lavender bg-white/80 border border-dark-lavender/10 shadow-sm transition-all duration-300 font-poppins text-center flex items-center justify-center cursor-pointer min-h-[44px]"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-full font-extrabold text-[11px] tracking-[0.2em] uppercase text-dark-lavender bg-white/80 border border-dark-lavender/10 shadow-sm transition-all duration-300 font-poppins text-center flex items-center justify-center cursor-pointer min-h-[44px]"
               >
                 Learn More
               </motion.a>
