@@ -19,6 +19,10 @@ export default function SplashScreen({ onComplete }) {
 
   // Debounced Resize tracker for high-performance layout safety
   useEffect(() => {
+    // Sync dimensions immediately on client mount
+    setDeviceWidth(window.innerWidth);
+    setDeviceHeight(window.innerHeight);
+
     let timeoutId = null;
     const fn = () => {
       if (timeoutId) clearTimeout(timeoutId);
@@ -71,7 +75,7 @@ export default function SplashScreen({ onComplete }) {
     const isLaptopSize = deviceWidth >= 768 && deviceWidth < 1024;
 
     if (isMobileSize) {
-      lw = 72; tw = 120; gap = -6;
+      lw = 60; tw = 100; gap = 40;
     } else if (isTabletSize) {
       lw = 115; tw = 200; gap = -38;
     } else if (isLaptopSize) {
