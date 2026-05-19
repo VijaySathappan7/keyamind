@@ -271,7 +271,7 @@ export default function ContactSection() {
                   className="w-full mt-2 flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white font-extrabold text-sm tracking-wide shadow-[0_10px_25px_rgba(37,211,102,0.3)] transition-all cursor-pointer group min-h-[48px]"
                 >
                   <MessageSquare size={18} className="fill-white" />
-                  <span>Send Message via WhatsApp</span>
+                  <span>Send Message</span>
                 </motion.button>
 
                 <p className="text-[11px] text-center text-dark-lavender/50 font-light mt-1">
