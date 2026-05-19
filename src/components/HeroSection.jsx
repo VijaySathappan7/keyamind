@@ -220,7 +220,7 @@ const HeroSection = () => {
         
         {/* LOGO & TITLE - ON TOP AT SMALLER SIZE FOR MOBILE, UNCHANGED FOR LAPTOP */}
         <motion.div 
-          className="w-full lg:w-[38%] flex flex-col items-center justify-center text-center z-20 h-auto shrink-0 pt-28 pb-8 lg:py-0"
+          className="w-full lg:w-[38%] flex flex-col items-center justify-center text-center z-20 h-auto shrink-0 pt-28 pb-1 lg:py-0"
         >
           <motion.div
             animate={{ y: [0, -8, 0] }}
