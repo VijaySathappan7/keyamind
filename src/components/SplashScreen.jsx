@@ -70,7 +70,7 @@ export default function SplashScreen({ onComplete }) {
     const isTabletSize = (deviceWidth >= 500 && deviceWidth < 768) || (deviceHeight >= 500 && deviceHeight < 680);
     
     if (isMobileSize) {
-      lw = 65; tw = 130; gap = 6;
+      lw = 82; tw = 130; gap = 6;
     } else if (isTabletSize) {
       lw = 110; tw = 220; gap = 32;
     } else if (deviceWidth < 1024) {
