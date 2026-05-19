@@ -79,7 +79,7 @@ const ctaVariants = {
 
 /* ─── Helper: scroll to a section with Lenis + retry ─────────────────────── */
 function scrollToSection(sectionId) {
-  const tryScroll = (attempts = 0) => {
+  const tryScroll = (attempts = 0, isLazy = false) => {
     // Check if any splash screens are currently active in DOM
     const isSplashActive = Array.from(document.querySelectorAll('*')).some(el => {
       const classes = el.className || '';
@@ -94,20 +94,30 @@ function scrollToSection(sectionId) {
 
     const el = document.getElementById(sectionId);
     if (el) {
-      if (window.lenis) {
-        window.lenis.scrollTo("#" + sectionId, {
-          offset: -96,
-          duration: 1.35,
-          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        });
-      } else {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      const executeScroll = () => {
+        if (window.lenis) {
+          window.lenis.scrollTo("#" + sectionId, {
+            offset: -96,
+            duration: 1.35,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          });
+        } else {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      };
+
+      executeScroll();
+
+      // If the section was lazy-loaded, run a secondary alignment cleanup after 350ms
+      // to correct any layout shifts caused by chunk loads and asset paints.
+      if (isLazy && attempts < 2) {
+        setTimeout(executeScroll, 350);
       }
     } else {
       // Dispatch custom event to mount all lazy components instantly
       window.dispatchEvent(new CustomEvent("force-lazy-load"));
       if (attempts < 60) {
-        setTimeout(() => tryScroll(attempts + 1), 50);
+        setTimeout(() => tryScroll(attempts + 1, true), 50);
       }
     }
   };
