@@ -138,7 +138,7 @@ export default function FounderProfileSection() {
             </div>
 
             {/* Executive Action Action (No Arrow Icon) */}
-            <div className="pt-4">
+            <div className="pt-4 flex justify-center lg:justify-start w-full">
               <a
                 href="#contact"
                 onClick={(e) => {
@@ -149,7 +149,7 @@ export default function FounderProfileSection() {
                     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
                   }
                 }}
-                className="inline-flex items-center gap-3 px-10 py-4 rounded-full bg-gradient-to-r from-dark-lavender via-purple-700 to-purple-600 text-white font-extrabold text-[11px] uppercase tracking-[0.3em] shadow-xl transition-all hover:scale-105 active:scale-95 cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-10 py-4 rounded-full bg-gradient-to-r from-dark-lavender via-purple-700 to-purple-600 text-white font-extrabold text-[11px] uppercase tracking-[0.3em] shadow-xl transition-all hover:scale-105 active:scale-95 cursor-pointer text-center"
               >
                 <span>Book a Consultation</span>
               </a>

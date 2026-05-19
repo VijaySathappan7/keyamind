@@ -419,12 +419,12 @@ export default function WhatWeDoSection() {
                             ))}
                           </div>
 
-                          <div className="flex flex-wrap gap-4">
+                          <div className="flex justify-center lg:justify-start w-full">
                             <motion.button
                               whileHover={{ scale: 1.04, y: -2, boxShadow: "0 15px 30px rgba(59,46,94,0.15)" }}
                               whileTap={{ scale: 0.96 }}
                               onClick={() => window.scrollToContact ? window.scrollToContact() : document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-                              className="px-8 py-3.5 rounded-full bg-gradient-to-r from-dark-lavender via-purple-700 to-purple-600 text-white font-extrabold text-[11px] tracking-[0.2em] uppercase shadow-md shadow-purple-500/10 transition-all duration-300 font-poppins text-center flex items-center justify-center gap-2 cursor-pointer min-h-[44px]"
+                              className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-gradient-to-r from-dark-lavender via-purple-700 to-purple-600 text-white font-extrabold text-[11px] tracking-[0.2em] uppercase shadow-md shadow-purple-500/10 transition-all duration-300 font-poppins text-center flex items-center justify-center gap-2 cursor-pointer min-h-[44px]"
                             >
                               Get Started
                             </motion.button>
