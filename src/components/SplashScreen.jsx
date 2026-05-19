@@ -173,7 +173,7 @@ export default function SplashScreen({ onComplete }) {
           <motion.div
             className="h-full rounded-full bg-gradient-to-r from-violet-500 via-purple-500 to-pink-500"
             initial={{ scaleX: 0, originX: 0 }}
-            animate={{ scaleX: isSplit ? 1 : 0 }}
+            animate={{ scaleX: (isSplit || isMerge || isExit) ? 1 : 0 }}
             transition={{ duration: 2.8, ease: [0.4, 0, 0.6, 1] }}
           />
         </motion.div>
