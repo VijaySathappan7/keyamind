@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 
 export default function SEOHead({
   title = "Keyamind Solutions | Best IBM Test, Fingerprint Analysis & Expert Career Counselling",
-  description = "Discover clarity with India's trusted IBM Test, Fingerprint Analysis, and expert Career Counselling. Unlock your intelligence and career potential with Keyamind Solutions.",
+  description = "Discover clarity with trusted IBM Test, Fingerprint Analysis, and expert Career Counselling. Unlock your intelligence and career potential with Keyamind Solutions.",
   keywords = `
     IBM Test,
     Career Counselling,
