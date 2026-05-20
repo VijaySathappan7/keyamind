@@ -130,9 +130,11 @@ export default function SEOHead({
 
       <meta property="og:image" content={ogImage} />
       <meta property="og:image:secure_url" content={ogImage} />
+      <meta property="og:image:type" content="image/png" />
       <meta property="og:image:width" content={imgWidth} />
       <meta property="og:image:height" content={imgHeight} />
       <meta property="og:image:alt" content="Keyamind Solutions" />
+      <link rel="image_src" href={ogImage} />
 
       <meta property="og:site_name" content="Keyamind Solutions" />
       <meta property="og:locale" content="en_IN" />
