@@ -13,12 +13,12 @@ import {
 import SEOHead from "../components/SEOHead";
 import ContentSection from "../components/ContentSection";
 
-export default function DmitPage() {
-  // Structured Schema for DMIT Service
-  const dmitSchema = {
+export default function IbmPage() {
+  // Structured Schema for IBM Service
+  const ibmSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": "DMIT Brain Mapping & Fingerprint Analysis",
+    "name": "IBM Brain Mapping & Fingerprint Analysis",
     "description": "Scientific fingerprint-based assessment that maps learning styles, natural talents, and cognitive traits for children and adults.",
     "provider": {
       "@type": "LocalBusiness",
@@ -63,15 +63,15 @@ export default function DmitPage() {
   return (
     <>
       <SEOHead 
-        title="Fingerprint Brain Mapping (DMIT) | Keyamind"
-        description="Discover your child's innate intelligence, learning style, and brain dominance with the scientific Dermatoglyphics Multiple Intelligence Test (DMIT)."
-        canonical="https://keyamind.com/dmit"
-        keywords="DMIT Test Chennai, brain mapping children, fingerprint analysis, Multiple Intelligences, Howard Gardner, child potential"
+        title="Fingerprint Brain Mapping (IBM) | Keyamind"
+        description="Discover your child's innate intelligence, learning style, and brain dominance with scientific Innate Brain Mapping (IBM)."
+        canonical="https://keyamind.com/ibm"
+        keywords="IBM Test Chennai, brain mapping children, fingerprint analysis, Multiple Intelligences, Howard Gardner, child potential"
       />
 
       {/* Inject custom service schema */}
       <script type="application/ld+json">
-        {JSON.stringify(dmitSchema)}
+        {JSON.stringify(ibmSchema)}
       </script>
 
       <div className="relative min-h-screen pt-24 pb-20 bg-gradient-to-b from-white via-warm-cream to-soft-lavender overflow-x-hidden selection:bg-purple-200 selection:text-dark-lavender">
@@ -94,7 +94,7 @@ export default function DmitPage() {
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-purple-200 bg-purple-50/50 backdrop-blur-md mb-6 self-start"
             >
               <Fingerprint className="w-4 h-4 text-purple-600 animate-pulse" />
-              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-purple-800">Dermatoglyphics Assessment</span>
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-purple-800">Innate Brain Mapping Assessment</span>
             </motion.div>
             
             <motion.h1 
@@ -204,7 +204,7 @@ export default function DmitPage() {
             </motion.div>
           </div>
 
-          {/* ================= STRICT PRIVACY CARD (CRITICAL USER REQUEST) ================= */}
+          {/* ================= STRICT PRIVACY CARD ================= */}
           <motion.div 
             initial={{ y: 40, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true, margin: "-50px" }}
@@ -219,7 +219,7 @@ export default function DmitPage() {
                 100% Scans Security & Privacy Guarantee
               </h3>
               <p className="text-xs sm:text-sm text-emerald-800/80 font-medium leading-relaxed">
-                We strictly adhere to biometric security compliance. Fingerprints scanned for DMIT analysis are highly encrypted, immediately transmitted to certified diagnostic clouds, and **permanently deleted** from our local scanners within 24 hours of scanning. We never sell, store, or warehouse personal biometric markers.
+                We strictly adhere to biometric security compliance. Fingerprints scanned for IBM analysis are highly encrypted, immediately transmitted to certified diagnostic clouds, and **permanently deleted** from our local scanners within 24 hours of scanning. We never sell, store, or warehouse personal biometric markers.
               </p>
             </div>
           </motion.div>
@@ -258,7 +258,7 @@ export default function DmitPage() {
           {/* ================= BENEFITS MATRIX ================= */}
           <div className="glass-premium rounded-[32px] p-8 sm:p-12 mb-24 border-white/60 shadow-xl">
             <h2 className="text-[clamp(24px,5.5vw,34px)] lg:text-[36px] font-outfit font-black text-dark-lavender leading-[1.12] tracking-tight text-center mb-12">
-              Who Benefits from DMIT <span className="text-gradient-purple font-cursive text-[clamp(28px,7.5vw,46px)] lg:text-[44px] font-normal capitalize tracking-normal inline-block drop-shadow-[0_2px_8px_rgba(139,92,246,0.15)] ml-1">Mapping</span>?
+              Who Benefits from IBM <span className="text-gradient-purple font-cursive text-[clamp(28px,7.5vw,46px)] lg:text-[44px] font-normal capitalize tracking-normal inline-block drop-shadow-[0_2px_8px_rgba(139,92,246,0.15)] ml-1">Mapping</span>?
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -307,12 +307,12 @@ export default function DmitPage() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <Link 
-                to="/blog/what-is-dmit" 
+                to="/blog/what-is-ibm" 
                 className="bg-white border border-purple-50 hover:border-purple-300 rounded-3xl p-8 shadow-[0_12px_40px_rgba(0,0,0,0.01)] hover:shadow-md transition-all flex flex-col justify-between"
               >
                 <div>
                   <span className="text-[10px] font-black text-purple-600 uppercase tracking-widest block mb-2">Featured Guide</span>
-                  <h3 className="text-base sm:text-lg font-black text-dark-lavender font-poppins mb-2">What is DMIT? The Science of Fingerprint Analysis</h3>
+                  <h3 className="text-base sm:text-lg font-black text-dark-lavender font-poppins mb-2">What is IBM? The Science of Fingerprint Analysis</h3>
                   <p className="text-xs sm:text-sm text-dark-lavender/65 font-semibold leading-relaxed">
                     Explore the detailed embryology and genetic correlations behind dermatoglyphics, and how they reveal cortical potential.
                   </p>

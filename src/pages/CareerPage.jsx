@@ -420,7 +420,7 @@ export default function CareerPage() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <Link 
-                to="/blog/dmit-for-career-selection" 
+                to="/blog/ibm-for-career-selection" 
                 className="bg-white border border-purple-50 hover:border-purple-300 rounded-3xl p-8 shadow-[0_12px_40px_rgba(0,0,0,0.01)] hover:shadow-md transition-all flex flex-col justify-between"
               >
                 <div>

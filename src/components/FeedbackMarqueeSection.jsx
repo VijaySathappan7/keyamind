@@ -25,7 +25,7 @@ const feedbacks = [
   },
   {
     quote:
-      "The DMIT analysis gave us incredible clarity on our son's inherent strengths. We now know exactly how to encourage his auditory learning preferences!",
+      "The IBM analysis gave us incredible clarity on our son's inherent strengths. We now know exactly how to encourage his auditory learning preferences!",
     name: "Karthikeyan Natarajan",
     role: "IT Executive",
     location: "Chennai",

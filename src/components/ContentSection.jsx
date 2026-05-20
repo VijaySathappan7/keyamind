@@ -14,7 +14,7 @@ import indianAvatar4 from '../assets/images/indian_avatar_4.png';
 
 /* ─── Hover Prefetching Intent Logic ─── */
 const prefetchPage = (to) => {
-  if (to === "/dmit") import("../pages/DmitPage").catch(() => {});
+  if (to === "/ibm") import("../pages/IbmPage").catch(() => {});
   else if (to === "/parenting") import("../pages/ParentingPage").catch(() => {});
   else if (to === "/career") import("../pages/CareerPage").catch(() => {});
   else if (to === "/blog") import("../pages/BlogListPage").catch(() => {});
@@ -39,7 +39,7 @@ const scienceLinks = [
 ];
 
 const pagesLinks = [
-  { name: "DMIT Mapping", to: "/dmit" },
+  { name: "IBM Mapping", to: "/ibm" },
   { name: "Parenting", to: "/parenting" },
   { name: "Career Guidance", to: "/career" },
   { name: "Blogs", to: "/blog" },
@@ -103,7 +103,7 @@ export default function ContentSection({ contactOnly = false }) {
       sections: [
         {
           heading: "1. Information Collection Architecture",
-          content: "As a premier neuroscience and DMIT growth advisory firm, we collect personal and developmental data strictly for the evaluation of cognitive mapping and counseling mandates. This includes biometric fingerprint ridge patterns, developmental history, and learning contour preferences provided voluntarily during exploratory consultations or digital communications."
+          content: "As a premier neuroscience and IBM growth advisory firm, we collect personal and developmental data strictly for the evaluation of cognitive mapping and counseling mandates. This includes biometric fingerprint ridge patterns, developmental history, and learning contour preferences voluntarily provided voluntarily during exploratory consultations or digital communications."
         },
         {
           heading: "2. Non-Transactional Web Environment",
@@ -129,7 +129,7 @@ export default function ContentSection({ contactOnly = false }) {
     },
     terms: {
       title: "Terms of Engagement",
-      subtitle: "Governing Framework for DMIT & Strategic Career Counseling Mandates",
+      subtitle: "Governing Framework for IBM & Strategic Career Counseling Mandates",
       sizeClass: "max-w-5xl w-[95vw] lg:w-full h-[85vh] md:h-[80vh]",
       sections: [
         {
@@ -146,7 +146,7 @@ export default function ContentSection({ contactOnly = false }) {
         },
         {
           heading: "4. Intellectual Property Rights",
-          content: "The site architecture, visual assets, proprietary DMIT mapping methodologies, and cognitive structuring models displayed herein remain the exclusive intellectual property of Keyamind Solutions. Unauthorised reproduction or commercial deployment is strictly prohibited under applicable copyright laws."
+          content: "The site architecture, visual assets, proprietary IBM mapping methodologies, and cognitive structuring models displayed herein remain the exclusive intellectual property of Keyamind Solutions. Unauthorised reproduction or commercial deployment is strictly prohibited under applicable copyright laws."
         },
         {
           heading: "5. Limitation of Liability",
@@ -188,7 +188,7 @@ export default function ContentSection({ contactOnly = false }) {
       sections: [
         {
           heading: "1. Biometric Mapping Scope",
-          content: "Dermatoglyphics Multiple Intelligence Test (DMIT) is an assessment tool designed to identify inherent biological traits, learning preferences, and natural potential based on ridge formations. It is intended for educational, personal, and career advisory guidance."
+          content: "Innate Brain Mapping (IBM) is an assessment tool designed to identify inherent biological traits, learning preferences, and natural potential based on ridge formations. It is intended for educational, personal, and career advisory guidance."
         },
         {
           heading: "2. Dynamic Human Potential",
@@ -431,7 +431,7 @@ export default function ContentSection({ contactOnly = false }) {
               </a>
 
               <p className="text-dark-lavender/80 text-sm font-medium leading-relaxed max-w-md font-poppins">
-                Keyamind Solutions is a premier growth advisory firm integrating advanced neuroscience with DMIT assessment architecture to illuminate inherent biological strengths and chart precision paths for life and career.
+                Keyamind Solutions is a premier growth advisory firm integrating advanced neuroscience with IBM assessment architecture to illuminate inherent biological strengths and chart precision paths for life and career.
               </p>
 
               <div className="flex items-center gap-4 mt-2">

@@ -78,7 +78,7 @@ const ExpertiseSection = memo(() => {
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-purple-100 bg-white/70 backdrop-blur-md shadow-sm mb-6">
             <div className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-purple-600 via-purple-500 to-purple-400 animate-pulse" />
             <span className="text-[10px] sm:text-[11px] tracking-[0.25em] uppercase font-extrabold text-dark-lavender font-poppins pl-[0.1em]">
-              DMIT & Career Counselling
+              IBM & Career Counselling
             </span>
           </div>
 
@@ -90,7 +90,7 @@ const ExpertiseSection = memo(() => {
           </h2>
 
           <p className="text-sm sm:text-base text-dark-lavender/80 leading-relaxed font-light font-poppins max-w-3xl mb-4 px-4">
-            Keyamind Solutions combines advanced DMIT brain mapping with practical,
+            Keyamind Solutions combines advanced IBM brain mapping with practical,
             research-backed mentorship. We don't just advise — we help individuals
             and organizations discover their inherent strengths and build a lifelong
             foundation of clarity, purpose, and confidence.

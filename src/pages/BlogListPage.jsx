@@ -10,7 +10,7 @@ export default function BlogListPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  const categories = ["All", "DMIT Science", "Parenting", "Career Alignment"];
+  const categories = ["All", "IBM Science", "Parenting", "Career Alignment"];
 
   // Filter logic
   const filteredBlogs = blogsData.filter((blog) => {
@@ -55,9 +55,9 @@ export default function BlogListPage() {
     <>
       <SEOHead 
         title="Blogs & Parenting Resources | Keyamind"
-        description="Explore expert, science-backed articles on DMIT brain mapping, child development, cognitive testing, brain quotients, and parenting methodologies."
+        description="Explore expert, science-backed articles on IBM brain mapping, child development, cognitive testing, brain quotients, and parenting methodologies."
         canonical="https://keyamind.com/blog"
-        keywords="brain mapping blogs, parenting advice science, multiple intelligences Gardner, DMIT test articles, career alignment tips"
+        keywords="brain mapping blogs, parenting advice science, multiple intelligences Gardner, IBM test articles, career alignment tips"
       />
 
       <div className="relative min-h-screen pt-24 pb-20 bg-gradient-to-b from-white via-warm-cream to-soft-lavender overflow-x-hidden selection:bg-purple-200 selection:text-dark-lavender">

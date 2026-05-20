@@ -6,7 +6,7 @@ import titleImage from '../assets/logos/title.webp';
 
 /* ─── Hover Prefetching Intent Logic ─── */
 const prefetchPage = (to) => {
-  if (to === "/dmit") import("../pages/DmitPage").catch(() => {});
+  if (to === "/ibm") import("../pages/IbmPage").catch(() => {});
   else if (to === "/parenting") import("../pages/ParentingPage").catch(() => {});
   else if (to === "/career") import("../pages/CareerPage").catch(() => {});
   else if (to === "/blog") import("../pages/BlogListPage").catch(() => {});
@@ -15,7 +15,7 @@ const prefetchPage = (to) => {
 
 /* ─── Link data ─────────────────────────────────────────────────────────── */
 const subPages = [
-  { name: "DMIT Assessment", to: "/dmit" },
+  { name: "IBM Assessment", to: "/ibm" },
   { name: "Parenting Guidance", to: "/parenting" },
   { name: "Career Counseling", to: "/career" },
   { name: "Knowledge Hub", to: "/blog" },
@@ -401,7 +401,7 @@ const Navbar = () => {
                 aria-expanded={scienceOpen}
                 aria-haspopup="true"
                 aria-controls="science-dropdown-menu"
-                aria-label="Toggle Science of DMIT Dropdown"
+                aria-label="Toggle Science of IBM Dropdown"
                 className="flex items-center gap-1 hover:text-purple-600 transition-colors duration-200 cursor-pointer py-2 uppercase font-black focus-visible:ring-2 focus-visible:ring-purple-500/50 focus-visible:outline-none rounded-lg font-poppins"
               >
                 <span>Science</span>

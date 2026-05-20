@@ -9,9 +9,9 @@
   </url>
 
 
-  <!-- DMIT Brain Mapping Landing Page -->
+  <!-- IBM Brain Mapping Landing Page -->
   <url>
-    <loc>https://keyamind.com/dmit</loc>
+    <loc>https://keyamind.com/ibm</loc>
     <lastmod>2026-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -49,17 +49,17 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- Blog Detail: What is DMIT? -->
+  <!-- Blog Detail: What is IBM? -->
   <url>
-    <loc>https://keyamind.com/blog/what-is-dmit</loc>
+    <loc>https://keyamind.com/blog/what-is-ibm</loc>
     <lastmod>2026-05-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
-  <!-- Blog Detail: DMIT for Career Selection -->
+  <!-- Blog Detail: IBM for Career Selection -->
   <url>
-    <loc>https://keyamind.com/blog/dmit-for-career-selection</loc>
+    <loc>https://keyamind.com/blog/ibm-for-career-selection</loc>
     <lastmod>2026-05-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

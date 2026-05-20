@@ -12,7 +12,7 @@ import SmoothScroll from "./components/SmoothScroll";
 import HomePage from "./pages/HomePage";
 
 // Lazy-loaded pages
-const DmitPage = lazy(() => import("./pages/DmitPage"));
+const IbmPage = lazy(() => import("./pages/IbmPage"));
 const ParentingPage = lazy(() => import("./pages/ParentingPage"));
 const CareerPage = lazy(() => import("./pages/CareerPage"));
 const BlogListPage = lazy(() => import("./pages/BlogListPage"));
@@ -75,7 +75,7 @@ export default function App() {
                 <Suspense fallback={null}>
                   <Routes>
                     <Route path="/" element={<HomePage />} />
-                    <Route path="/dmit" element={<DmitPage />} />
+                    <Route path="/ibm" element={<IbmPage />} />
                     <Route path="/parenting" element={<ParentingPage />} />
                     <Route path="/career" element={<CareerPage />} />
                     <Route path="/blog" element={<BlogListPage />} />

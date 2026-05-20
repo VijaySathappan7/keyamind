@@ -1,7 +1,7 @@
 {
   "name": "Keyamind Solutions",
   "short_name": "Keyamind",
-  "description": "DMIT Brain Mapping, Fingerprint Intelligence Analysis & Life Mentorship",
+  "description": "IBM Brain Mapping, Fingerprint Intelligence Analysis & Life Mentorship",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#faf9f6",

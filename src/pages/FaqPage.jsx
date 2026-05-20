@@ -65,13 +65,13 @@ export default function FaqPage() {
     }
   };
 
-  const categories = ["All", "DMIT Science", "Parenting Guidance", "Safety & Security"];
+  const categories = ["All", "IBM Science", "Parenting Guidance", "Safety & Security"];
 
   const faqs = [
     {
-      q: "How scientific and reliable is the DMIT assessment?",
-      a: "DMIT (Dermatoglyphics Multiple Intelligence Test) is based on the biological synchronization of fingerprint development and brain formation. Dermal ridges develop in the fetus's ectoderm layer between the 13th and 21st weeks, which is the exact same period and cellular origin as the central nervous system's neocortex. It compiles decades of empirical research in genetics, neurobiology, and Howard Gardner's theory of Multiple Intelligences, offering a 90%+ scientific accuracy correlation regarding innate learning channels and brain hemisphere dominance.",
-      cat: "DMIT Science"
+      q: "How scientific and reliable is the IBM assessment?",
+      a: "IBM (Innate Brain Mapping) is based on the biological synchronization of fingerprint development and brain formation. Dermal ridges develop in the fetus's ectoderm layer between the 13th and 21st weeks, which is the exact same period and cellular origin as the central nervous system's neocortex. It compiles decades of empirical research in genetics, neurobiology, and Howard Gardner's theory of Multiple Intelligences, offering a 90%+ scientific accuracy correlation regarding innate learning channels and brain hemisphere dominance.",
+      cat: "IBM Science"
     },
     {
       q: "Are my child's fingerprints saved or shared in your database?",
@@ -79,14 +79,14 @@ export default function FaqPage() {
       cat: "Safety & Security"
     },
     {
-      q: "What is the best age group to undergo a DMIT brain mapping?",
-      a: "Dermal ridges are formed permanently in the womb and never change throughout a human lifetime. Therefore, DMIT can be conducted as early as age 2 (once the child's finger size allows for distinct scanner registration). It is highly recommended for: Toddlers (2-6 years) to understand innate learning preferences; School children (7-12 years) to address concentration blocks; Teenagers (13-18) to select academic streams and college majors; and Adults/Working Professionals looking for career transitions or marital relationship synergy.",
-      cat: "DMIT Science"
+      q: "What is the best age group to undergo an IBM brain mapping?",
+      a: "Dermal ridges are formed permanently in the womb and never change throughout a human lifetime. Therefore, IBM can be conducted as early as age 2 (once the child's finger size allows for distinct scanner registration). It is highly recommended for: Toddlers (2-6 years) to understand innate learning preferences; School children (7-12 years) to address concentration blocks; Teenagers (13-18) to select academic streams and college majors; and Adults/Working Professionals looking for career transitions or marital relationship synergy.",
+      cat: "IBM Science"
     },
     {
-      q: "How does DMIT differ from a traditional IQ test?",
-      a: "A traditional IQ (Intelligence Quotient) test is an active paper-or-web questionnaire. It measures a child's immediate academic ability, current vocabulary, and problem-solving response under time pressure—which fluctuates heavily based on their current academic learning, stress levels, and coaching. In contrast, DMIT is a static biological mapping. It measures *innate capacity* rather than current academic achievement, evaluating the complete spectrum of human qualities: Intelligence Quotient (IQ), Emotional Quotient (EQ), Creativity Quotient (CQ), and Adversity Quotient (AQ).",
-      cat: "DMIT Science"
+      q: "How does IBM differ from a traditional IQ test?",
+      a: "A traditional IQ (Intelligence Quotient) test is an active paper-or-web questionnaire. It measures a child's immediate academic ability, current vocabulary, and problem-solving response under time pressure—which fluctuates heavily based on their current academic learning, stress levels, and coaching. In contrast, IBM is a static biological mapping. It measures *innate capacity* rather than current academic achievement, evaluating the complete spectrum of human qualities: Intelligence Quotient (IQ), Emotional Quotient (EQ), Creativity Quotient (CQ), and Adversity Quotient (AQ).",
+      cat: "IBM Science"
     },
     {
       q: "What is Parent-Child Compatibility Mapping and how does it help?",
@@ -94,7 +94,7 @@ export default function FaqPage() {
       cat: "Parenting Guidance"
     },
     {
-      q: "How long does a DMIT session take and what is the delivery timeline?",
+      q: "How long does an IBM session take and what is the delivery timeline?",
       a: "The fingerprint scanning session itself is completely non-invasive, quick, and takes approximately 10 to 15 minutes per individual. Once the scan vectors are submitted, the detailed 70+ page diagnostic report is processed by our certified scientific cloud partners. The final report generation and a highly comprehensive 1-on-1 counseling session with our expert cognitive coaches are typically delivered within 3 to 5 business days.",
       cat: "Safety & Security"
     }
@@ -130,9 +130,9 @@ export default function FaqPage() {
     <>
       <SEOHead 
         title="Frequently Asked Questions (FAQs) | Keyamind"
-        description="Got questions about DMIT safety, scientific accuracy, or parenting counseling? Browse our detailed FAQ center with real, science-backed answers."
+        description="Got questions about IBM safety, scientific accuracy, or parenting counseling? Browse our detailed FAQ center with real, science-backed answers."
         canonical="https://keyamind.com/faq"
-        keywords="DMIT safety, fingerprint privacy, biological mapping FAQ, child psychology questions, Keyamind customer support"
+        keywords="IBM safety, fingerprint privacy, biological mapping FAQ, child psychology questions, Keyamind customer support"
       />
 
       <script type="application/ld+json">

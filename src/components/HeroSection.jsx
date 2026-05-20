@@ -10,7 +10,7 @@ import useMediaQuery from "./useMediaQuery";
 import LazyVideo from "./LazyVideo";
 
 const phrases = [
-  "DMIT Brain Mapping",
+  "IBM Brain Mapping",
   "Career Counselling",
   "Fingerprint Analysis",
   "Student Guidance"
@@ -152,7 +152,7 @@ const HeroSection = () => {
   };
 
   const highlights = [
-    "DMIT Brain Mapping",
+    "IBM Brain Mapping",
     "Career Counselling",
     "Fingerprint Analysis",
     "Learning Insights",
@@ -297,7 +297,7 @@ const HeroSection = () => {
               variants={fadeUp}
               className="mt-3.5 text-[13px] sm:text-[14.5px] text-black/85 leading-relaxed font-medium font-poppins max-w-2xl text-left"
             >
-              Discover clarity and direction with India's trusted <strong>DMIT Test</strong>, scientific <strong>Fingerprint Analysis</strong>, and expert <strong>Career Counselling</strong>.
+              Discover clarity and direction with India's trusted <strong>IBM Test</strong>, scientific <strong>Fingerprint Analysis</strong>, and expert <strong>Career Counselling</strong>.
             </motion.p>
 
             {/* TYPEWRITER DYNAMIC EXPERTISE BADGE */}
