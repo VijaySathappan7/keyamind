@@ -37,9 +37,13 @@ export default function SEOHead({
     Fingerprint Analysis India
   `,
   canonical = "https://keyamind.com/",
-  ogImage = "https://keyamind.com/og-image.webp",
+  ogImage = "https://keyamind.com/logosquare.png",
   ogType = "website",
 }) {
+  const isSquare = ogImage.includes("logosquare");
+  const imgWidth = isSquare ? "300" : "1200";
+  const imgHeight = isSquare ? "300" : "630";
+
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -126,8 +130,8 @@ export default function SEOHead({
 
       <meta property="og:image" content={ogImage} />
       <meta property="og:image:secure_url" content={ogImage} />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
+      <meta property="og:image:width" content={imgWidth} />
+      <meta property="og:image:height" content={imgHeight} />
       <meta property="og:image:alt" content="Keyamind Solutions" />
 
       <meta property="og:site_name" content="Keyamind Solutions" />
