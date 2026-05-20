@@ -37,12 +37,12 @@ export default function SEOHead({
     Fingerprint Analysis India
   `,
   canonical = "https://keyamind.com/",
-  ogImage = "https://keyamind.com/logosquare.png",
+  ogImage = "https://keyamind.com/og-image.png",
   ogType = "website",
 }) {
-  const isSquare = ogImage.includes("logosquare");
-  const imgWidth = isSquare ? "300" : "1200";
-  const imgHeight = isSquare ? "300" : "630";
+  const isSquare = ogImage.includes("og-image") || ogImage.includes("logosquare");
+  const imgWidth = isSquare ? "600" : "1200";
+  const imgHeight = isSquare ? "600" : "630";
 
   const structuredData = {
     "@context": "https://schema.org",
