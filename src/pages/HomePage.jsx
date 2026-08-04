@@ -12,7 +12,7 @@ const WhatWeDoSection = lazy(() => import("../components/WhatWeDoSection"));
 const BrainBalanceSection = lazy(() => import("../components/BrainBalanceSection"));
 const BrainLobeFunctionalitySection = lazy(() => import("../components/BrainLobeFunctionalitySection"));
 const HumanQuotientsSection = lazy(() => import("../components/HumanQuotientsSection"));
-const PersonalitySection = lazy(() => import("../components/PersonalitySection"));
+
 const LearningStylesSection = lazy(() => import("../components/LearningStylesSection"));
 const ServicesSection = lazy(() => import("../components/ServicesSection"));
 const FeedbackMarqueeSection = lazy(() => import("../components/FeedbackMarqueeSection"));
@@ -69,10 +69,7 @@ export default function HomePage() {
         <HumanQuotientsSection />
       </LazySection>
 
-      {/* 9. Natural Personality */}
-      <LazySection height="700px">
-        <PersonalitySection />
-      </LazySection>
+
 
       {/* 10. Learning Styles */}
       <LazySection height="750px">

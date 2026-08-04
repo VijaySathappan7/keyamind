@@ -173,10 +173,6 @@ const BrainLobeFunctionalitySection = memo(() => {
                     <h3 className="text-base sm:text-lg font-extrabold text-dark-lavender font-outfit tracking-wide leading-tight">
                       {lobe.name}
                     </h3>
-
-                    <p className="mt-0.5 text-xs sm:text-[13px] text-dark-lavender/70 font-light leading-snug">
-                      {lobe.desc}
-                    </p>
                   </div>
 
                   {/* ARROW */}
